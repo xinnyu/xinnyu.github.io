@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Swift,iOS," />
+  <meta name="keywords" content="iOS,Swift," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="MJRefresh是用法最简单的下拉刷新框架：一行代码搞定 支持 UIScrollView、UITableView、UICollectionView、UIWebView 的刷新 基础用法1234567891011121314151617//设置下拉刷新var MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAct">
-<meta name="keywords" content="Swift,iOS">
+<meta name="description" content="MJRefresh是用法最简单的下拉刷新框架：一行代码搞定 支持 UIScrollView、UITableView、UICollectionView、UIWebView 的刷新 基础用法//设置下拉刷新var MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: &quot;refresh&quot;)self.myTab">
+<meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS-常用第三方库2(MJRefresh)">
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/20/iOS-常用第三方库2-MJRefresh/index.html">
 <meta property="og:site_name" content="XINNYU">
-<meta property="og:description" content="MJRefresh是用法最简单的下拉刷新框架：一行代码搞定 支持 UIScrollView、UITableView、UICollectionView、UIWebView 的刷新 基础用法1234567891011121314151617//设置下拉刷新var MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAct">
+<meta property="og:description" content="MJRefresh是用法最简单的下拉刷新框架：一行代码搞定 支持 UIScrollView、UITableView、UICollectionView、UIWebView 的刷新 基础用法//设置下拉刷新var MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: &quot;refresh&quot;)self.myTab">
 <meta property="og:updated_time" content="2017-04-13T18:55:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS-常用第三方库2(MJRefresh)">
-<meta name="twitter:description" content="MJRefresh是用法最简单的下拉刷新框架：一行代码搞定 支持 UIScrollView、UITableView、UICollectionView、UIWebView 的刷新 基础用法1234567891011121314151617//设置下拉刷新var MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAct">
+<meta name="twitter:description" content="MJRefresh是用法最简单的下拉刷新框架：一行代码搞定 支持 UIScrollView、UITableView、UICollectionView、UIWebView 的刷新 基础用法//设置下拉刷新var MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: &quot;refresh&quot;)self.myTab">
 
 
 
@@ -401,7 +401,7 @@
       
         <p><a href="https://github.com/CoderMJLee/MJRefresh" target="_blank" rel="external">MJRefresh</a>是用法最简单的下拉刷新框架：一行代码搞定</p>
 <p>支持 UIScrollView、UITableView、UICollectionView、UIWebView 的刷新</p>
-<h3 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//设置下拉刷新</div><div class="line">var MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: &quot;refresh&quot;)</div><div class="line">self.myTabView.header = MJHeader</div><div class="line">        </div><div class="line">//设置上拉加载</div><div class="line">var MJFooter = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: &quot;load&quot;)</div><div class="line">self.myTabView.footer = MJFooter</div><div class="line"></div><div class="line">func load()&#123;  </div><div class="line">	//执行加载动作</div><div class="line">	self.myTabView.header.endRefreshing()</div><div class="line">&#125;</div><div class="line"></div><div class="line">func refresh()&#123;  </div><div class="line">	//执行刷新动作</div><div class="line">	self.myTabView.footer.endRefreshing()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line"><span class="comment">//设置下拉刷新</span></div><div class="line"><span class="selector-tag">var</span> MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: <span class="string">"refresh"</span>)</div><div class="line">self<span class="selector-class">.myTabView</span><span class="selector-class">.header</span> = MJHeader</div><div class="line">        </div><div class="line"><span class="comment">//设置上拉加载</span></div><div class="line"><span class="selector-tag">var</span> MJFooter = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: <span class="string">"load"</span>)</div><div class="line">self<span class="selector-class">.myTabView</span><span class="selector-class">.footer</span> = MJFooter</div><div class="line"></div><div class="line">func load()&#123;  </div><div class="line">	<span class="comment">//执行加载动作</span></div><div class="line">	self<span class="selector-class">.myTabView</span><span class="selector-class">.header</span><span class="selector-class">.endRefreshing</span>()</div><div class="line">&#125;</div><div class="line"></div><div class="line">func refresh()&#123;  </div><div class="line">	<span class="comment">//执行刷新动作</span></div><div class="line">	self<span class="selector-class">.myTabView</span><span class="selector-class">.footer</span><span class="selector-class">.endRefreshing</span>()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><ol>
 <li><p>下拉刷新控件的种类</p>
 <p> ○ 默认（Normal）：MJRefreshNormalHeader<br> ○ 动图（Gif）：MJRefreshGifHeader</p>
@@ -410,8 +410,8 @@
 <p> <em>自动刷新（Auto）</em><br> 默认（Normal）：MJRefreshAutoNormalFooter<br> 动图（Gif）：MJRefreshAutoGifFooter<br> <em>自动回弹（Back）</em><br> 默认（Normal）：MJRefreshBackNormalFooter<br> 动图（Gif）：MJRefreshBackGifFooter</p>
 </li>
 </ol>
-<p>####<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// 设置文字</div><div class="line">[header setTitle:@&quot;Pull down to refresh&quot; forState:MJRefreshStateIdle];</div><div class="line">[header setTitle:@&quot;Release to refresh&quot; forState:MJRefreshStatePulling];</div><div class="line">[header setTitle:@&quot;Loading ...&quot; forState:MJRefreshStateRefreshing];</div><div class="line">// 设置字体</div><div class="line">header.stateLabel.font = [UIFont systemFontOfSize:15];</div><div class="line">header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:14];</div><div class="line">// 设置颜色</div><div class="line">header.stateLabel.textColor = [UIColor redColor];</div><div class="line">header.lastUpdatedTimeLabel.textColor = [UIColor blueColor];</div><div class="line"></div><div class="line">// 隐藏时间</div><div class="line">header.lastUpdatedTimeLabel.hidden = YES;</div><div class="line">// 隐藏状态</div><div class="line">header.stateLabel.hidden = YES;</div></pre></td></tr></table></figure></p>
-<h4 id="下拉加载"><a href="#下拉加载" class="headerlink" title="下拉加载"></a>下拉加载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadMoreData方法）</div><div class="line">MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];</div><div class="line">// 设置刷新图片</div><div class="line">[footer setImages:refreshingImages forState:MJRefreshStateRefreshing];</div><div class="line"></div><div class="line">// 隐藏刷新状态的文字</div><div class="line">footer.refreshingTitleHidden = YES;</div><div class="line">// 如果没有上面的方法，就用footer.stateLabel.hidden = YES;</div><div class="line"></div><div class="line">// 隐藏当前的上拉刷新控件</div><div class="line">self.tableView.footer.hidden = YES;</div><div class="line"></div><div class="line">// 变为没有更多数据的状态</div><div class="line">[footer noticeNoMoreData];</div></pre></td></tr></table></figure>
+<p>####<br><figure class="highlight pf"><table><tr><td class="code"><pre><div class="line">// 设置文字</div><div class="line">[header <span class="built_in">set</span>Title:@<span class="string">"Pull down to refresh"</span> <span class="keyword">for</span>State:MJRefreshStateIdle];</div><div class="line">[header <span class="built_in">set</span>Title:@<span class="string">"Release to refresh"</span> <span class="keyword">for</span>State:MJRefreshStatePulling];</div><div class="line">[header <span class="built_in">set</span>Title:@<span class="string">"Loading ..."</span> <span class="keyword">for</span>State:MJRefreshStateRefreshing];</div><div class="line">// 设置字体</div><div class="line">header.<span class="keyword">state</span>Label.font = [UIFont systemFontOfSize:<span class="number">15</span>];</div><div class="line">header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:<span class="number">14</span>];</div><div class="line">// 设置颜色</div><div class="line">header.<span class="keyword">state</span>Label.textColor = [UIColor redColor];</div><div class="line">header.lastUpdatedTimeLabel.textColor = [UIColor blueColor];</div><div class="line"></div><div class="line">// 隐藏时间</div><div class="line">header.lastUpdatedTimeLabel.hidden = YES;</div><div class="line">// 隐藏状态</div><div class="line">header.<span class="keyword">state</span>Label.hidden = YES;</div></pre></td></tr></table></figure></p>
+<h4 id="下拉加载"><a href="#下拉加载" class="headerlink" title="下拉加载"></a>下拉加载</h4><figure class="highlight pf"><table><tr><td class="code"><pre><div class="line">// 设置回调（一旦进入刷新状态，就调用target的action，也就是调用<span class="literal">self</span>的<span class="built_in">load</span>MoreData方法）</div><div class="line">MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:<span class="literal">self</span> refreshingAction:@selector(<span class="built_in">load</span>MoreData)];</div><div class="line">// 设置刷新图片</div><div class="line">[footer <span class="built_in">set</span>Images:refreshingImages <span class="keyword">for</span>State:MJRefreshStateRefreshing];</div><div class="line"></div><div class="line">// 隐藏刷新状态的文字</div><div class="line">footer.refreshingTitleHidden = YES;</div><div class="line">// 如果没有上面的方法，就用footer.<span class="keyword">state</span>Label.hidden = YES;</div><div class="line"></div><div class="line">// 隐藏当前的上拉刷新控件</div><div class="line"><span class="literal">self</span>.<span class="built_in">table</span>View.footer.hidden = YES;</div><div class="line"></div><div class="line">// 变为没有更多数据的状态</div><div class="line">[footer noticeNoMoreData];</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -441,9 +441,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Swift/" rel="tag"># Swift</a>
-          
             <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
           
         </div>
       

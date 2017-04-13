@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="用了Mac自带的Vim之后发现yy复制的内容和剪切板不同步，谷歌之，找到2种方法：  “+y  在 ~/.vimrc 里增加 set clipboard=unnamed  但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；于是就安装了MacVim，结果试了之后还是不管用，执行1vim --version | grep clip 结果还是： 12-cli">
+<meta name="description" content="用了Mac自带的Vim之后发现yy复制的内容和剪切板不同步，谷歌之，找到2种方法：  “+y  在 ~/.vimrc 里增加 set clipboard=unnamed  但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；于是就安装了MacVim，结果试了之后还是不管用，执行vim --version | grep clip 结果还是： -client">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac自带Vim7.3不能使用系统剪切板解决方案">
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/26/Mac自带Vim7-3不能使用系统剪切板解决方案/index.html">
 <meta property="og:site_name" content="XINNYU">
-<meta property="og:description" content="用了Mac自带的Vim之后发现yy复制的内容和剪切板不同步，谷歌之，找到2种方法：  “+y  在 ~/.vimrc 里增加 set clipboard=unnamed  但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；于是就安装了MacVim，结果试了之后还是不管用，执行1vim --version | grep clip 结果还是： 12-cli">
+<meta property="og:description" content="用了Mac自带的Vim之后发现yy复制的内容和剪切板不同步，谷歌之，找到2种方法：  “+y  在 ~/.vimrc 里增加 set clipboard=unnamed  但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；于是就安装了MacVim，结果试了之后还是不管用，执行vim --version | grep clip 结果还是： -client">
 <meta property="og:updated_time" content="2015-09-26T14:33:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac自带Vim7.3不能使用系统剪切板解决方案">
-<meta name="twitter:description" content="用了Mac自带的Vim之后发现yy复制的内容和剪切板不同步，谷歌之，找到2种方法：  “+y  在 ~/.vimrc 里增加 set clipboard=unnamed  但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；于是就安装了MacVim，结果试了之后还是不管用，执行1vim --version | grep clip 结果还是： 12-cli">
+<meta name="twitter:description" content="用了Mac自带的Vim之后发现yy复制的内容和剪切板不同步，谷歌之，找到2种方法：  “+y  在 ~/.vimrc 里增加 set clipboard=unnamed  但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；于是就安装了MacVim，结果试了之后还是不管用，执行vim --version | grep clip 结果还是： -client">
 
 
 
@@ -382,12 +382,12 @@
 <li>“+y </li>
 <li>在 ~/.vimrc 里增加 set clipboard=unnamed</li>
 </ul>
-<p>但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；<br>于是就安装了MacVim，结果试了之后还是不管用，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim --version | grep clip</div></pre></td></tr></table></figure></p>
+<p>但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；<br>于是就安装了MacVim，结果试了之后还是不管用，执行<br><figure class="highlight vim"><table><tr><td class="code"><pre><div class="line"><span class="keyword">vim</span> --<span class="keyword">version</span> | <span class="keyword">grep</span> clip</div></pre></td></tr></table></figure></p>
 <p>结果还是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-clientserver -clipboard +cmdline_compl +cmdline_hist +cmdline_info +comments </div><div class="line">-xterm_clipboard -xterm_save</div></pre></td></tr></table></figure>
+<figure class="highlight haml"><table><tr><td class="code"><pre><div class="line">-<span class="ruby">clientserver -clipboard +cmdline_compl +cmdline_hist +cmdline_info +comments </span></div><div class="line">-<span class="ruby">xterm_clipboard -xterm_save</span></div></pre></td></tr></table></figure>
 <p>原因是就算你安装了MacVim使用了Vim7.4系统自带的Terminal还是会默认使用自带的7.3版本；</p>
 <p>所以只要在profile中添加如下语句就可以解决问题了；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alias vim=&quot;/Applications/MacVim.app/Contents/MacOS/Vim&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight monkey"><table><tr><td class="code"><pre><div class="line"><span class="keyword">alias</span> <span class="title">vim</span>=<span class="string">"/Applications/MacVim.app/Contents/MacOS/Vim"</span></div></pre></td></tr></table></figure>
 <p>之后你在终端使用vim也会调用MacVim中的7.4版本了。</p>
 
       
