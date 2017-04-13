@@ -503,8 +503,8 @@ pre code {
 }
 .highlight pre {
   border: none;
-  margin: 0;
-  padding: 10px 0;
+  margin: 10;
+  padding: 20px 0;
 }
 .highlight table {
   margin: 0;
@@ -1691,7 +1691,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff3e65;
+  background: #952dff;
 }
 .links-of-blogroll {
   font-size: 13px;
