@@ -294,154 +294,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2017/04/14/R.swift使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/14/R.swift使用/" itemprop="url">
-                  R.swift使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-14T03:29:11+08:00">
-                2017-04-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/04/14/R.swift使用/" class="leancloud_visitors" data-flag-title="R.swift使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用CocoaPods来对R.Swift进行安装：</p>
-<p><code>pod &#39;R.swift&#39;</code></p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
-<li>进入项目的配置界面，在左边的TARGETS项下面选择我们的项目，并在右边点击<code>Build Phases</code>这个tab。</li>
-<li>进入<code>&lt;Build Phases&gt;</code>这个tab后，我们看到左上角有一个”+”按钮，点击并在弹出的选项卡中选择<code>New Run Script Phase</code>。</li>
-<li>我们会看到界面的下方多出了一个<code>Run Script</code>项，展开它，并在脚本输入区域输入<code>&quot;\$PODS_ROOT/R.swift/rswift&quot;</code> “\$SRCROOT” (第二对双引号括起来所代码的是项目的根目录，你也可以放到根目录下的其他目录中，只需将其修改为”$SRCROOT/XXX”，XXX为目标目录名)。<br>4.我们按住新建的这个<code>Run Script</code>项向上移动，移到<code>Compile Source</code>项的上方，不过也要保证此时它也在<code>Check Pods Manifest.lock</code>项的下方。</li>
-<li>Command + B，编译一下，编译成功后，在Finder进入到刚刚我们制定的目录中，此时我们会看到一个名为R.generated.swift的文件已经创建了，直接把此文件拖入Xcode项目中，<strong>记住不要勾选Copy items if needed项</strong>。</li>
-<li>配置到此完成，我们可以构建自己的项目了</li>
-</ol>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="Image-图片"><a href="#Image-图片" class="headerlink" title="Image - 图片"></a>Image - 图片</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pImage = <span class="type">UIImage</span>(named: <span class="string">"image_test"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nImage = <span class="type">R</span>.image.image_test()</div></pre></td></tr></table></figure>
-<h4 id="File-数据文件"><a href="#File-数据文件" class="headerlink" title="File - 数据文件"></a>File - 数据文件</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFile = <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"DataFile"</span>, ofType: <span class="string">"json"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFile = <span class="type">R</span>.file.dataFileJson.path()</div></pre></td></tr></table></figure>
-<h4 id="Font-字体"><a href="#Font-字体" class="headerlink" title="Font - 字体"></a>Font - 字体</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFont = <span class="type">UIFont</span>(name: <span class="string">"chalkduster"</span>, size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFont = <span class="type">R</span>.font.chalkduster(size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  你看，非常神奇，在上面的方法中你不仅可以选择字体类型，还能设置字体大小</span></div></pre></td></tr></table></figure>
-<h4 id="Color-颜色"><a href="#Color-颜色" class="headerlink" title="Color - 颜色"></a>Color - 颜色</h4><p>把.clr文件拖入项目中即可使用颜色配置<br><code>let appRedColor = R.color.myAppColor.red()</code></p>
-<h4 id="Nibs"><a href="#Nibs" class="headerlink" title="Nibs"></a>Nibs</h4><p>不使用R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="string">"CustomView"</span></div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">UINib</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> rootViews = customViewNib.instantiate(withOwner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = rootViews[<span class="number">0</span>] <span class="keyword">as</span>? <span class="type">CustomView</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div></pre></td></tr></table></figure></p>
-<p>使用 R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="type">R</span>.nib.customView.name</div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">R</span>.nib.customView()</div><div class="line"><span class="keyword">let</span> rootViews = <span class="type">R</span>.nib.customView.instantiateWithOwner(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = <span class="type">R</span>.nib.customView.firstView(owner: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nib: <span class="type">R</span>.nib.customView)</div></pre></td></tr></table></figure></p>
-<h4 id="Localized-strings"><a href="#Localized-strings" class="headerlink" title="Localized strings"></a>Localized strings</h4><p>不使用R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">NSLocalizedString</span>(<span class="string">"welcome.message"</span>, comment: <span class="string">""</span>)</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">NSLocalizedString</span>(<span class="string">"title"</span>, tableName: <span class="string">"Settings"</span>, comment: <span class="string">""</span>)</div><div class="line"></div><div class="line"><span class="comment">// Formatted strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"welcome.withName"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Stringsdict files</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"copy.progress"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="number">4</span>, <span class="number">23</span>)</div></pre></td></tr></table></figure></p>
-<p>使用 R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">// Localized strings are grouped per table (.strings file)</span></div><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">R</span>.string.localizable.welcomeMessage()</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">R</span>.string.settings.title()</div><div class="line"></div><div class="line"><span class="comment">// Functions with parameters are generated for format strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">R</span>.string.localizable.welcomeWithName(<span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Functions with named argument labels are generated for stringsdict keys</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">R</span>.string.localizable.copyProgress(completed: <span class="number">4</span>, total: <span class="number">23</span>)</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2017/04/14/Pyinstaller将python脚本打包成可执行文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -679,6 +531,154 @@
             <h3 id="1-要import-pods里的头文件"><a href="#1-要import-pods里的头文件" class="headerlink" title="1.要import pods里的头文件"></a>1.要import pods里的头文件</h3><p>有时候XCode搜索头文件不会去搜索Pods里的第三方库，我们需要在XCode里设置一下项目Target的Search Paths。</p>
 <p>双击User Header Search Paths的空白处，填入”$(PODS_ROOT)”(没有引号), 设置为递归的搜索recursive，问题解决了。</p>
 <h3 id="2-XCode自带BUG"><a href="#2-XCode自带BUG" class="headerlink" title="2.XCode自带BUG"></a>2.XCode自带BUG</h3><p>有些时候我们没有调用第三方库，发现UIkit的自动补全都没法触发了，这样的原因多半是因为XCode自带BUG，在你的注释里有中文的时候，不会触发自动补全，比如这个’年’，删掉过后再编译一下试试，再不行就重启一下XCode。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2016/09/14/R.swift使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/14/R.swift使用/" itemprop="url">
+                  R.swift使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-14T03:29:11+08:00">
+                2016-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/09/14/R.swift使用/" class="leancloud_visitors" data-flag-title="R.swift使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用CocoaPods来对R.Swift进行安装：</p>
+<p><code>pod &#39;R.swift&#39;</code></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li>进入项目的配置界面，在左边的TARGETS项下面选择我们的项目，并在右边点击<code>Build Phases</code>这个tab。</li>
+<li>进入<code>&lt;Build Phases&gt;</code>这个tab后，我们看到左上角有一个”+”按钮，点击并在弹出的选项卡中选择<code>New Run Script Phase</code>。</li>
+<li>我们会看到界面的下方多出了一个<code>Run Script</code>项，展开它，并在脚本输入区域输入<code>&quot;\$PODS_ROOT/R.swift/rswift&quot;</code> “\$SRCROOT” (第二对双引号括起来所代码的是项目的根目录，你也可以放到根目录下的其他目录中，只需将其修改为”$SRCROOT/XXX”，XXX为目标目录名)。<br>4.我们按住新建的这个<code>Run Script</code>项向上移动，移到<code>Compile Source</code>项的上方，不过也要保证此时它也在<code>Check Pods Manifest.lock</code>项的下方。</li>
+<li>Command + B，编译一下，编译成功后，在Finder进入到刚刚我们制定的目录中，此时我们会看到一个名为R.generated.swift的文件已经创建了，直接把此文件拖入Xcode项目中，<strong>记住不要勾选Copy items if needed项</strong>。</li>
+<li>配置到此完成，我们可以构建自己的项目了</li>
+</ol>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="Image-图片"><a href="#Image-图片" class="headerlink" title="Image - 图片"></a>Image - 图片</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pImage = <span class="type">UIImage</span>(named: <span class="string">"image_test"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nImage = <span class="type">R</span>.image.image_test()</div></pre></td></tr></table></figure>
+<h4 id="File-数据文件"><a href="#File-数据文件" class="headerlink" title="File - 数据文件"></a>File - 数据文件</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFile = <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"DataFile"</span>, ofType: <span class="string">"json"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFile = <span class="type">R</span>.file.dataFileJson.path()</div></pre></td></tr></table></figure>
+<h4 id="Font-字体"><a href="#Font-字体" class="headerlink" title="Font - 字体"></a>Font - 字体</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFont = <span class="type">UIFont</span>(name: <span class="string">"chalkduster"</span>, size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFont = <span class="type">R</span>.font.chalkduster(size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  你看，非常神奇，在上面的方法中你不仅可以选择字体类型，还能设置字体大小</span></div></pre></td></tr></table></figure>
+<h4 id="Color-颜色"><a href="#Color-颜色" class="headerlink" title="Color - 颜色"></a>Color - 颜色</h4><p>把.clr文件拖入项目中即可使用颜色配置<br><code>let appRedColor = R.color.myAppColor.red()</code></p>
+<h4 id="Nibs"><a href="#Nibs" class="headerlink" title="Nibs"></a>Nibs</h4><p>不使用R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="string">"CustomView"</span></div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">UINib</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> rootViews = customViewNib.instantiate(withOwner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = rootViews[<span class="number">0</span>] <span class="keyword">as</span>? <span class="type">CustomView</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div></pre></td></tr></table></figure></p>
+<p>使用 R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="type">R</span>.nib.customView.name</div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">R</span>.nib.customView()</div><div class="line"><span class="keyword">let</span> rootViews = <span class="type">R</span>.nib.customView.instantiateWithOwner(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = <span class="type">R</span>.nib.customView.firstView(owner: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nib: <span class="type">R</span>.nib.customView)</div></pre></td></tr></table></figure></p>
+<h4 id="Localized-strings"><a href="#Localized-strings" class="headerlink" title="Localized strings"></a>Localized strings</h4><p>不使用R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">NSLocalizedString</span>(<span class="string">"welcome.message"</span>, comment: <span class="string">""</span>)</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">NSLocalizedString</span>(<span class="string">"title"</span>, tableName: <span class="string">"Settings"</span>, comment: <span class="string">""</span>)</div><div class="line"></div><div class="line"><span class="comment">// Formatted strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"welcome.withName"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Stringsdict files</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"copy.progress"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="number">4</span>, <span class="number">23</span>)</div></pre></td></tr></table></figure></p>
+<p>使用 R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">// Localized strings are grouped per table (.strings file)</span></div><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">R</span>.string.localizable.welcomeMessage()</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">R</span>.string.settings.title()</div><div class="line"></div><div class="line"><span class="comment">// Functions with parameters are generated for format strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">R</span>.string.localizable.welcomeWithName(<span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Functions with named argument labels are generated for stringsdict keys</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">R</span>.string.localizable.copyProgress(completed: <span class="number">4</span>, total: <span class="number">23</span>)</div></pre></td></tr></table></figure></p>
 
           
         
@@ -1958,8 +1958,6 @@
   
 
 
-  
-
 
 
 
@@ -1983,9 +1981,6 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
