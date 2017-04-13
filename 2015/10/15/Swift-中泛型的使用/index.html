@@ -387,7 +387,7 @@
 <figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">OrderedDictionary</span> </span>&#123;  </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>到现在为止应该都没有什么问题。通过语义可以看出这个对象是一个结构体。</p>
 <p>现在你需要将其一般化，以便它能够装载你需要的任何类型的数据。通过下列改变你对Swift中“结构”的定义：</p>
-<figure class="highlight crystal"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">OrderedDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ValueType</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">struct OrderedDictionary&lt;KeyType, ValueType&gt;</div></pre></td></tr></table></figure>
 <p>在尖括弧中的元素是通用类型的参数。KeyType和ValueType不是他们自身的类型，而是你可以使用在结构里定义取代的类型。现在就简洁清新许多了！</p>
 <p>最简单的实现一个有顺序的字典是保持一个数组和一个字典。字典中将会装载衍射，而数组将装载keys的顺序。</p>
 <p>在结构体内部的定义中，加入以下的代码：</p>
