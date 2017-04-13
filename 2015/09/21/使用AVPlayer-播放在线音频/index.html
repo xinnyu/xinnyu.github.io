@@ -1,12 +1,93 @@
-<!DOCTYPE html>
-<html lang=zh>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：  AVPlayer MPMoviePlayerController 能实现音乐流播（但是此方法苹果在iOS9中已经不推荐使用了） Audioqueue，Audiostream （太复杂） 第三方库AudioStreamer（只能播放在线音频）  所以用AVPlayer来实现在线音频播放是最好的选择">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="xinyu, xinnyu" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：  AVPlayer MPMoviePlayerController 能实现音乐流播（但是此方法苹果在iOS9中已经不推荐使用了） Audioqueue，Audiostream （太复杂） 第三方库AudioStreamer（只能播放在线音频）  所以用AVPlayer来实现在线音频播放是最好的选择">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播">
@@ -17,120 +98,241 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播">
 <meta name="twitter:description" content="在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：  AVPlayer MPMoviePlayerController 能实现音乐流播（但是此方法苹果在iOS9中已经不推荐使用了） Audioqueue，Audiostream （太复杂） 第三方库AudioStreamer（只能播放在线音频）  所以用AVPlayer来实现在线音频播放是最好的选择">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="/images/favicon.ico">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-          
-        
-    
-    <!-- title -->
-    <title>使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- rss -->
-    
-    
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/"/>
+
+
+
+
+
+  <title> 使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播 | XINNYU </title>
 </head>
 
-<body>
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2015/09/21/iOS-常用第三方库7-Reachability/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
-        
-        
-        <li><a class="icon" href="/2015/09/21/使用融云和LeanCloud-创建一个IM应用/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
-        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&text=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&is_video=false&description=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播&body=Check out this article: https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&name=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动连播"><span class="toc-number">2.</span> <span class="toc-text">自动连播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁屏界面和控制中心添加详情"><span class="toc-number">3.</span> <span class="toc-text">锁屏界面和控制中心添加详情</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用KVO监视播放器的缓存状态和播放状态"><span class="toc-number">4.</span> <span class="toc-text">利用KVO监视播放器的缓存状态和播放状态</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index width mx-auto px2 my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">XINNYU</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2015-09-20T16:17:37.000Z" itemprop="datePublished">2015-09-21</time>
-    </div>
-
-
-      
-
-    </div>
-  </header>
   
 
-  <div class="content" itemprop="articleBody">
-    <p>在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XINNYU</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-21T00:17:37+08:00">
+                2015-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：</p>
 <ul>
 <li>AVPlayer</li>
 <li>MPMoviePlayerController 能实现音乐流播（但是此方法苹果在iOS9中已经不推荐使用了）</li>
@@ -173,103 +375,357 @@
 <h3 id="利用KVO监视播放器的缓存状态和播放状态"><a href="#利用KVO监视播放器的缓存状态和播放状态" class="headerlink" title="利用KVO监视播放器的缓存状态和播放状态"></a>利用KVO监视播放器的缓存状态和播放状态</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//先移除观察者      </span></div><div class="line"><span class="keyword">if</span> <span class="keyword">self</span>.musicPlayer.currentItem != <span class="literal">nil</span> &#123;</div><div class="line">	<span class="keyword">self</span>.musicPlayer.currentItem?.removeObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"status"</span>)</div><div class="line">	<span class="keyword">self</span>.musicPlayer.currentItem?.removeObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"loadedTimeRanges"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//添加观察者</span></div><div class="line">playerItem.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"status"</span>, options: .<span class="type">New</span>, context: <span class="literal">nil</span>)</div><div class="line">playerItem.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"loadedTimeRanges"</span>, options: .<span class="type">New</span>, context: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="comment">//播放状态</span></div><div class="line">playerItem.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"status"</span>, options: .<span class="type">New</span>, context: <span class="literal">nil</span>)</div><div class="line"><span class="comment">//缓存进度</span></div><div class="line">playerItem.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"loadedTimeRanges"</span>, options: .<span class="type">New</span>, context: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="comment">//属性改变了要实现的方法</span></div><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">observeValueForKeyPath</span><span class="params">(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer&lt;Void&gt;)</span></span> &#123;</div><div class="line">	<span class="comment">//获取缓存进度</span></div><div class="line">	<span class="keyword">if</span> keyPath == <span class="string">"loadedTimeRanges"</span> &#123;</div><div class="line">	<span class="keyword">let</span> array = (object <span class="keyword">as</span>! <span class="type">AVPlayerItem</span>).loadedTimeRanges</div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> range = array.first &#123;</div><div class="line">			<span class="comment">//当前缓存的总时间</span></div><div class="line">       <span class="keyword">let</span> rangeValue = range.<span class="type">CMTimeRangeValue</span></div><div class="line">       <span class="keyword">let</span> duration = rangeValue.duration</div><div class="line">			<span class="comment">//总时间换算成秒数</span></div><div class="line">       <span class="keyword">let</span> loadTime = <span class="type">CMTimeGetSeconds</span>(duration)</div><div class="line"></div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="comment">//获取当前播放状态</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><em>获取到了缓存时间可以判断当前的缓存时间和当前播放时间的值，来判断网络状况，同时也可以在做视频播放器时用来作缓存条</em>。</p>
 
-  </div>
-</article>
-
-
-
+      
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
 
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
+    <div>
+      
         
-      </ul>
+
+      
     </div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动连播"><span class="toc-number">2.</span> <span class="toc-text">自动连播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁屏界面和控制中心添加详情"><span class="toc-number">3.</span> <span class="toc-text">锁屏界面和控制中心添加详情</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用KVO监视播放器的缓存状态和播放状态"><span class="toc-number">4.</span> <span class="toc-text">利用KVO监视播放器的缓存状态和播放状态</span></a></li></ol>
+    <div>
+      
+        
+
+      
     </div>
 
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&text=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&is_video=false&description=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播&body=Check out this article: https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&title=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/&name=使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
+    <div>
+      
+        
 
+      
     </div>
 
-    <div id="actions-footer">
-      <ul>
-        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
-        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
-        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
-        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
-      </ul>
-    </div>
+    <footer class="post-footer">
+      
 
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/21/使用融云和LeanCloud-创建一个IM应用/" rel="next" title="使用融云和LeanCloud 创建一个IM应用">
+                <i class="fa fa-chevron-left"></i> 使用融云和LeanCloud 创建一个IM应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/21/iOS-常用第三方库7-Reachability/" rel="prev" title="iOS 常用第三方库7(Reachability)">
+                iOS 常用第三方库7(Reachability) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="xinnyu" />
+          <p class="site-author-name" itemprop="name">xinnyu</p>
+           
+              <p class="site-description motion-element" itemprop="description">成就感和尊严使你快乐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动连播"><span class="nav-number">2.</span> <span class="nav-text">自动连播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁屏界面和控制中心添加详情"><span class="nav-number">3.</span> <span class="nav-text">锁屏界面和控制中心添加详情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用KVO监视播放器的缓存状态和播放状态"><span class="nav-number">4.</span> <span class="nav-text">利用KVO监视播放器的缓存状态和播放状态</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xinnyu</span>
 </div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2017 xinnyu
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
         
-      </ul>
-    </nav>
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
-</footer>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
-<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
-
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- Google Analytics -->
-
-    <script type="text/javascript">
-        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-86660611-1', 'auto');
-        ga('send', 'pageview');
-    </script>
-
-<!-- Disqus Comments -->
-
-
