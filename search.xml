@@ -191,6 +191,13 @@
     </entry>
 
     
+    <entry>
+      <title><![CDATA[Next手机代码显示不全解决办法]]></title>
+      <url>%2F2015%2F07%2F14%2FNext%E6%89%8B%E6%9C%BA%E4%BB%A3%E7%A0%81%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%2F</url>
+      <content type="text"><![CDATA[修改custom.styl(路径：source/css/_custom) 增加 .code &#123;padding-left: 20px !important;background-color: black;&#125;]]></content>
+    </entry>
+
+    
   
   
 </search>
