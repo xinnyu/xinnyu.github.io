@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="SDWebImage是一个著名的第三方库，它的作用是：  Asynchronous image downloader with cache support with an UIImageView category.就是一个异步加载图片并且支持缓存的UIImage分类；  使用方法：1imageView.sd_setImageWithURL(NSURL(string: &amp;quot;&amp;quot;),">
+    <meta name="description" content="SDWebImage是一个著名的第三方库，它的作用是：  Asynchronous image downloader with cache support with an UIImageView category.就是一个异步加载图片并且支持缓存的UIImage分类；  使用方法：1imageView.sd_setImageWithURL(NSURL(string: &quot;&quot;), placeholde">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS 常用第三方库7(SDWebImage)">
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/20/iOS-常用第三方库7-SDWebImage/index.html">
 <meta property="og:site_name" content="XINNYU">
-<meta property="og:description" content="SDWebImage是一个著名的第三方库，它的作用是：  Asynchronous image downloader with cache support with an UIImageView category.就是一个异步加载图片并且支持缓存的UIImage分类；  使用方法：1imageView.sd_setImageWithURL(NSURL(string: &amp;quot;&amp;quot;),">
-<meta property="og:updated_time" content="2015-09-20T16:04:18.000Z">
+<meta property="og:description" content="SDWebImage是一个著名的第三方库，它的作用是：  Asynchronous image downloader with cache support with an UIImageView category.就是一个异步加载图片并且支持缓存的UIImage分类；  使用方法：1imageView.sd_setImageWithURL(NSURL(string: &quot;&quot;), placeholde">
+<meta property="og:updated_time" content="2017-04-13T11:47:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 常用第三方库7(SDWebImage)">
-<meta name="twitter:description" content="SDWebImage是一个著名的第三方库，它的作用是：  Asynchronous image downloader with cache support with an UIImageView category.就是一个异步加载图片并且支持缓存的UIImage分类；  使用方法：1imageView.sd_setImageWithURL(NSURL(string: &amp;quot;&amp;quot;),">
+<meta name="twitter:description" content="SDWebImage是一个著名的第三方库，它的作用是：  Asynchronous image downloader with cache support with an UIImageView category.就是一个异步加载图片并且支持缓存的UIImage分类；  使用方法：1imageView.sd_setImageWithURL(NSURL(string: &quot;&quot;), placeholde">
     
     
         
@@ -134,9 +134,9 @@
 <blockquote>
 <p>Asynchronous image downloader with cache support with an UIImageView category.<br>就是一个异步加载图片并且支持缓存的UIImage分类；</p>
 </blockquote>
-<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">imageView.sd_setImageWithURL(NSURL(string: &quot;&quot;), placeholderImage: UIImage(named: &quot;placeholder&quot;))</div></pre></td></tr></table></figure>
+<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">imageView.sd_setImageWithURL(<span class="type">NSURL</span>(string: <span class="string">""</span>), placeholderImage: <span class="type">UIImage</span>(named: <span class="string">"placeholder"</span>))</div></pre></td></tr></table></figure>
 <p>清除缓存：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SDImageCache.sharedImageCache().cleanDisk()</div><div class="line">SDImageCache.sharedImageCache().clearMemory()</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">SDImageCache</span>.sharedImageCache().cleanDisk()</div><div class="line"><span class="type">SDImageCache</span>.sharedImageCache().clearMemory()</div></pre></td></tr></table></figure>
 <p>这个框架使用简单，然而而其中复杂的实现细节全部隐藏在这行代码之后；这边有一篇它的源代码分析：<a href="">http://draveness.me/ios-yuan-dai-ma-jie-xi-sdwebimage/</a></p>
 
   </div>

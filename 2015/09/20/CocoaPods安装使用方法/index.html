@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/20/CocoaPods安装使用方法/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="安装首先安装好Ruby环境，在终端中输入以下命令： 1sudo gem install cocoapods 可是在天朝，在终端中敲入这个命令之后，会发现半天没有任何反应。原因无他，因为那堵墙阻挡了cocoapods.org。 我们可以用淘宝的Ruby镜像来访问cocoapods。按照下面的顺序在终端中敲入依次敲入命令： 1$ gem sources --remove https://rubygem">
-<meta property="og:updated_time" content="2015-10-15T21:33:59.000Z">
+<meta property="og:updated_time" content="2017-04-13T12:52:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods安装使用方法">
 <meta name="twitter:description" content="安装首先安装好Ruby环境，在终端中输入以下命令： 1sudo gem install cocoapods 可是在天朝，在终端中敲入这个命令之后，会发现半天没有任何反应。原因无他，因为那堵墙阻挡了cocoapods.org。 我们可以用淘宝的Ruby镜像来访问cocoapods。按照下面的顺序在终端中敲入依次敲入命令： 1$ gem sources --remove https://rubygem">
@@ -136,7 +136,7 @@
 
   <div class="content" itemprop="articleBody">
     <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>首先安装好Ruby环境，在终端中输入以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
 <p>可是在天朝，在终端中敲入这个命令之后，会发现半天没有任何反应。原因无他，因为那堵墙阻挡了cocoapods.org。</p>
 <p>我们可以用淘宝的Ruby镜像来访问cocoapods。按照下面的顺序在终端中敲入依次敲入命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem sources --remove https://rubygems.org/</div></pre></td></tr></table></figure>
@@ -163,9 +163,9 @@
 <p>然后CocoaPods就会帮你做好一切了，使用Alamofire只需要在项目中 import Alamofire；</p>
 <p>对了，使用过CocoaPods的项目就不用之前的<del>.xcodeproj</del>文件打开了，而是使用<strong>.xcworkspace</strong>打开。</p>
 <p>在这之后如果你还要添加新的第三方库的话，就只要在已经存在的Podfile中添加相应的代码然后到项目文件夹执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pod update</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod update</div></pre></td></tr></table></figure>
 <p><em>快速更新第三方库的方法</em>：<br>在更新时使用如下代码替换之前的 <del>pod update</del></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pod update --verbose --no-repo-update</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod update --verbose --no-repo-update</div></pre></td></tr></table></figure>
 
   </div>
 </article>

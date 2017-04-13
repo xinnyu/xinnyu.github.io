@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/20/iOS9-网络https-错误/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。 解决办法： 在info.plist中添加123456&amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;gt;&amp;lt;true/&amp;gt;&amp;lt;/dict">
-<meta property="og:updated_time" content="2017-04-11T09:47:10.000Z">
+<meta property="og:updated_time" content="2017-04-13T12:03:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS9 网络https 错误">
 <meta name="twitter:description" content="在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。 解决办法： 在info.plist中添加123456&amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;gt;&amp;lt;true/&amp;gt;&amp;lt;/dict">
@@ -132,7 +132,7 @@
   <div class="content" itemprop="articleBody">
     <p>在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。</p>
 <p><strong>解决办法</strong>：</p>
-<p>在<em>info.plist</em>中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</div><div class="line">&lt;dict&gt;</div><div class="line">&lt;key&gt;NSAllowsArbitraryLoads</div><div class="line">&lt;/key&gt;</div><div class="line">&lt;true/&gt;</div><div class="line">&lt;/dict&gt;</div></pre></td></tr></table></figure></p>
+<p>在<em>info.plist</em>中添加<br><figure class="highlight plist"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAppTransportSecurity<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAllowsArbitraryLoads</div><div class="line"><span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">true</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div></pre></td></tr></table></figure></p>
 
   </div>
 </article>
