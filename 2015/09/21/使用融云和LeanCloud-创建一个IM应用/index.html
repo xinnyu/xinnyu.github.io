@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="融云 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有种无从下手的感觉，下面简单记录一下使用过程。 导入SDK推荐使用CocoaPods导入：  在Podfile中添加：  1pod &amp;apos;RongCloudIMKit&amp;apos;  然后执行命">
+<meta name="keywords" content="Swift,iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用融云和LeanCloud 创建一个IM应用">
+<meta property="og:url" content="https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/index.html">
+<meta property="og:site_name" content="XINNYU">
+<meta property="og:description" content="融云 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有种无从下手的感觉，下面简单记录一下使用过程。 导入SDK推荐使用CocoaPods导入：  在Podfile中添加：  1pod &amp;apos;RongCloudIMKit&amp;apos;  然后执行命">
+<meta property="og:updated_time" content="2015-09-21T06:29:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用融云和LeanCloud 创建一个IM应用">
+<meta name="twitter:description" content="融云 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有种无从下手的感觉，下面简单记录一下使用过程。 导入SDK推荐使用CocoaPods导入：  在Podfile中添加：  1pod &amp;apos;RongCloudIMKit&amp;apos;  然后执行命">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>使用融云和LeanCloud 创建一个IM应用</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2015/09/21/使用AVPlayer-播放在线音频/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2015/09/26/Dynamics动画/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&text=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&is_video=false&description=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用融云和LeanCloud 创建一个IM应用&body=Check out this article: https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&name=使用融云和LeanCloud 创建一个IM应用&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#导入SDK"><span class="toc-number">1.</span> <span class="toc-text">导入SDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取Token"><span class="toc-number">2.</span> <span class="toc-text">获取Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化和测试连接"><span class="toc-number">3.</span> <span class="toc-text">初始化和测试连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接成功后启动单聊会话"><span class="toc-number">4.</span> <span class="toc-text">连接成功后启动单聊会话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试单聊"><span class="toc-number">5.</span> <span class="toc-text">测试单聊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置用户信息提供者"><span class="toc-number">6.</span> <span class="toc-text">设置用户信息提供者</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        使用融云和LeanCloud 创建一个IM应用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">XINNYU</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2015-09-20T17:39:23.000Z" itemprop="datePublished">2015-09-21</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Swift/">Swift</a>, <a class="tag-link" href="/tags/iOS/">iOS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><a href="http://www.rongcloud.cn/" target="_blank" rel="external">融云</a> 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。<br>详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有种无从下手的感觉，下面简单记录一下使用过程。</p>
+<h3 id="导入SDK"><a href="#导入SDK" class="headerlink" title="导入SDK"></a>导入SDK</h3><p>推荐使用CocoaPods导入：</p>
+<ol>
+<li>在Podfile中添加：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod &apos;RongCloudIMKit&apos;</div></pre></td></tr></table></figure>
+<ol>
+<li>然后执行命令：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
+<h3 id="获取Token"><a href="#获取Token" class="headerlink" title="获取Token"></a>获取Token</h3><p>Token 也叫用户令牌，是 SDK 端用来连接融云服务器的凭证，每个用户连接服务器都需要一个 Token。每次初始化连接服务器时，都需要向服务器提交 Token。<br>获取Token需要注册一个融云的账号，然后新建一个应用，之后在API调试中填写userid（用户唯一标示符）、name（用户昵称）、portraitUri（头像url）就可以获得一个测试用的Token。</p>
+<h3 id="初始化和测试连接"><a href="#初始化和测试连接" class="headerlink" title="初始化和测试连接"></a>初始化和测试连接</h3><p>获得测试用的Token之后就可以利用AppKey（创建应用时融云给你的应用标示符）和Token对应用进行初始化了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//用AppKey初始化     RCIM.sharedRCIM().initWithAppKey(&quot;82hegw5uh4r8x&quot;)      </div><div class="line">//用Token测试连接</div><div class="line">RCIM.sharedRCIM().connectWithToken(token, success: &#123; (str:String!) -&gt; Void in</div><div class="line">	print(&quot;连接成功！&quot;)       </div><div class="line">  //连接成功后设置当前登陆用户信息</div><div class="line">	RCIMClient.sharedRCIMClient().currentUserInfo = RCUserInfo(userId: id, name: name, portrait: avatorURL)</div><div class="line">            </div><div class="line">	//在UserDefaults中保存Token </div><div class="line">	NSUserDefaults.standardUserDefaults().setObject(token, forKey: &quot;kDeviceToken&quot;)</div><div class="line">	//在主线程中调用更新UI</div><div class="line">  dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; Void in</div><div class="line">                </div><div class="line">	&#125;)&#125;,</div><div class="line">	error: &#123; (_) -&gt; Void in</div><div class="line">		print(&quot;连接错误！&quot;)</div><div class="line">	&#125;)</div><div class="line">	&#123; () -&gt; Void in</div><div class="line">		print(&quot;Token不正确！&quot;)</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="连接成功后启动单聊会话"><a href="#连接成功后启动单聊会话" class="headerlink" title="连接成功后启动单聊会话"></a>连接成功后启动单聊会话</h3><p>融云在它的SDK中已经集成聊天用户界面，所以我们只要创建一个RCConversationViewController的实例就能使用它提供的用户界面了，同时用户界面也支持自定义，这部分在官网的开发文档中有详细的介绍，这里就不做赘述。<br>需要注意的是：要使用RCConversationViewController，必须给它的几个属性赋值：</p>
+<ul>
+<li>conversationType：聊天类型，有单聊、群聊等等</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.conversationType = RCConversationType.ConversationType_PRIVATE //这里的PRIVATE是单聊</div></pre></td></tr></table></figure>
+<ul>
+<li>targetId：聊天目标用户id</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.targerId = &quot;&quot;</div></pre></td></tr></table></figure>
+<ul>
+<li>userName:聊天目标用户的昵称</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.userName = &quot;&quot;</div></pre></td></tr></table></figure>
+<ul>
+<li>title:聊天界面显示的标题</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.title = self.userName</div></pre></td></tr></table></figure>
+<p>RCConversationViewController中还有其他很多的属性可以自定义，比如用户头像形状之类的，这些可以在它的头文件中找到。</p>
+<h3 id="测试单聊"><a href="#测试单聊" class="headerlink" title="测试单聊"></a>测试单聊</h3><p>设置好以上内容之后，单聊的工作就已经做好了，现在我们可以测试单聊的效果，这里由于还没有其他的用户，我们就先和自己聊天来测试一下单聊的效果；<br>把targerId设置成已经登录的id，然后就可以自己和自己聊天了，内部集成的界面还是挺简洁易用的，虽然是自己和自己聊天，但是他也不是在本地操作的，也要经过融云的服务器，所以你把网络断开的情况下是不能发出信息的。<br>到这里单聊已经实现了，但是你会发现聊天界面他是不会显示用户头像的，虽然你在初始化的时候给了一个头像的url，但是他是不会加载出来的，不得不说这一点确实很脑残，主要原因是融云为了安全起见，他的服务器是不会储存用户信息的，在融云那边只有一个Token和userid的对应关系，和你发送给他的好友关系，也就是说你的用户信息需要自己在用一个服务器存起来，然后向融云提供一个用户信息提供者；</p>
+<h3 id="设置用户信息提供者"><a href="#设置用户信息提供者" class="headerlink" title="设置用户信息提供者"></a>设置用户信息提供者</h3><p>要设置用户信息提供者首先要实现RCIMUserInfoDataSource协议，所以我们要在APP启动的时候让Appdelegate实现协议，然后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -&gt; Void)!) &#123;</div><div class="line">        let userInfo = RCUserInfo()</div><div class="line">        userInfo.userId = userId</div><div class="line">        switch userId&#123;</div><div class="line">        case &quot;xinnyu&quot;:</div><div class="line">            userInfo.name = &quot;潘新宇&quot;</div><div class="line">            userInfo.portraitUri = &quot;http://7xl9qm.com1.z0.glb.clouddn.com/avatar.png&quot;</div><div class="line">        case &quot;liuchuqi&quot;:</div><div class="line">            userInfo.name = &quot;A&quot;</div><div class="line">            userInfo.portraitUri = &quot;http://www4.qqjay.com/u/files/2011/1216/d3302821f418fc5539398cb3ba72cd8c.jpg&quot;</div><div class="line">        case &quot;lijie&quot;:</div><div class="line">            userInfo.name = &quot;B&quot;</div><div class="line">            userInfo.portraitUri = &quot;http://image.photophoto.cn/nm-6/018/030/0180300244.jpg&quot;</div><div class="line">        case &quot;tansanxiang&quot;:</div><div class="line">            userInfo.name = &quot;C&quot;</div><div class="line">            userInfo.portraitUri = &quot;http://cdn.duitang.com/uploads/item/201407/26/20140726221707_i4ZnL.thumb.224_0.jpeg&quot;</div><div class="line">        default:</div><div class="line">            print(&quot;没有这个用户&quot;)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        completion(userInfo)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#导入SDK"><span class="toc-number">1.</span> <span class="toc-text">导入SDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取Token"><span class="toc-number">2.</span> <span class="toc-text">获取Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化和测试连接"><span class="toc-number">3.</span> <span class="toc-text">初始化和测试连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接成功后启动单聊会话"><span class="toc-number">4.</span> <span class="toc-text">连接成功后启动单聊会话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试单聊"><span class="toc-number">5.</span> <span class="toc-text">测试单聊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置用户信息提供者"><span class="toc-number">6.</span> <span class="toc-text">设置用户信息提供者</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&text=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&is_video=false&description=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用融云和LeanCloud 创建一个IM应用&body=Check out this article: https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&title=使用融云和LeanCloud 创建一个IM应用"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/&name=使用融云和LeanCloud 创建一个IM应用&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
