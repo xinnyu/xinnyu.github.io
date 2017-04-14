@@ -66,6 +66,13 @@
 
     
     <entry>
+      <title><![CDATA[CocoaPods Podfile]]></title>
+      <url>%2F2015%2F09%2F29%2FCocoaPods%20Podfile%2F</url>
+      <content type="text"><![CDATA[什么是PodfilePodfile是一个规范，描述了一个或多个一套工程目标的依赖项 一个简单写法:target &apos;MyApp&apos; do pod &apos;AFNetworking&apos;, &apos;~&gt; 3.0&apos;end 更复杂的一个例子：# 下面两行是指明依赖库的来源地址source &apos;https://github.com/CocoaPods/Specs.git&apos;source &apos;https://github.com/Artsy/Specs.git&apos;# 说明平台是ios，版本是9.0platform :ios, &apos;9.0&apos;# 忽略引入库的所有警告（强迫症者的福音啊）inhibit_all_warnings!# 针对MyApp target引入AFNetworking# 针对MyAppTests target引入OCMock，target &apos;MyApp&apos; do pod &apos;AFNetworking&apos;, &apos;~&gt; 3.0&apos; target &apos;MyAppTests&apos; do inherit! :search_paths pod &apos;OCMock&apos;, &apos;~&gt; 2.0.1&apos; endend# 这个是cocoapods的一些配置,官网并没有太详细的说明,一般采取默认就好了,也就是不写.post_install do |installer| installer.pods_project.targets.each do |target| puts target.name endend From a podspec in the root of a library repository (引用仓库根目录的podspec)有时我们需要引入依赖库指定的分支或节点，写法如下。 引入master分支（默认） 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git'```* 引入指定的分支 ```pod &apos;AFNetworking&apos;, :git =&gt; &apos;https://github.com/gowalla/AFNetworking.git&apos;, :branch =&gt; &apos;dev&apos; 引入某个节点的代码 'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :tag => '0.7.0'```* 引入某个特殊的提交节点 ```pod &apos;AFNetworking&apos;, :git =&gt; &apos;https://github.com/gowalla/AFNetworking.git&apos;, :commit =&gt; &apos;082f8319af&apos; 需要特别注意的是，虽然这样将会满足任何在Pod中的依赖项通过其他Pods 但是podspec必须存在于仓库的根目录中。]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Mac终端command not found 解决办法]]></title>
       <url>%2F2015%2F09%2F26%2FMac%E7%BB%88%E7%AB%AF%E6%8F%90%E7%A4%BA-command-not-found%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%2F</url>
       <content type="text"><![CDATA[在bash_profile中添加： export PATH=&quot;$PATH:$HOME/.rvm/bin&quot; # Add RVM to PATH for scripting[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;&amp; source &quot;$HOME/.rvm/scripts/rvm&quot; # Load RVM into a shell session *as a function*]]></content>
