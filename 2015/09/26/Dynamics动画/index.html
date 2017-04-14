@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,动画," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -88,13 +88,13 @@
 
 
 <meta name="description" content="UIKit Dynamics是iOS7中新推出的，可以模拟现实的二维动画效果，开发出逼真的物理动画。 关键类 UIDynamicAnimator：封装了底层的物理引擎，为动力项（UIDynamicItem）提供物理相关的功能和动画； UIDynamicBehavior，动力行为，为动力项提供不同的物理行为； UIDynamicItem，动力项，相当于现实世界中的一个基本物体；  使用方法 创建一个">
-<meta name="keywords" content="iOS,动画">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dynamics动画">
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/26/Dynamics动画/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="UIKit Dynamics是iOS7中新推出的，可以模拟现实的二维动画效果，开发出逼真的物理动画。 关键类 UIDynamicAnimator：封装了底层的物理引擎，为动力项（UIDynamicItem）提供物理相关的功能和动画； UIDynamicBehavior，动力行为，为动力项提供不同的物理行为； UIDynamicItem，动力项，相当于现实世界中的一个基本物体；  使用方法 创建一个">
-<meta property="og:updated_time" content="2015-10-15T21:33:56.000Z">
+<meta property="og:updated_time" content="2017-04-14T10:57:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamics动画">
 <meta name="twitter:description" content="UIKit Dynamics是iOS7中新推出的，可以模拟现实的二维动画效果，开发出逼真的物理动画。 关键类 UIDynamicAnimator：封装了底层的物理引擎，为动力项（UIDynamicItem）提供物理相关的功能和动画； UIDynamicBehavior，动力行为，为动力项提供不同的物理行为； UIDynamicItem，动力项，相当于现实世界中的一个基本物体；  使用方法 创建一个">
@@ -386,12 +386,11 @@
 <h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
 <li>创建一个UIDynamicAnimator</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">@property(strong, nonatomic) UIDynamicAnimator *dynamicAnimate;</div><div class="line"></div><div class="line">- (UIDynamicAnimator *)dynamicAnimate&#123;</div><div class="line">    if (!_dynamicAnimate) &#123;</div><div class="line">        _dynamicAnimate = [[UIDynamicAnimator alloc] initWithReferenceView:self.gameView];</div><div class="line">        _dynamicAnimate.delegate = self;</div><div class="line">    &#125;</div><div class="line">    return _dynamicAnimate;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIDynamicAnimator</span> *dynamicAnimate;</div><div class="line"></div><div class="line">- (<span class="built_in">UIDynamicAnimator</span> *)dynamicAnimate&#123;</div><div class="line">    <span class="keyword">if</span> (!_dynamicAnimate) &#123;</div><div class="line">        _dynamicAnimate = [[<span class="built_in">UIDynamicAnimator</span> alloc] initWithReferenceView:<span class="keyword">self</span>.gameView];</div><div class="line">        _dynamicAnimate.delegate = <span class="keyword">self</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _dynamicAnimate;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li>然后就可以把动力行为加到动画中了</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[self.dynamicAnimate addBehavior:_dropItemBehavior];</div></pre></td></tr></table></figure>
-
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">[<span class="keyword">self</span>.dynamicAnimate addBehavior:_dropItemBehavior];</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -421,8 +420,6 @@
         <div class="post-tags">
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
-          
-            <a href="/tags/动画/" rel="tag"># 动画</a>
           
         </div>
       
@@ -526,7 +523,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -537,7 +534,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -548,7 +545,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

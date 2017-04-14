@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Swift," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -88,14 +88,14 @@
 
 
 <meta name="description" content="模型-视图-控制器这个模式其实应该叫做MCV，用控制器把model与view隔开才对，也就是model与view互相不知道对方的存在，没有任何瓜葛，他们就像一个团队里吵了架的同事，如果有项目需要他俩来参与，那么最好有第三者来管理他俩之间的沟通与协调。这个第三者就是控制器。既然管理，那么姑且就把这个控制器提做项目经理吧，这样的话让他俩干啥就得干啥。就像斯坦福老头说的视图就是控制器的狗腿子。  让我们">
-<meta name="keywords" content="Swift">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS MVC 详解">
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/19/iOS-MVC-详解/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="模型-视图-控制器这个模式其实应该叫做MCV，用控制器把model与view隔开才对，也就是model与view互相不知道对方的存在，没有任何瓜葛，他们就像一个团队里吵了架的同事，如果有项目需要他俩来参与，那么最好有第三者来管理他俩之间的沟通与协调。这个第三者就是控制器。既然管理，那么姑且就把这个控制器提做项目经理吧，这样的话让他俩干啥就得干啥。就像斯坦福老头说的视图就是控制器的狗腿子。  让我们">
 <meta property="og:image" content="http://7xl9qm.com1.z0.glb.clouddn.com/MVC.png">
-<meta property="og:updated_time" content="2015-09-20T05:21:47.000Z">
+<meta property="og:updated_time" content="2017-04-14T10:57:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS MVC 详解">
 <meta name="twitter:description" content="模型-视图-控制器这个模式其实应该叫做MCV，用控制器把model与view隔开才对，也就是model与view互相不知道对方的存在，没有任何瓜葛，他们就像一个团队里吵了架的同事，如果有项目需要他俩来参与，那么最好有第三者来管理他俩之间的沟通与协调。这个第三者就是控制器。既然管理，那么姑且就把这个控制器提做项目经理吧，这样的话让他俩干啥就得干啥。就像斯坦福老头说的视图就是控制器的狗腿子。  让我们">
@@ -343,28 +343,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -403,7 +381,7 @@
       
         <h2 id="模型-视图-控制器"><a href="#模型-视图-控制器" class="headerlink" title="模型-视图-控制器"></a>模型-视图-控制器</h2><p>这个模式其实应该叫做MCV，用控制器把model与view隔开才对，也就是model与view互相不知道对方的存在，没有任何瓜葛，他们就像一个团队里吵了架的同事，如果有项目需要他俩来参与，那么最好有第三者来管理他俩之间的沟通与协调。这个第三者就是控制器。<br>既然管理，那么姑且就把这个控制器提做项目经理吧，这样的话让他俩干啥就得干啥。就像斯坦福老头说的视图就是控制器的狗腿子。</p>
 <blockquote>
-<p>让我们来欣赏一下这张图（摘自斯坦福公开课的课件）：<br> <img src="http://7xl9qm.com1.z0.glb.clouddn.com/MVC.png" alt=""></p>
+<p>让我们来欣赏一下这张图（摘自斯坦福公开课的课件）：<br><img src="http://7xl9qm.com1.z0.glb.clouddn.com/MVC.png" alt=""></p>
 </blockquote>
 <p>先撇开那些乱七八糟的箭头单看他们之间的分界线，view与controller、model与controller之间的线是虚的，而model与view之间的是双黄线，考过驾照的知道越过这个线意味着什么吧。</p>
 <p>控制器与视图之间的大部分连线都可以在Xcode中通过按住ctrl来连接。例如outlet，例如delegate。有了这些连线，他们之间的沟通算是畅通无阻了。</p>
@@ -449,7 +427,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Swift/" rel="tag"># Swift</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
         </div>
       
@@ -462,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/20/NSDate-相关/" rel="next" title="NSDate 相关">
-                <i class="fa fa-chevron-left"></i> NSDate 相关
+              <a href="/2015/09/20/NSTimer相关知识/" rel="next" title="NSTimer相关知识">
+                <i class="fa fa-chevron-left"></i> NSTimer相关知识
               </a>
             
           </div>
@@ -472,8 +450,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/19/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
+              <a href="/2015/07/26/Mac终端提示-command-not-found解决办法/" rel="prev" title="Mac终端command not found 解决办法">
+                Mac终端command not found 解决办法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -553,7 +531,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -564,7 +542,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -575,7 +553,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

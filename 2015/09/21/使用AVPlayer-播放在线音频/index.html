@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="xinyu, xinnyu" />
+  <meta name="keywords" content="iOS,Swift," />
 
 
 
@@ -88,13 +88,13 @@
 
 
 <meta name="description" content="在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：  AVPlayer MPMoviePlayerController 能实现音乐流播（但是此方法苹果在iOS9中已经不推荐使用了） Audioqueue，Audiostream （太复杂） 第三方库AudioStreamer（只能播放在线音频）  所以用AVPlayer来实现在线音频播放是最好的选择">
-<meta name="keywords">
+<meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播">
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：  AVPlayer MPMoviePlayerController 能实现音乐流播（但是此方法苹果在iOS9中已经不推荐使用了） Audioqueue，Audiostream （太复杂） 第三方库AudioStreamer（只能播放在线音频）  所以用AVPlayer来实现在线音频播放是最好的选择">
-<meta property="og:updated_time" content="2017-04-13T12:50:33.000Z">
+<meta property="og:updated_time" content="2017-04-14T10:57:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播">
 <meta name="twitter:description" content="在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：  AVPlayer MPMoviePlayerController 能实现音乐流播（但是此方法苹果在iOS9中已经不推荐使用了） Audioqueue，Audiostream （太复杂） 第三方库AudioStreamer（只能播放在线音频）  所以用AVPlayer来实现在线音频播放是最好的选择">
@@ -386,17 +386,20 @@
 </ul>
 <p>所以用AVPlayer来实现在线音频播放是最好的选择；一下就是利用AVPlayer实现音乐流播并实现后台锁屏播放和设置自动连播的大概步骤：</p>
 <p>项目源代码：<a href="https://github.com/xinnyu/DouBanFM" target="_blank" rel="external">Swift 2.0 版豆瓣电台</a></p>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>先声明AVplayer和AVPlayerItem的实例：<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> musicPlayer:<span class="type">AVPlayer</span>!</div><div class="line"><span class="keyword">var</span> playerItem:<span class="type">AVPlayerItem</span>?</div></pre></td></tr></table></figure></p>
-<p>然后在需要的播放音频的地方给它赋值：<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">self</span>.musicPlayer = <span class="type">AVPlayer</span>()</div><div class="line"><span class="keyword">let</span> playerLayer = <span class="type">AVPlayerLayer</span>(player: <span class="keyword">self</span>.musicPlayer)</div><div class="line"><span class="keyword">self</span>.view.layer.addSublayer(playerLayer)</div><div class="line"><span class="keyword">let</span> url = <span class="type">NSURL</span>(string: <span class="string">"   "</span>)</div><div class="line"><span class="comment">//替换当前的playerItem</span></div><div class="line"><span class="keyword">self</span>.musicPlayer.replaceCurrentItemWithPlayerItem(playerItem)</div><div class="line"><span class="comment">//开始播放</span></div><div class="line"><span class="keyword">self</span>.musicPlayer.play()</div></pre></td></tr></table></figure></p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>先声明AVplayer和AVPlayerItem的实例：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> musicPlayer:<span class="type">AVPlayer</span>!</div><div class="line"><span class="keyword">var</span> playerItem:<span class="type">AVPlayerItem</span>?</div></pre></td></tr></table></figure>
+<p>然后在需要的播放音频的地方给它赋值：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">self</span>.musicPlayer = <span class="type">AVPlayer</span>()</div><div class="line"><span class="keyword">let</span> playerLayer = <span class="type">AVPlayerLayer</span>(player: <span class="keyword">self</span>.musicPlayer)</div><div class="line"><span class="keyword">self</span>.view.layer.addSublayer(playerLayer)</div><div class="line"><span class="keyword">let</span> url = <span class="type">NSURL</span>(string: <span class="string">"   "</span>)</div><div class="line"><span class="comment">//替换当前的playerItem</span></div><div class="line"><span class="keyword">self</span>.musicPlayer.replaceCurrentItemWithPlayerItem(playerItem)</div><div class="line"><span class="comment">//开始播放</span></div><div class="line"><span class="keyword">self</span>.musicPlayer.play()</div></pre></td></tr></table></figure>
 <p>以上就是实现播放在线音频的代码，但是如果要实现后台播放和自动连播的话，还要做以下工作：</p>
 <h3 id="自动连播"><a href="#自动连播" class="headerlink" title="自动连播"></a>自动连播</h3><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//当播放完成了之后发送通知，继续播放</span></div><div class="line"><span class="type">NSNotificationCenter</span>.defaultCenter().addObserver(<span class="keyword">self</span>, selector: <span class="string">"playerItemDidReachEnd:"</span>, name: <span class="type">AVPlayerItemDidPlayToEndTimeNotification</span>, object: playerItem)</div><div class="line"></div><div class="line"><span class="comment">//没有播放完成的通知       </span></div><div class="line"><span class="type">NSNotificationCenter</span>.defaultCenter().addObserver(<span class="keyword">self</span>, selector: <span class="string">"playerItemDidNotReachEnd"</span>, name: <span class="type">AVPlayerItemFailedToPlayToEndTimeNotification</span>, object: playerItem)</div><div class="line"></div><div class="line"><span class="comment">//接受到通知后响应的方法</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">playerItemDidReachEnd</span><span class="params">(aNotification:NSNotification)</span></span>&#123;</div><div class="line">	<span class="comment">//自动播放相关</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">playerItemDidNotReachEnd</span><span class="params">(aNotification:NSNotification)</span></span>&#123;</div><div class="line">	<span class="comment">//歌曲没有正常播放到结束</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><em>后台播放</em></p>
 <p>如果是播放本地音频的话，后台播放只要在APP启动时加上：</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> session = <span class="type">AVAudioSession</span>.sharedInstance()</div><div class="line"><span class="keyword">try</span>! session.setCategory(<span class="type">AVAudioSessionCategoryPlayback</span>)</div><div class="line"><span class="keyword">try</span>! session.setActive(<span class="literal">true</span>)</div></pre></td></tr></table></figure>
 <p>然后在info.plist文件中添加：</p>
-<figure class="highlight plist"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>UIBackgroundModes<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>audio<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;key&gt;UIBackgroundModes&lt;/key&gt;</div><div class="line">&lt;array&gt;</div><div class="line">&lt;string&gt;audio&lt;/string&gt;</div><div class="line">&lt;/array&gt;</div></pre></td></tr></table></figure>
 <p>即可。</p>
-<p>但是如果每一首歌都要请求网络的话，只做上述工作时行不通的，还要在实例化AVPlayer的地方加上：<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//后台播放</span></div><div class="line"><span class="keyword">var</span> bgTask:<span class="type">UIBackgroundTaskIdentifier</span> = <span class="number">0</span></div><div class="line"><span class="keyword">if</span> <span class="type">UIApplication</span>.sharedApplication().applicationState == <span class="type">UIApplicationState</span>.<span class="type">Background</span> &#123;</div><div class="line">	<span class="keyword">self</span>.musicPlayer.play()</div><div class="line">	netMusicIsPlaying = <span class="literal">true</span></div><div class="line"></div><div class="line">	<span class="keyword">let</span> app:<span class="type">UIApplication</span> = <span class="type">UIApplication</span>.sharedApplication()</div><div class="line">	<span class="keyword">let</span> newTask:<span class="type">UIBackgroundTaskIdentifier</span> = app.beginBackgroundTaskWithExpirationHandler(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">if</span> newTask != <span class="type">UIBackgroundTaskInvalid</span> &#123;</div><div class="line">	app.endBackgroundTask(bgTask)</div><div class="line">	&#125;</div><div class="line">	bgTask = newTask</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="keyword">self</span>.musicPlayer.play()</div><div class="line">	netMusicIsPlaying = <span class="literal">true</span></div><div class="line">	isPlayOffline = <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是如果每一首歌都要请求网络的话，只做上述工作时行不通的，还要在实例化AVPlayer的地方加上：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//后台播放</span></div><div class="line"><span class="keyword">var</span> bgTask:<span class="type">UIBackgroundTaskIdentifier</span> = <span class="number">0</span></div><div class="line"><span class="keyword">if</span> <span class="type">UIApplication</span>.sharedApplication().applicationState == <span class="type">UIApplicationState</span>.<span class="type">Background</span> &#123;</div><div class="line">	<span class="keyword">self</span>.musicPlayer.play()</div><div class="line">	netMusicIsPlaying = <span class="literal">true</span></div><div class="line"></div><div class="line">	<span class="keyword">let</span> app:<span class="type">UIApplication</span> = <span class="type">UIApplication</span>.sharedApplication()</div><div class="line">	<span class="keyword">let</span> newTask:<span class="type">UIBackgroundTaskIdentifier</span> = app.beginBackgroundTaskWithExpirationHandler(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">if</span> newTask != <span class="type">UIBackgroundTaskInvalid</span> &#123;</div><div class="line">	app.endBackgroundTask(bgTask)</div><div class="line">	&#125;</div><div class="line">	bgTask = newTask</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="keyword">self</span>.musicPlayer.play()</div><div class="line">	netMusicIsPlaying = <span class="literal">true</span></div><div class="line">	isPlayOffline = <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样才能实现真正的后台播放。</p>
 <h3 id="锁屏界面和控制中心添加详情"><a href="#锁屏界面和控制中心添加详情" class="headerlink" title="锁屏界面和控制中心添加详情"></a>锁屏界面和控制中心添加详情</h3><p>首先要作以下准备工作</p>
 <ul>
@@ -446,6 +449,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
+          
+        </div>
+      
 
       
         
@@ -465,7 +476,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/21/iOS-常用第三方库7-Reachability/" rel="prev" title="iOS 常用第三方库7(Reachability)">
+              <a href="/2015/09/21/Reachability 使用/" rel="prev" title="iOS 常用第三方库7(Reachability)">
                 iOS 常用第三方库7(Reachability) <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -546,7 +557,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -557,7 +568,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -568,7 +579,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,Swift," />
+  <meta name="keywords" content="iOS,Swift,第三方库," />
 
 
 
@@ -88,13 +88,13 @@
 
 
 <meta name="description" content="安装使用CocoaPods来对R.Swift进行安装： pod &amp;#39;R.swift&amp;#39; 配置 进入项目的配置界面，在左边的TARGETS项下面选择我们的项目，并在右边点击Build Phases这个tab。 进入&amp;lt;Build Phases&amp;gt;这个tab后，我们看到左上角有一个”+”按钮，点击并在弹出的选项卡中选择New Run Script Phase。 我们会看到界面的下方">
-<meta name="keywords" content="iOS,Swift">
+<meta name="keywords" content="iOS,Swift,第三方库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="R.swift使用">
 <meta property="og:url" content="https://xinnyu.github.io/2016/09/14/R.swift使用/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="安装使用CocoaPods来对R.Swift进行安装： pod &amp;#39;R.swift&amp;#39; 配置 进入项目的配置界面，在左边的TARGETS项下面选择我们的项目，并在右边点击Build Phases这个tab。 进入&amp;lt;Build Phases&amp;gt;这个tab后，我们看到左上角有一个”+”按钮，点击并在弹出的选项卡中选择New Run Script Phase。 我们会看到界面的下方">
-<meta property="og:updated_time" content="2017-04-13T19:35:18.000Z">
+<meta property="og:updated_time" content="2017-04-14T10:57:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R.swift使用">
 <meta name="twitter:description" content="安装使用CocoaPods来对R.Swift进行安装： pod &amp;#39;R.swift&amp;#39; 配置 进入项目的配置界面，在左边的TARGETS项下面选择我们的项目，并在右边点击Build Phases这个tab。 进入&amp;lt;Build Phases&amp;gt;这个tab后，我们看到左上角有一个”+”按钮，点击并在弹出的选项卡中选择New Run Script Phase。 我们会看到界面的下方">
@@ -390,10 +390,14 @@
 <h4 id="File-数据文件"><a href="#File-数据文件" class="headerlink" title="File - 数据文件"></a>File - 数据文件</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFile = <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"DataFile"</span>, ofType: <span class="string">"json"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFile = <span class="type">R</span>.file.dataFileJson.path()</div></pre></td></tr></table></figure>
 <h4 id="Font-字体"><a href="#Font-字体" class="headerlink" title="Font - 字体"></a>Font - 字体</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFont = <span class="type">UIFont</span>(name: <span class="string">"chalkduster"</span>, size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFont = <span class="type">R</span>.font.chalkduster(size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  你看，非常神奇，在上面的方法中你不仅可以选择字体类型，还能设置字体大小</span></div></pre></td></tr></table></figure>
 <h4 id="Color-颜色"><a href="#Color-颜色" class="headerlink" title="Color - 颜色"></a>Color - 颜色</h4><p>把.clr文件拖入项目中即可使用颜色配置<br><code>let appRedColor = R.color.myAppColor.red()</code></p>
-<h4 id="Nibs"><a href="#Nibs" class="headerlink" title="Nibs"></a>Nibs</h4><p>不使用R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="string">"CustomView"</span></div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">UINib</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> rootViews = customViewNib.instantiate(withOwner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = rootViews[<span class="number">0</span>] <span class="keyword">as</span>? <span class="type">CustomView</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div></pre></td></tr></table></figure></p>
-<p>使用 R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="type">R</span>.nib.customView.name</div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">R</span>.nib.customView()</div><div class="line"><span class="keyword">let</span> rootViews = <span class="type">R</span>.nib.customView.instantiateWithOwner(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = <span class="type">R</span>.nib.customView.firstView(owner: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nib: <span class="type">R</span>.nib.customView)</div></pre></td></tr></table></figure></p>
-<h4 id="Localized-strings"><a href="#Localized-strings" class="headerlink" title="Localized strings"></a>Localized strings</h4><p>不使用R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">NSLocalizedString</span>(<span class="string">"welcome.message"</span>, comment: <span class="string">""</span>)</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">NSLocalizedString</span>(<span class="string">"title"</span>, tableName: <span class="string">"Settings"</span>, comment: <span class="string">""</span>)</div><div class="line"></div><div class="line"><span class="comment">// Formatted strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"welcome.withName"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Stringsdict files</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"copy.progress"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="number">4</span>, <span class="number">23</span>)</div></pre></td></tr></table></figure></p>
-<p>使用 R.swift<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">// Localized strings are grouped per table (.strings file)</span></div><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">R</span>.string.localizable.welcomeMessage()</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">R</span>.string.settings.title()</div><div class="line"></div><div class="line"><span class="comment">// Functions with parameters are generated for format strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">R</span>.string.localizable.welcomeWithName(<span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Functions with named argument labels are generated for stringsdict keys</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">R</span>.string.localizable.copyProgress(completed: <span class="number">4</span>, total: <span class="number">23</span>)</div></pre></td></tr></table></figure></p>
+<h4 id="Nibs"><a href="#Nibs" class="headerlink" title="Nibs"></a>Nibs</h4><p>不使用R.swift</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="string">"CustomView"</span></div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">UINib</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> rootViews = customViewNib.instantiate(withOwner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = rootViews[<span class="number">0</span>] <span class="keyword">as</span>? <span class="type">CustomView</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div></pre></td></tr></table></figure>
+<p>使用 R.swift</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="type">R</span>.nib.customView.name</div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">R</span>.nib.customView()</div><div class="line"><span class="keyword">let</span> rootViews = <span class="type">R</span>.nib.customView.instantiateWithOwner(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = <span class="type">R</span>.nib.customView.firstView(owner: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nib: <span class="type">R</span>.nib.customView)</div></pre></td></tr></table></figure>
+<h4 id="Localized-strings"><a href="#Localized-strings" class="headerlink" title="Localized strings"></a>Localized strings</h4><p>不使用R.swift</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">NSLocalizedString</span>(<span class="string">"welcome.message"</span>, comment: <span class="string">""</span>)</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">NSLocalizedString</span>(<span class="string">"title"</span>, tableName: <span class="string">"Settings"</span>, comment: <span class="string">""</span>)</div><div class="line"></div><div class="line"><span class="comment">// Formatted strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"welcome.withName"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Stringsdict files</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"copy.progress"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="number">4</span>, <span class="number">23</span>)</div></pre></td></tr></table></figure>
+<p>使用 R.swift</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">// Localized strings are grouped per table (.strings file)</span></div><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">R</span>.string.localizable.welcomeMessage()</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">R</span>.string.settings.title()</div><div class="line"></div><div class="line"><span class="comment">// Functions with parameters are generated for format strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">R</span>.string.localizable.welcomeWithName(<span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Functions with named argument labels are generated for stringsdict keys</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">R</span>.string.localizable.copyProgress(completed: <span class="number">4</span>, total: <span class="number">23</span>)</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -426,6 +430,8 @@
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
             <a href="/tags/Swift/" rel="tag"># Swift</a>
+          
+            <a href="/tags/第三方库/" rel="tag"># 第三方库</a>
           
         </div>
       
@@ -529,7 +535,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -540,7 +546,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -551,7 +557,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

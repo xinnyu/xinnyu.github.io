@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="xinyu, xinnyu" />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。 解决办法： 在info.plist中添加&amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;gt;&amp;lt;true/&amp;gt;&amp;lt;/dict&amp;gt;">
-<meta name="keywords">
+<meta name="description" content="在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。 解决办法： 在info.plist中添加 &amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;gt;&amp;lt;true/&amp;gt;&amp;lt;/dict&amp;gt;">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS9 网络https 错误">
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/20/iOS9-网络https-错误/index.html">
 <meta property="og:site_name" content="XINNYU">
-<meta property="og:description" content="在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。 解决办法： 在info.plist中添加&amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;gt;&amp;lt;true/&amp;gt;&amp;lt;/dict&amp;gt;">
-<meta property="og:updated_time" content="2017-04-13T12:03:35.000Z">
+<meta property="og:description" content="在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。 解决办法： 在info.plist中添加 &amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;gt;&amp;lt;true/&amp;gt;&amp;lt;/dict&amp;gt;">
+<meta property="og:updated_time" content="2017-04-14T10:57:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS9 网络https 错误">
-<meta name="twitter:description" content="在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。 解决办法： 在info.plist中添加&amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;gt;&amp;lt;true/&amp;gt;&amp;lt;/dict&amp;gt;">
+<meta name="twitter:description" content="在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。 解决办法： 在info.plist中添加 &amp;lt;key&amp;gt;NSAppTransportSecurity&amp;lt;/key&amp;gt;&amp;lt;dict&amp;gt;&amp;lt;key&amp;gt;NSAllowsArbitraryLoads&amp;lt;/key&amp;gt;&amp;lt;true/&amp;gt;&amp;lt;/dict&amp;gt;">
 
 
 
@@ -379,7 +379,8 @@
       
         <p>在iOS9 中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。</p>
 <p><strong>解决办法</strong>：</p>
-<p>在<em>info.plist</em>中添加<br><figure class="highlight plist"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAppTransportSecurity<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAllowsArbitraryLoads</div><div class="line"><span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">true</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在<em>info.plist</em>中添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</div><div class="line">&lt;dict&gt;</div><div class="line">&lt;key&gt;NSAllowsArbitraryLoads</div><div class="line">&lt;/key&gt;</div><div class="line">&lt;true/&gt;</div><div class="line">&lt;/dict&gt;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -407,6 +408,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
 
       
         
@@ -416,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/20/iOS-常用第三方库1(Alamofire)/" rel="next" title="iOS 常用第三方库1(Alamofire)">
-                <i class="fa fa-chevron-left"></i> iOS 常用第三方库1(Alamofire)
+              <a href="/2015/09/20/Alamofile使用/" rel="next" title="Alamofile使用">
+                <i class="fa fa-chevron-left"></i> Alamofile使用
               </a>
             
           </div>
@@ -498,7 +505,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -509,7 +516,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -520,7 +527,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
