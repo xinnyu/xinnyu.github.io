@@ -294,6 +294,294 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/26/Mac自带Vim7-3不能使用系统剪切板解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/26/Mac自带Vim7-3不能使用系统剪切板解决方案/" itemprop="url">
+                  Mac自带Vim7.3不能使用系统剪切板解决方案
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-26T19:35:44+08:00">
+                2015-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/09/26/Mac自带Vim7-3不能使用系统剪切板解决方案/" class="leancloud_visitors" data-flag-title="Mac自带Vim7.3不能使用系统剪切板解决方案">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>用了Mac自带的Vim之后发现yy复制的内容和剪切板不同步，谷歌之，找到2种方法：</p>
+<ul>
+<li>“+y </li>
+<li>在 ~/.vimrc 里增加 set clipboard=unnamed</li>
+</ul>
+<p>但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；<br>于是就安装了MacVim，结果试了之后还是不管用，执行<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">vim --version | grep clip</div></pre></td></tr></table></figure></p>
+<p>结果还是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">-clientserver -clipboard +cmdline_compl +cmdline_hist +cmdline_info +comments </div><div class="line">-xterm_clipboard -xterm_save</div></pre></td></tr></table></figure>
+<p>原因是就算你安装了MacVim使用了Vim7.4系统自带的Terminal还是会默认使用自带的7.3版本；</p>
+<p>所以只要在profile中添加如下语句就可以解决问题了；</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">alias vim=&quot;/Applications/MacVim.app/Contents/MacOS/Vim&quot;</div></pre></td></tr></table></figure>
+<p>之后你在终端使用vim也会调用MacVim中的7.4版本了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/26/Dynamics动画/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/26/Dynamics动画/" itemprop="url">
+                  Dynamics动画
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-26T01:29:21+08:00">
+                2015-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/09/26/Dynamics动画/" class="leancloud_visitors" data-flag-title="Dynamics动画">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>UIKit Dynamics是iOS7中新推出的，可以模拟现实的二维动画效果，开发出逼真的物理动画。</p>
+<h3 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h3><ul>
+<li>UIDynamicAnimator：封装了底层的物理引擎，为动力项（UIDynamicItem）提供物理相关的功能和动画；</li>
+<li>UIDynamicBehavior，动力行为，为动力项提供不同的物理行为；</li>
+<li>UIDynamicItem，动力项，相当于现实世界中的一个基本物体；</li>
+</ul>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
+<li>创建一个UIDynamicAnimator</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">@property(strong, nonatomic) UIDynamicAnimator *dynamicAnimate;</div><div class="line"></div><div class="line">- (UIDynamicAnimator *)dynamicAnimate&#123;</div><div class="line">    if (!_dynamicAnimate) &#123;</div><div class="line">        _dynamicAnimate = [[UIDynamicAnimator alloc] initWithReferenceView:self.gameView];</div><div class="line">        _dynamicAnimate.delegate = self;</div><div class="line">    &#125;</div><div class="line">    return _dynamicAnimate;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>然后就可以把动力行为加到动画中了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[self.dynamicAnimate addBehavior:_dropItemBehavior];</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1527,317 +1815,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/20/iOS-常用第三方库2-MJRefresh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/20/iOS-常用第三方库2-MJRefresh/" itemprop="url">
-                  iOS-常用第三方库2(MJRefresh)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-20T19:52:32+08:00">
-                2015-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/20/iOS-常用第三方库2-MJRefresh/" class="leancloud_visitors" data-flag-title="iOS-常用第三方库2(MJRefresh)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/CoderMJLee/MJRefresh" target="_blank" rel="external">MJRefresh</a>是用法最简单的下拉刷新框架：一行代码搞定</p>
-<p>支持 UIScrollView、UITableView、UICollectionView、UIWebView 的刷新</p>
-<h3 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//设置下拉刷新</div><div class="line">var MJHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: &quot;refresh&quot;)</div><div class="line">self.myTabView.header = MJHeader</div><div class="line">        </div><div class="line">//设置上拉加载</div><div class="line">var MJFooter = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: &quot;load&quot;)</div><div class="line">self.myTabView.footer = MJFooter</div><div class="line"></div><div class="line">func load()&#123;  </div><div class="line">	//执行加载动作</div><div class="line">	self.myTabView.header.endRefreshing()</div><div class="line">&#125;</div><div class="line"></div><div class="line">func refresh()&#123;  </div><div class="line">	//执行刷新动作</div><div class="line">	self.myTabView.footer.endRefreshing()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><ol>
-<li><p>下拉刷新控件的种类</p>
-<p> ○ 默认（Normal）：MJRefreshNormalHeader<br> ○ 动图（Gif）：MJRefreshGifHeader</p>
-</li>
-<li><p>上拉刷新控件的种类</p>
-<p> <em>自动刷新（Auto）</em><br> 默认（Normal）：MJRefreshAutoNormalFooter<br> 动图（Gif）：MJRefreshAutoGifFooter<br> <em>自动回弹（Back）</em><br> 默认（Normal）：MJRefreshBackNormalFooter<br> 动图（Gif）：MJRefreshBackGifFooter</p>
-</li>
-</ol>
-<p>####<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// 设置文字</div><div class="line">[header setTitle:@&quot;Pull down to refresh&quot; forState:MJRefreshStateIdle];</div><div class="line">[header setTitle:@&quot;Release to refresh&quot; forState:MJRefreshStatePulling];</div><div class="line">[header setTitle:@&quot;Loading ...&quot; forState:MJRefreshStateRefreshing];</div><div class="line">// 设置字体</div><div class="line">header.stateLabel.font = [UIFont systemFontOfSize:15];</div><div class="line">header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:14];</div><div class="line">// 设置颜色</div><div class="line">header.stateLabel.textColor = [UIColor redColor];</div><div class="line">header.lastUpdatedTimeLabel.textColor = [UIColor blueColor];</div><div class="line"></div><div class="line">// 隐藏时间</div><div class="line">header.lastUpdatedTimeLabel.hidden = YES;</div><div class="line">// 隐藏状态</div><div class="line">header.stateLabel.hidden = YES;</div></pre></td></tr></table></figure></p>
-<h4 id="下拉加载"><a href="#下拉加载" class="headerlink" title="下拉加载"></a>下拉加载</h4><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadMoreData方法）</div><div class="line">MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];</div><div class="line">// 设置刷新图片</div><div class="line">[footer setImages:refreshingImages forState:MJRefreshStateRefreshing];</div><div class="line"></div><div class="line">// 隐藏刷新状态的文字</div><div class="line">footer.refreshingTitleHidden = YES;</div><div class="line">// 如果没有上面的方法，就用footer.stateLabel.hidden = YES;</div><div class="line"></div><div class="line">// 隐藏当前的上拉刷新控件</div><div class="line">self.tableView.footer.hidden = YES;</div><div class="line"></div><div class="line">// 变为没有更多数据的状态</div><div class="line">[footer noticeNoMoreData];</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/20/iOS-常用第三方库1(Alamofire)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/20/iOS-常用第三方库1(Alamofire)/" itemprop="url">
-                  iOS 常用第三方库1(Alamofire)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-20T19:18:20+08:00">
-                2015-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/20/iOS-常用第三方库1(Alamofire)/" class="leancloud_visitors" data-flag-title="iOS 常用第三方库1(Alamofire)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">Alamofire</a> 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架；</p>
-<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Alamofire.request(method: Method, URLString: URLStringConvertible, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [String : String]?).response (options: NSJSONReadingOptions, completionHandler: &#123; (NSURLRequest, NSHTTPURLResponse?, NSData?, NSError?) -&gt; Void in</div><div class="line">    //操作数据</div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>但是上面方法中有些参数可以省略，基本用法如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Alamofire.request(.GET, &quot;URL&quot;).responseJSON(options: NSJSONReadingOptions.AllowFragments) &#123; (_, _, json, _) -&gt; Void in</div><div class="line">//操作数据</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="获取数据的方法"><a href="#获取数据的方法" class="headerlink" title="获取数据的方法"></a>获取数据的方法</h4><ul>
-<li>response()</li>
-<li>responseString(encoding: NSStringEncoding)</li>
-<li>responseJSON(options: NSJSONReadingOptions)</li>
-<li>responsePropertyList(options: NSPropertyListReadOptions)</li>
-</ul>
-<h4 id="HTTP-Methods"><a href="#HTTP-Methods" class="headerlink" title="HTTP Methods"></a>HTTP Methods</h4><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">public enum Method: String &#123;</div><div class="line">    case OPTIONS = &quot;OPTIONS&quot;</div><div class="line">    case GET = &quot;GET&quot;</div><div class="line">    case HEAD = &quot;HEAD&quot;</div><div class="line">    case POST = &quot;POST&quot;</div><div class="line">    case PUT = &quot;PUT&quot;</div><div class="line">    case PATCH = &quot;PATCH&quot;</div><div class="line">    case DELETE = &quot;DELETE&quot;</div><div class="line">    case TRACE = &quot;TRACE&quot;</div><div class="line">    case CONNECT = &quot;CONNECT&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="请求需要的参数parameters"><a href="#请求需要的参数parameters" class="headerlink" title="请求需要的参数parameters"></a>请求需要的参数parameters</h4><p>类型是一个字典 [String : AnyObject]<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let parameters = [</div><div class="line">    &quot;foo&quot;: &quot;bar&quot;,</div><div class="line">    &quot;baz&quot;: [&quot;a&quot;, 1],</div><div class="line">    &quot;qux&quot;: [&quot;x&quot;: 1 , &quot;y&quot;: 2 , &quot;z&quot;: 3]</div><div class="line">]</div><div class="line">Alamofire.request(.POST, &quot;http://httpbin.org/post&quot;, parameters: parameters)</div></pre></td></tr></table></figure></p>
-<h4 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h4><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Alamofire.download(.GET, &quot;http://httpbin.org/stream/100&quot;) &#123; temporaryURL, response in</div><div class="line">    let fileManager = NSFileManager.defaultManager()</div><div class="line">    if let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as? NSURL &#123;</div><div class="line">        let pathComponent = response.suggestedFilename</div><div class="line">        return directoryURL.URLByAppendingPathComponent(pathComponent!)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return temporaryURL</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这些都只是Alamofire的常规使用，更加详细的使用方法其官方网站上有详细描述。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1887,7 +1864,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
