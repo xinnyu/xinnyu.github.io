@@ -574,6 +574,288 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2017/01/30/基础算法(堆排序)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/30/基础算法(堆排序)/" itemprop="url">
+                  基础算法(堆排序)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-30T14:32:05+08:00">
+                2017-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/30/基础算法(堆排序)/" class="leancloud_visitors" data-flag-title="基础算法(堆排序)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="external">堆排序（Heapsort）</a>是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。</p>
+<h4 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h4><ol>
+<li><p>先将初始文件Array[1..n]建成一个大根堆，此堆为初始的无序区。</p>
+</li>
+<li><p>再将关键字最大的记录Array[1]（即堆顶）和无序区的最后一个记录Array[n]交换，由此得到新的无序区Array[1..n-1]和有序区Array[n]，然后再把无序区建成一个大根堆，然后再次将Array[1..n-1]中关键字最大的记录Array[1]和该区间的最后一个记录Array[n-1]交换.</p>
+</li>
+</ol>
+<p>下面是算法的Swift实现:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">/// 将Array中的index位置堆化</span></div><div class="line"><span class="comment">///</span></div><div class="line"><span class="comment">/// - Parameters:</span></div><div class="line"><span class="comment">///   - array: 数组</span></div><div class="line"><span class="comment">///   - index: 位置</span></div><div class="line"><span class="comment">///   - end: 数组的最后位置</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">maxHeapify</span><span class="params">(array: <span class="keyword">inout</span> [Int], index:Int, end:Int)</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> parentIndex = index</div><div class="line">    <span class="keyword">var</span> endIndex = end</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> <span class="literal">true</span> &#123;</div><div class="line">        <span class="keyword">var</span> leftChildIndex = parentIndex * <span class="number">2</span> + <span class="number">1</span></div><div class="line">        <span class="keyword">var</span> rightChildIndex = leftChildIndex + <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="keyword">var</span> childIndex = leftChildIndex</div><div class="line">        <span class="keyword">if</span> childIndex &gt; endIndex &#123;</div><div class="line">            <span class="keyword">break</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> childIndex + <span class="number">1</span> &lt;= endIndex &amp;&amp; array[leftChildIndex] &lt; array[rightChildIndex] &#123;</div><div class="line">            childIndex += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> array[parentIndex] &lt; array[childIndex]&#123;</div><div class="line">            <span class="built_in">swap</span>(&amp;array[childIndex], &amp;array[parentIndex])</div><div class="line">            parentIndex = childIndex</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">break</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/// 创建大根堆</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">creatMaxHeap</span><span class="params">(array: <span class="keyword">inout</span> [Int])</span></span>&#123;</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">0</span>...(array.<span class="built_in">count</span> - <span class="number">1</span>) / <span class="number">2</span>).reversed()&#123;</div><div class="line">        maxHeapify(array: &amp;array, index: i, end: array.<span class="built_in">count</span> - <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/// 堆排序</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">heapSort</span><span class="params">(array: <span class="keyword">inout</span> [Int])</span></span>&#123;</div><div class="line">    creatMaxHeap(array: &amp;array)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">0</span>...array.<span class="built_in">count</span> - <span class="number">1</span>).reversed()&#123;</div><div class="line">        <span class="keyword">if</span> i != <span class="number">0</span>&#123;</div><div class="line">            <span class="built_in">swap</span>(&amp;array[<span class="number">0</span>], &amp;array[i])</div><div class="line">        &#125;</div><div class="line">        maxHeapify(array: &amp;array, index: <span class="number">0</span>, end: i - <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/29/基础算法(快速排序)/" itemprop="url">
+                  基础算法(快速排序)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-29T14:52:05+08:00">
+                2017-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/29/基础算法(快速排序)/" class="leancloud_visitors" data-flag-title="基础算法(快速排序)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="external">Quicksort</a>又称划分交换排序，最早由东尼·霍尔提出。在平均状况下，排序n个项目要Ο(n log n)次比较。在最坏状况下则需要Ο(n2)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他Ο(n log n)算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地被实现出来。</p>
+<p>快速排序使用分治法（Divide and conquer）策略来把一个串行（list）分为两个子串行（sub-lists）。</p>
+<h4 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h4><ol>
+<li>从数列中挑出一个元素，称为 “基准”（pivot），</li>
+<li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。</li>
+<li>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</li>
+</ol>
+<p>递归的最底部情形，是数列的大小是零或一，也就是永远都已经被排序好了。虽然一直递归下去，但是这个算法总会退出，因为在每次的迭代（iteration）中，它至少会把一个元素摆到它最后的位置去。</p>
+<h4 id="Swift代码"><a href="#Swift代码" class="headerlink" title="Swift代码"></a>Swift代码</h4><p>由上面的步骤我们可以写出一个简单的快排算法：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">quickSortSimple</span><span class="params">(array:[Int])</span></span> -&gt; [<span class="type">Int</span>]&#123;</div><div class="line">    <span class="keyword">if</span> array.<span class="built_in">count</span> &lt;= <span class="number">1</span> &#123;</div><div class="line">        <span class="keyword">return</span> array</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> lowArray = [<span class="type">Int</span>](), highArray = [<span class="type">Int</span>]()</div><div class="line">    <span class="keyword">var</span> pivot = array.first!</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...array.<span class="built_in">count</span> - <span class="number">1</span>&#123;</div><div class="line">        <span class="keyword">let</span> num = array[i]</div><div class="line">        <span class="keyword">if</span> num &gt; pivot&#123;</div><div class="line">            highArray.append(num)</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            lowArray.append(num)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> result = quickSortSimple(array: lowArray)</div><div class="line">    result.append(pivot)</div><div class="line">    <span class="keyword">let</span> highResult = quickSortSimple(array: highArray)</div><div class="line">    result.append(contentsOf: highResult)</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面简单版本有个缺点，就是它需要Ω(n)的额外存储空间。额外需要的存储器空间配置，在实际上的实现，也会极度影响速度和缓存的性能。有一个比较复杂使用原地（in-place）分区算法的版本如下:</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//用于将</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">partition</span><span class="params">(a: <span class="keyword">inout</span> [Int],low:Int,high:Int)</span></span> -&gt; <span class="type">Int</span>&#123;</div><div class="line">    <span class="keyword">if</span> low &gt;= high&#123;</div><div class="line">        <span class="keyword">return</span> low</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">let</span> pivot = a[low]</div><div class="line">    <span class="keyword">var</span> i = low, j = high</div><div class="line">    <span class="keyword">while</span> i &lt; j &#123;</div><div class="line">        <span class="keyword">while</span> i &lt; j &amp;&amp; a[j] &gt;= pivot &#123;</div><div class="line">            j -= <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span> i &lt; j &amp;&amp; a[i] &lt;= pivot &#123;</div><div class="line">            i += <span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> i &lt; j &#123;</div><div class="line">            <span class="built_in">swap</span>(&amp;a[i], &amp;a[j])</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> i != low&#123;</div><div class="line">        <span class="built_in">swap</span>(&amp;a[i], &amp;a[low])</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> i</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">quickSort</span><span class="params">(array: <span class="keyword">inout</span> [Int], low:Int, high:Int)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> low &gt; high&#123;</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">let</span> index = <span class="built_in">partition</span>(a: &amp;array, low: low, high: high)</div><div class="line">    <span class="built_in">quickSort</span>(array: &amp;array, low: low, high: index - <span class="number">1</span>)</div><div class="line">    <span class="built_in">quickSort</span>(array: &amp;array, low: index + <span class="number">1</span>, high: high)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2016/10/14/iOS常用宏定义（Swift篇）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1492,310 +1774,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/29/设计模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/29/设计模式/" itemprop="url">
-                  设计模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-29T14:52:05+08:00">
-                2015-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/29/设计模式/" class="leancloud_visitors" data-flag-title="设计模式">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>设计模式是为了解决特定问题而出现的；</p>
-<p>设计模式的基本原则：</p>
-<ul>
-<li><p>开闭原则<br>模块应该对扩展开放而对修改关闭；</p>
-</li>
-<li><p>里氏代换原则<br>父类和子类之间的方法可以相互调换，从而方便修改；多态</p>
-</li>
-<li><p>依赖倒转原则<br>抽象不依赖于细节，细节依赖于抽象；</p>
-</li>
-<li><p>接口隔离原则<br>尽量保证接口只做必要的事情；</p>
-</li>
-<li><p>合成/聚合复用</p>
-</li>
-</ul>
-<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>比如iOS从网络请求加载数据，更新UI的时候，我们会初始化出一个model，随着后续版本的升级，这个model会持续添加参数，或者减少参数；此时如果我们直接修改这个model的话，那么就要同时修改与这个model相匹配的view，这样就会一只在两者之间修改来修改去，适配器模式就是为了解决这种问题存在的。</p>
-<p>如果你运用了适配器模式，那么我们的model不会直接与view接触，它会先和适配器接触，然后再通过适配器去更新UI</p>
-<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/29/CocoaPods Podfile/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/29/CocoaPods Podfile/" itemprop="url">
-                  CocoaPods Podfile
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-29T14:52:05+08:00">
-                2015-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/29/CocoaPods Podfile/" class="leancloud_visitors" data-flag-title="CocoaPods Podfile">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="什么是Podfile"><a href="#什么是Podfile" class="headerlink" title="什么是Podfile"></a>什么是Podfile</h2><p>Podfile是一个规范，描述了一个或多个一套工程目标的依赖项</p>
-<p>一个简单写法:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">target <span class="string">'MyApp'</span> do</div><div class="line">  pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 3.0'</span></div><div class="line">end</div></pre></td></tr></table></figure>
-<p>更复杂的一个例子：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 下面两行是指明依赖库的来源地址</span></div><div class="line">source <span class="string">'https://github.com/CocoaPods/Specs.git'</span></div><div class="line">source <span class="string">'https://github.com/Artsy/Specs.git'</span></div><div class="line"></div><div class="line"><span class="comment"># 说明平台是ios，版本是9.0</span></div><div class="line">platform :ios, <span class="string">'9.0'</span></div><div class="line"></div><div class="line"><span class="comment"># 忽略引入库的所有警告（强迫症者的福音啊）</span></div><div class="line">inhibit_all_warnings!</div><div class="line"></div><div class="line"><span class="comment"># 针对MyApp target引入AFNetworking</span></div><div class="line"><span class="comment"># 针对MyAppTests target引入OCMock，</span></div><div class="line">target <span class="string">'MyApp'</span> do</div><div class="line">    pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 3.0'</span></div><div class="line">    target <span class="string">'MyAppTests'</span> do</div><div class="line">       inherit! :search_paths</div><div class="line">       pod <span class="string">'OCMock'</span>, <span class="string">'~&gt; 2.0.1'</span></div><div class="line">    end</div><div class="line">end</div><div class="line"><span class="comment"># 这个是cocoapods的一些配置,官网并没有太详细的说明,一般采取默认就好了,也就是不写.</span></div><div class="line">post_install do |installer|       </div><div class="line">   installer.pods_project.targets.each do |target|</div><div class="line">     puts target.name</div><div class="line">   end</div><div class="line">end</div></pre></td></tr></table></figure>
-<h4 id="From-a-podspec-in-the-root-of-a-library-repository-引用仓库根目录的podspec"><a href="#From-a-podspec-in-the-root-of-a-library-repository-引用仓库根目录的podspec" class="headerlink" title="From a podspec in the root of a library repository (引用仓库根目录的podspec)"></a>From a podspec in the root of a library repository (引用仓库根目录的podspec)</h4><p>有时我们需要引入依赖库指定的分支或节点，写法如下。</p>
-<ul>
-<li><p>引入master分支（默认）</p>
-<p><code>pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;</code></p>
-</li>
-<li><p>引入指定的分支</p>
-<p><code>pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :branch =&gt; &#39;dev&#39;</code></p>
-</li>
-<li><p>引入某个节点的代码</p>
-<p><code>pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :tag =&gt; &#39;0.7.0&#39;</code></p>
-</li>
-<li><p>引入某个特殊的提交节点</p>
-<p><code>pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :commit =&gt; &#39;082f8319af&#39;</code></p>
-</li>
-</ul>
-<p>需要特别注意的是，虽然这样将会满足任何在Pod中的依赖项通过其他Pods 但是podspec必须存在于仓库的根目录中。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1840,7 +1823,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1862,7 +1845,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
