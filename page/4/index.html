@@ -382,27 +382,15 @@
       
         
           
-            <h2 id="模型-视图-控制器"><a href="#模型-视图-控制器" class="headerlink" title="模型-视图-控制器"></a>模型-视图-控制器</h2><p>这个模式其实应该叫做MCV，用控制器把model与view隔开才对，也就是model与view互相不知道对方的存在，没有任何瓜葛，他们就像一个团队里吵了架的同事，如果有项目需要他俩来参与，那么最好有第三者来管理他俩之间的沟通与协调。这个第三者就是控制器。<br>既然管理，那么姑且就把这个控制器提做项目经理吧，这样的话让他俩干啥就得干啥。就像斯坦福老头说的视图就是控制器的狗腿子。</p>
-<blockquote>
-<p>让我们来欣赏一下这张图（摘自斯坦福公开课的课件）：<br><img src="http://7xl9qm.com1.z0.glb.clouddn.com/MVC.png" alt=""></p>
-</blockquote>
-<p>先撇开那些乱七八糟的箭头单看他们之间的分界线，view与controller、model与controller之间的线是虚的，而model与view之间的是双黄线，考过驾照的知道越过这个线意味着什么吧。</p>
-<p>控制器与视图之间的大部分连线都可以在Xcode中通过按住ctrl来连接。例如outlet，例如delegate。有了这些连线，他们之间的沟通算是畅通无阻了。</p>
-<ol>
-<li>用户在view上的操作可以直接告诉控制器让控制器去响应</li>
-<li>view需要的代理也可以指派给控制器让控制器去完成</li>
-<li>view需要的数据源也需要控制器来提供</li>
-</ol>
-<p><em>总之，控制器很忙，因为它非常被动。</em></p>
-<p>控制器还需要一个角色的参与：<strong>model</strong></p>
-<p>顾名思义，模型。我觉得使用asp.net里mvc的domain来描述比较好理解，领域。例如你要开发一个图书管理系统，模型里描绘的就是图书的书名、售价、作者，谁借走了，几号借走的，一切关于这个应用领域的数据。<br>我们可以给模型一个简单的定义：它描述了一个应用所有需要抽象出来的数据结构和这些数据之间的关系，还有他们获取数据需要通过的途径（本地的、远程的）等。<br>有了模型，控制器想啥时候去拿数，想怎么拿都行。</p>
-<p>仔细观察上面的图，有控制器到model的箭头，没有model到控制器的箭头。因为模型不需要知道控制器的存在，这样可以减少耦合，提高代码复用可能性。把你定义好的model挪到别的项目中，还可以使用。</p>
-<p>但是问题来了，当model数据已经更新了，被修改了，怎么通知相关的控制器？注意model上方有个天线，高端！之所以使用无线的，是因为model不知道更改要发给谁，但是model可以广播，model的观点：谁关心我的更改让谁收听去，我对谁收听了我不感兴趣。</p>
-<p>广播的方式有两种：Notification 和 KVO（都是设计模式，本系列接下来会详述）</p>
-<p>好了，他们几个之间的关系基本有个概念了。mvc模式就是这样，把原本杂乱无章的类，分为三堆，严格监管，按规则行事。</p>
-<p>还是那句话：<em>说到底一切都是为了使类之间的耦合性更松散。好的代码应该对扩展开放，对修改关闭。</em></p>
-
-          
+          模型-视图-控制器这个模式其实应该叫做M
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/09/19/iOS-MVC-详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -532,12 +520,15 @@
       
         
           
-            <p><a href="https://github.com/tonymillion/Reachability" target="_blank" rel="external">Reachability</a> 是一个检测网络状态的框架。<br>开发Web等网络应用程序的时候，需要确认网络环境，连接情况等信息。如果没有处理这些信息的话，是不会通过Apple的审查的。</p>
-<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><p>将Reachability.h 和 Reachability.m 拷贝到你的工程中。</p>
-<p>然后：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> reach:<span class="type">Reachability</span>?</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkNetStatus</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">self</span>.reach = <span class="type">Reachability</span>.reachabilityForInternetConnection()</div><div class="line">       <span class="comment">// Tell the reachability that we DON'T want to be reachable on 3G/EDGE/CDMA</span></div><div class="line">       <span class="keyword">self</span>.reach!.reachableOnWWAN = <span class="literal">false</span></div><div class="line">       </div><div class="line">       <span class="keyword">if</span> reach?.currentReachabilityStatus() == <span class="type">NetworkStatus</span>.<span class="type">ReachableViaWWAN</span> &#123;</div><div class="line">           <span class="keyword">self</span>.net = <span class="type">NetState</span>.<span class="type">Mobile</span></div><div class="line">       &#125;</div><div class="line">       </div><div class="line">       <span class="comment">// Here we set up a NSNotification observer. The Reachability that caused the notification</span></div><div class="line">       <span class="comment">// is passed in the object parameter</span></div><div class="line">       <span class="type">NSNotificationCenter</span>.defaultCenter().addObserver(<span class="keyword">self</span>,</div><div class="line">           selector: <span class="string">"reachabilityChanged:"</span>,</div><div class="line">           name: kReachabilityChangedNotification,</div><div class="line">           object: <span class="literal">nil</span>)</div><div class="line">       </div><div class="line">       <span class="keyword">self</span>.reach!.startNotifier()</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="function"><span class="keyword">func</span> <span class="title">reachabilityChanged</span><span class="params">(notification: NSNotification)</span></span>&#123;</div><div class="line">       </div><div class="line">       <span class="keyword">if</span> <span class="keyword">self</span>.reach!.isReachableViaWiFi()  &#123;</div><div class="line">           <span class="built_in">print</span>(<span class="string">"能访问网络"</span>)</div><div class="line">           </div><div class="line">           </div><div class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>  <span class="keyword">self</span>.reach!.isReachableViaWWAN()&#123;</div><div class="line">           appDelegate.isCanUseNetWork = <span class="literal">true</span></div><div class="line">           <span class="built_in">print</span>(<span class="string">"正在使用移动网络"</span>)</div><div class="line">           </div><div class="line">       &#125;<span class="keyword">else</span> &#123;</div><div class="line">           </div><div class="line">           <span class="built_in">print</span>(<span class="string">"没有网络!!!"</span>) </div><div class="line">           <span class="keyword">self</span>.net = <span class="type">NetState</span>.<span class="type">None</span></div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-
-          
+          Reachability 是一个检测网络
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/08/11/Reachability 使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -667,10 +658,16 @@
       
         
           
-            <p>在bash_profile中添加：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/.rvm/bin"</span> <span class="comment"># Add RVM to PATH for scripting</span></div><div class="line"></div><div class="line">[[ <span class="_">-s</span> <span class="string">"<span class="variable">$HOME</span>/.rvm/scripts/rvm"</span> ]] &amp;&amp; <span class="built_in">source</span> <span class="string">"<span class="variable">$HOME</span>/.rvm/scripts/rvm"</span> <span class="comment"># Load RVM into a shell session *as a function*</span></div></pre></td></tr></table></figure>
-
-          
+          在bash_profile中添加：
+ex
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/26/Mac终端提示-command-not-found解决办法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -800,25 +797,15 @@
       
         
           
-            <p><a href="https://github.com/kevinzhow/PNChart" target="_blank" rel="external">PNChart</a> 是一个简约，易用的第三方图表库，它支持折线图，柱形图，饼状图和圆形图的绘制；</p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
-<li>画折线图</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">func  setLineChart()&#123;</div><div class="line">        </div><div class="line">  /// 定义一个lineChart    </div><div class="line">	var lineChart = PNLineChart(frame: CGRectMake(0, self.view.frame.height/4, self.view.frame.width, self.view.frame.height/2))</div><div class="line">	//不要使用下面的方法，Width 不好计算，只设置数据的话宽度会自动设定</div><div class="line">	//lineChart.setXLabels([&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;], withWidth: 50)</div><div class="line">	lineChart.xLabels = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;]</div><div class="line">	lineChart.axisColor = UIColor.blackColor()</div><div class="line">	lineChart.showCoordinateAxis = true</div><div class="line">        </div><div class="line">	/// 设置第一根折线</div><div class="line">	var dataArray = [1,4,9,20,8,9]</div><div class="line">	var lineChartData = PNLineChartData()</div><div class="line">	//lineChartData.lineWidth = 20</div><div class="line">	lineChartData.itemCount = UInt(dataArray.count)</div><div class="line">	lineChartData.color = UIColor.greenColor()</div><div class="line">	lineChartData.getData = (&#123;(index:UInt) -&gt; PNLineChartDataItem in</div><div class="line">	var y = dataArray[Int(index)]</div><div class="line">	return PNLineChartDataItem(y: CGFloat(y))</div><div class="line">	&#125;)</div><div class="line"></div><div class="line">	//为数据源设置Title</div><div class="line">	lineChartData.dataTitle = &quot;Swift&quot;</div><div class="line">        </div><div class="line">	/// 设置第二根折线</div><div class="line">	var dataArray2 = [5,19,9,3,5]</div><div class="line">	var lineChartData2 = PNLineChartData()</div><div class="line">	//lineChartData.lineWidth = 20</div><div class="line">	lineChartData2.itemCount = UInt(dataArray2.count)</div><div class="line">	lineChartData2.color = UIColor.redColor()</div><div class="line">	lineChartData2.getData = (&#123;(index:UInt) -&gt; PNLineChartDataItem in</div><div class="line">		var y = dataArray2[Int(index)]</div><div class="line">		return PNLineChartDataItem(y: CGFloat(y))</div><div class="line">	&#125;)</div><div class="line">        </div><div class="line">	//把折线加入到lineChart中，开始画图</div><div class="line">	lineChart.chartData = [lineChartData,lineChartData2]</div><div class="line">	lineChart.strokeChart()</div><div class="line">        </div><div class="line">	self.view.addSubview(lineChart)</div><div class="line">        </div><div class="line">	/// 为图表设置标签，****要在画图之后添加****</div><div class="line">	//为数据源2设置Title</div><div class="line">	lineChartData2.dataTitle = &quot;OC&quot;</div><div class="line">	//选择标签风格</div><div class="line">	lineChart.legendStyle = PNLegendItemStyle.Serial</div><div class="line">	//获取标签</div><div class="line">	var legend = lineChart.getLegendWithMaxWidth(self.view.frame.width)</div><div class="line">	//设置标签位置</div><div class="line">	legend.frame = CGRectMake(50, lineChart.frame.origin.y + lineChart.frame.height + 10 , legend.frame.width, legend.frame.height)</div><div class="line">        </div><div class="line">	self.view.addSubview(legend)</div><div class="line">        </div><div class="line">	lineChart.delegate = self</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>画柱形图：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">func setBarChart()&#123;</div><div class="line">	//直接初始化一个PNBarChart，不要数据源</div><div class="line">	var barChart = PNBarChart(frame: CGRectMake(0, 200, self.view.frame.width, 350))</div><div class="line">	barChart.xLabels = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;]</div><div class="line">	//barChart.xLabelWidth = 55</div><div class="line">	barChart.yValues = [1,3,6,-7,15]</div><div class="line">	//显示图表边界</div><div class="line">	barChart.showChartBorder = true</div><div class="line">	//允许负数</div><div class="line">	barChart.showLevelLine = false</div><div class="line">        </div><div class="line">	//barChart.strokeColor = UIColor.redColor()</div><div class="line">	barChart.barRadius = 2</div><div class="line">	//设置文字颜色，**********设置不了************</div><div class="line">	barChart.labelTextColor = UIColor.redColor()</div><div class="line">        </div><div class="line">	//开始画图</div><div class="line">	barChart.strokeChart()</div><div class="line">	self.view.add</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>画圆形图：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">func setCircleChart()&#123;</div><div class="line">	//直接初始化一个PNCircleChart ，不要数据源之类的</div><div class="line">	var circelChart = PNCircleChart(frame: CGRectMake(self.view.frame.width/2 - self.view.frame.width/4, 200, self.view.frame.width/2, 200), total: 100, current: 60, clockwise: false, shadow: true, shadowColor: UIColor.grayColor())</div><div class="line">	circelChart.current = 60</div><div class="line">	circelChart.total = 100</div><div class="line">	//circelChart.strokeColor = UIColor.greenColor()</div><div class="line">        </div><div class="line">	circelChart.strokeChart()</div><div class="line">	self.view.addSubview(circelChart)</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>画饼状图：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">func setPieChart()&#123;</div><div class="line">	//先定义一个PNPieChartDataItem数组，116 202 33      72 114 224</div><div class="line">	var items = [PNPieChartDataItem(value: 50, color: UIColor(red: 116/255, green: 202/255, blue: 33/255, alpha: 1) , description: &quot;Swift&quot;),PNPieChartDataItem(value: 20, color: UIColor(red: 72/255, green: 114/255, blue: 224/255, alpha: 1) , description: &quot;OC&quot;)]</div><div class="line">        </div><div class="line">	var pieChart = PNPieChart(frame: CGRectMake(self.view.frame.width/2 - self.view.frame.width/3, 200, self.view.frame.width/1.5, 200), items: items)</div><div class="line">        </div><div class="line">	pieChart.descriptionTextFont = UIFont.systemFontOfSize(15)</div><div class="line">        </div><div class="line">	pieChart.strokeChart()</div><div class="line">	self.view.addSubview(pieChart)</div><div class="line">        </div><div class="line">	//选择标签风格</div><div class="line">	pieChart.legendStyle = PNLegendItemStyle.Serial</div><div class="line">	//获取标签</div><div class="line">	var legend = pieChart.getLegendWithMaxWidth(self.view.frame.width)</div><div class="line">	//设置标签位置</div><div class="line">	legend.frame = CGRectMake(50, pieChart.frame.origin.y + pieChart.frame.height + 10, legend.frame.width, legend.frame.height)</div><div class="line">        </div><div class="line">	self.view.addSubview(legend)     </div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-
-          
+          PNChart 是一个简约，易用的第三方
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/21/PNChart 使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -948,17 +935,16 @@
       
         
           
-            <h4 id="时间和字符串的转换"><a href="#时间和字符串的转换" class="headerlink" title="时间和字符串的转换"></a>时间和字符串的转换</h4><ul>
-<li>Data智能转换成字符串，即可以显示<em>“刚刚”</em>，<em>“昨天”</em>，<em>“几小时之前等等”</em></li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">extension</span> <span class="title">Date</span> </span>&#123;</div><div class="line">    <span class="comment">//MARK: 根据规则返回对应的字符串</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getTimeString</span><span class="params">()</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">if</span> isToday &#123;</div><div class="line">            <span class="keyword">if</span> minute &lt; <span class="number">5</span> &#123;</div><div class="line">                <span class="keyword">return</span> <span class="string">"刚刚"</span></div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> hour &lt; <span class="number">1</span> &#123;</div><div class="line">                <span class="keyword">return</span> <span class="string">"<span class="subst">\(minute)</span>分钟之前"</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">return</span> <span class="string">"<span class="subst">\(hour)</span>小时之前"</span></div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> isYesterday &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"昨天 <span class="subst">\(<span class="keyword">self</span>.yesterdayTimeStr()</span>)"</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> isYear &#123;</div><div class="line">            <span class="keyword">return</span> noYesterdayTimeStr()</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> yearTimeStr()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    fileprivate <span class="keyword">var</span> selfDate : <span class="type">Date</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">/// 距当前有几分钟</span></div><div class="line">    <span class="keyword">var</span> minute : <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">let</span> dateComponent = <span class="type">Calendar</span>.current.dateComponents([.minute], from: selfDate, to: <span class="type">Date</span>())</div><div class="line">        <span class="keyword">return</span> dateComponent.minute!</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/// 距当前有几小时</span></div><div class="line">    <span class="keyword">var</span> hour : <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">let</span> dateComponent = <span class="type">Calendar</span>.current.dateComponents([.hour], from: selfDate, to: <span class="type">Date</span>())</div><div class="line">        <span class="keyword">return</span> dateComponent.hour!</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/// 是否是今天</span></div><div class="line">    <span class="keyword">var</span> isToday : <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="type">Calendar</span>.current.isDateInToday(selfDate)</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/// 是否是昨天</span></div><div class="line">    <span class="keyword">var</span> isYesterday : <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="type">Calendar</span>.current.isDateInYesterday(selfDate)</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/// 是否是今年</span></div><div class="line">    <span class="keyword">var</span> isYear: <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">let</span> nowComponent = <span class="type">Calendar</span>.current.dateComponents([.year], from: <span class="type">Date</span>())</div><div class="line">        <span class="keyword">let</span> component = <span class="type">Calendar</span>.current.dateComponents([.year], from: selfDate)</div><div class="line">        <span class="keyword">return</span> (nowComponent.year == component.year)</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">yesterdayTimeStr</span><span class="params">()</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">let</span> format = <span class="type">DateFormatter</span>()</div><div class="line">        format.dateFormat = <span class="string">"HH:mm"</span></div><div class="line">        <span class="keyword">return</span> format.string(from: selfDate)</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">noYesterdayTimeStr</span><span class="params">()</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">let</span> format = <span class="type">DateFormatter</span>()</div><div class="line">        format.dateFormat = <span class="string">"MM-dd HH:mm"</span></div><div class="line">        <span class="keyword">return</span> format.string(from: selfDate)</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">yearTimeStr</span><span class="params">()</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">let</span> format = <span class="type">DateFormatter</span>()</div><div class="line">        format.dateFormat = <span class="string">"yyyy-MM-dd HH:mm"</span></div><div class="line">        <span class="keyword">return</span> format.string(from: selfDate)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>自带的转换方法，显示今天 xx:xx</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dateToString</span><span class="params">(date:Date)</span></span> -&gt; <span class="type">String</span>&#123;</div><div class="line">    <span class="comment">//定义一个日期格式</span></div><div class="line">    <span class="keyword">let</span> dateFormat = <span class="type">DateFormatter</span>()</div><div class="line">    <span class="comment">//日期风格</span></div><div class="line">    dateFormat.dateStyle = <span class="type">DateFormatter</span>.<span class="type">Style</span>.short</div><div class="line">    <span class="comment">//时间风格</span></div><div class="line">    dateFormat.timeStyle = <span class="type">DateFormatter</span>.<span class="type">Style</span>.short</div><div class="line">    <span class="comment">//设置相对日期</span></div><div class="line">    dateFormat.doesRelativeDateFormatting = <span class="literal">true</span></div><div class="line">    dateFormat.timeStyle = <span class="type">DateFormatter</span>.<span class="type">Style</span>.short</div><div class="line">    <span class="comment">//日期的地区为中国</span></div><div class="line">    dateFormat.locale = <span class="type">Locale</span>(identifier: <span class="string">"zh_cn"</span>)</div><div class="line">    <span class="keyword">let</span> dateStr = dateFormat.string(from: date)</div><div class="line">    <span class="keyword">return</span> dateStr</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="日期之间比较"><a href="#日期之间比较" class="headerlink" title="日期之间比较"></a>日期之间比较</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//与otherDate比较，相同返回YES</span></div><div class="line">now.isEqualToDate(tomorrow)</div><div class="line"></div><div class="line"><span class="comment">//与anotherDate比较，返回较早的那个日期</span></div><div class="line">now.earlierDate(tomorrow)</div><div class="line"></div><div class="line"><span class="comment">//与anotherDate比较，返回较晚的那个日期</span></div><div class="line">now.laterDate(tomorrow)</div></pre></td></tr></table></figure>
-
-          
+          时间和字符串的转换
+Data智能转换成字
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/20/iOS Date相关/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1088,11 +1074,15 @@
       
         
           
-            <p>修改<code>custom.styl</code><br>(路径：source/css/_custom)</p>
-<p>增加如下代码：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.code</span> &#123;</div><div class="line"><span class="attribute">padding-left</span>: <span class="number">20px</span> <span class="meta">!important</span>;</div><div class="line"><span class="attribute">background-color</span>: black;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
+          修改custom.styl(路径：sou
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/14/Next手机代码显示不全解决办法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1222,20 +1212,18 @@
       
         
           
-            <ol>
-<li>定义一个 NSTimer</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timer1:<span class="type">NSTimer</span>! = <span class="type">NSTimer</span>.scheduledTimerWithTimeInterval(<span class="number">1</span>, target: <span class="keyword">self</span>, selector: <span class="string">"addOneMin:"</span>, userInfo: <span class="literal">nil</span>, repeats: <span class="literal">true</span>)</div><div class="line"><span class="comment">//selector 是一个选择器,需要定义一个函数,当函数需要传参时,函数名后应该加冒号</span></div></pre></td></tr></table></figure>
-<ol>
-<li>启动 NSTimer</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line">.fire()</div></pre></td></tr></table></figure>
-<ol>
-<li>暂停</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line">.invalidate()</div></pre></td></tr></table></figure>
-
           
+定义一个 NSTimer
+
+var t
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/06/20/NSTimer相关知识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1365,46 +1353,17 @@
       
         
           
-            <p>iOS中传值的方式主要有以下几种：</p>
-<ul>
-<li>segue传值</li>
-<li>通知传值</li>
-<li>代理传值</li>
-<li>单例传值</li>
-<li>ShareApplication</li>
-<li>NSUserdefault</li>
-</ul>
-<p>如果是A页面传值到B页面，之间有segue连接的话，用属性传值就可以搞定，如果从B页面传值到A页面或者之间没有直接的segue的话，就可以使用代理传值或者单例传值了。</p>
-<ul>
-<li><strong>segue传值</strong></li>
-</ul>
-<p>segue传值就是利用segue跳转时利用属性进行传值，这边就不做记录了。</p>
-<ul>
-<li><strong>通知传值</strong></li>
-</ul>
-<p>通知是一个单例类，只存在一个通知实例，一个通知会有一个对应的名字，而这个名字就是对应的观察者的接受通知的索引，每个对象都可以接收到这个广播，但是只有这个通知的名字和观察者的名字相同时，对应的观察者才可以接收到这个广播并处理对应逻辑。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//seletor: 接收到通知后应该做的操作；name：该通知对应的名字</div><div class="line">//A发送通知</div><div class="line">NSNotificationCenter.defaultCenter().postNotificationName(&quot;通知名字&quot;, object: self, userInfo: [&quot;key&quot;: value])</div><div class="line">//B接收通知</div><div class="line">NSNotificationCenter.defaultCenter().addObserver(self, selector: &quot;接收到通知后要执行的方法:&quot;, name: &quot;通知名字&quot;, object: nil)</div><div class="line">//同时实现接受通知后要执行的方法</div><div class="line">func 接收到通知后要执行的方法(aNotification:NSNotification)&#123;</div><div class="line">	//value = aNotification.userInfo[&quot;key&quot;]</div><div class="line">&#125;</div><div class="line">B方 移除监听removeObserver (一定要记得)</div><div class="line">deinit &#123;</div><div class="line">		NSNotificationCenter.defaultCenter().removeObserver(self)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>代理传值</strong></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//声明委托</div><div class="line">protocol passValueDele&#123;</div><div class="line">    func passValue(value:String)</div><div class="line">&#125;</div><div class="line"></div><div class="line">//接受委托，并定义一个委托类的对象：</div><div class="line">let vc1 = self.storyboard?.instantiateViewControllerWithIdentifier(&quot;detail&quot;) as! ViewController</div><div class="line"></div><div class="line">vc1.delegate1 = self</div><div class="line">func passValue(value:String)&#123;  </div><div class="line">		//得到value之后执行操作</div><div class="line">&#125;</div><div class="line"></div><div class="line">//在委托类中声明一个委托变量，并调用方法传值；</div><div class="line">weak var delegate1:passValueDele?  //注意用weak，防止循环引用</div><div class="line">delegate1?.passValue(&quot;value&quot;)</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>单例传值</strong></li>
-</ul>
-<p>简单来说单例传值就是创建一个类的单例，各个ViewController共享数据。</p>
-<p>先创建一个单例：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleTonClass</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> value:<span class="type">String</span>?</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">singleTon</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> <span class="keyword">var</span> once_t:dispatch_once_t = <span class="number">0</span></div><div class="line">        <span class="keyword">static</span> <span class="keyword">var</span> currentDataSong:<span class="type">CurrentDataSong</span>?</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">shareCurrentDataSong</span>()-&gt;<span class="title">CurrentDataSong</span></span>&#123;</div><div class="line">        dispatch_once(&amp;singleTon.once_t) &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">            singleTon.<span class="type">SingleTonClass</span> = <span class="type">SingleTonClass</span>()</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> singleTon.<span class="type">SingleTonClass</span>!</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后在需要传值的ViewController中给单例的属性赋值；<br>这样就可以在需要值的ViewController中得到要传的值了；</p>
-<ul>
-<li><strong>ShareAppDelegate传值</strong></li>
-</ul>
-<p>和单例的原理一样，不过这个单例利用的是AppDelegate；</p>
-<ul>
-<li><strong>NSUserdefault传值</strong></li>
-</ul>
-<p>此方法试用于轻量级的数据转移，就是把需要传的值先存入到NSUserdefault中，然后在需要值的地方从NSUserdefault中取值。</p>
+          iOS中传值的方式主要有以下几种：
 
-          
+s
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/04/20/iOS-传值总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1534,21 +1493,15 @@
       
         
           
-            <p>GitHub上iOS关于HUD的第三方库实在太多了， 这三个比较常用：</p>
-<ul>
-<li><a href="https://github.com/relatedcode/ProgressHUD" target="_blank" rel="external">ProgressHUD</a></li>
-<li><a href="https://github.com/johnlui/SwiftNotice" target="_blank" rel="external">SwiftNotice</a></li>
-<li><a href="https://github.com/jdg/MBProgressHUD/tree/iOS7Style" target="_blank" rel="external">MBProgressHUD</a></li>
-</ul>
-<h3 id="ProgressHUD"><a href="#ProgressHUD" class="headerlink" title="ProgressHUD"></a>ProgressHUD</h3><p>用法简单，一行代码搞定：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"ProgressHUD.h"</span></span></div><div class="line"></div><div class="line">ProgressHUD.show(<span class="string">"正在刷新！"</span>)</div><div class="line">ProgressHUD.showError(<span class="string">"错误"</span>)</div><div class="line">ProgressHUD.showSuccess(<span class="string">"刷新成功！"</span>)</div><div class="line"></div><div class="line">ProgressHUD.dismiss()</div></pre></td></tr></table></figure>
-<p>但是可自定义的属性不多；</p>
-<h3 id="SwiftNotice"><a href="#SwiftNotice" class="headerlink" title="SwiftNotice"></a>SwiftNotice</h3><p>用法同样简单，还支持顶部通知：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">noticeTop(<span class="string">""</span>) <span class="comment">//顶部通知</span></div><div class="line">notice(<span class="string">""</span>, type: NoticeType, autoClear: <span class="literal">true</span>)</div><div class="line">noticeOnlyText(<span class="string">""</span>)</div><div class="line">successNotice(<span class="string">""</span>)</div><div class="line">errorNotice(<span class="string">""</span>)</div></pre></td></tr></table></figure>
-<h3 id="MBProgressHUD"><a href="#MBProgressHUD" class="headerlink" title="MBProgressHUD"></a>MBProgressHUD</h3><figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">[MBProgressHUD showHUDAddedTo:<span class="keyword">self</span>.view animated:<span class="literal">YES</span>];</div><div class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, <span class="number">0</span>), ^&#123;</div><div class="line">    <span class="comment">// Do something...</span></div><div class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</div><div class="line">        [MBProgressHUD hideHUDForView:<span class="keyword">self</span>.view animated:<span class="literal">YES</span>];</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>自定义：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:<span class="keyword">self</span>.view animated:<span class="literal">YES</span>];</div><div class="line">hud.mode = MBProgressHUDModeAnnularDeterminate;</div><div class="line">hud.labelText = <span class="string">@"Loading"</span>;</div><div class="line">[<span class="keyword">self</span> doSomethingInBackgroundWithProgressCallback:^(<span class="keyword">float</span> progress) &#123;</div><div class="line">    hud.progress = progress;</div><div class="line">&#125; completionCallback:^&#123;</div><div class="line">    [hud hide:<span class="literal">YES</span>];</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-          
+          GitHub上iOS关于HUD的第三方库
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/03/20/iOS HUD/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

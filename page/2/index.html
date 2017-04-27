@@ -382,29 +382,15 @@
       
         
           
-            <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用CocoaPods来对R.Swift进行安装：</p>
-<p><code>pod &#39;R.swift&#39;</code></p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
-<li>进入项目的配置界面，在左边的TARGETS项下面选择我们的项目，并在右边点击<code>Build Phases</code>这个tab。</li>
-<li>进入<code>&lt;Build Phases&gt;</code>这个tab后，我们看到左上角有一个”+”按钮，点击并在弹出的选项卡中选择<code>New Run Script Phase</code>。</li>
-<li>我们会看到界面的下方多出了一个<code>Run Script</code>项，展开它，并在脚本输入区域输入<code>&quot;\$PODS_ROOT/R.swift/rswift&quot;</code> “\$SRCROOT” (第二对双引号括起来所代码的是项目的根目录，你也可以放到根目录下的其他目录中，只需将其修改为”$SRCROOT/XXX”，XXX为目标目录名)。<br>4.我们按住新建的这个<code>Run Script</code>项向上移动，移到<code>Compile Source</code>项的上方，不过也要保证此时它也在<code>Check Pods Manifest.lock</code>项的下方。</li>
-<li>Command + B，编译一下，编译成功后，在Finder进入到刚刚我们制定的目录中，此时我们会看到一个名为R.generated.swift的文件已经创建了，直接把此文件拖入Xcode项目中，<strong>记住不要勾选Copy items if needed项</strong>。</li>
-<li>配置到此完成，我们可以构建自己的项目了</li>
-</ol>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="Image-图片"><a href="#Image-图片" class="headerlink" title="Image - 图片"></a>Image - 图片</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pImage = <span class="type">UIImage</span>(named: <span class="string">"image_test"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nImage = <span class="type">R</span>.image.image_test()</div></pre></td></tr></table></figure>
-<h4 id="File-数据文件"><a href="#File-数据文件" class="headerlink" title="File - 数据文件"></a>File - 数据文件</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFile = <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"DataFile"</span>, ofType: <span class="string">"json"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFile = <span class="type">R</span>.file.dataFileJson.path()</div></pre></td></tr></table></figure>
-<h4 id="Font-字体"><a href="#Font-字体" class="headerlink" title="Font - 字体"></a>Font - 字体</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFont = <span class="type">UIFont</span>(name: <span class="string">"chalkduster"</span>, size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFont = <span class="type">R</span>.font.chalkduster(size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  你看，非常神奇，在上面的方法中你不仅可以选择字体类型，还能设置字体大小</span></div></pre></td></tr></table></figure>
-<h4 id="Color-颜色"><a href="#Color-颜色" class="headerlink" title="Color - 颜色"></a>Color - 颜色</h4><p>把.clr文件拖入项目中即可使用颜色配置<br><code>let appRedColor = R.color.myAppColor.red()</code></p>
-<h4 id="Nibs"><a href="#Nibs" class="headerlink" title="Nibs"></a>Nibs</h4><p>不使用R.swift</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="string">"CustomView"</span></div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">UINib</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> rootViews = customViewNib.instantiate(withOwner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = rootViews[<span class="number">0</span>] <span class="keyword">as</span>? <span class="type">CustomView</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div></pre></td></tr></table></figure>
-<p>使用 R.swift</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="type">R</span>.nib.customView.name</div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">R</span>.nib.customView()</div><div class="line"><span class="keyword">let</span> rootViews = <span class="type">R</span>.nib.customView.instantiateWithOwner(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = <span class="type">R</span>.nib.customView.firstView(owner: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nib: <span class="type">R</span>.nib.customView)</div></pre></td></tr></table></figure>
-<h4 id="Localized-strings"><a href="#Localized-strings" class="headerlink" title="Localized strings"></a>Localized strings</h4><p>不使用R.swift</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">NSLocalizedString</span>(<span class="string">"welcome.message"</span>, comment: <span class="string">""</span>)</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">NSLocalizedString</span>(<span class="string">"title"</span>, tableName: <span class="string">"Settings"</span>, comment: <span class="string">""</span>)</div><div class="line"></div><div class="line"><span class="comment">// Formatted strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"welcome.withName"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Stringsdict files</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"copy.progress"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="number">4</span>, <span class="number">23</span>)</div></pre></td></tr></table></figure>
-<p>使用 R.swift</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">// Localized strings are grouped per table (.strings file)</span></div><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">R</span>.string.localizable.welcomeMessage()</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">R</span>.string.settings.title()</div><div class="line"></div><div class="line"><span class="comment">// Functions with parameters are generated for format strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">R</span>.string.localizable.welcomeWithName(<span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Functions with named argument labels are generated for stringsdict keys</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">R</span>.string.localizable.copyProgress(completed: <span class="number">4</span>, total: <span class="number">23</span>)</div></pre></td></tr></table></figure>
-
-          
+          安装使用CocoaPods来对R.Swi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/14/R.swift使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -534,69 +520,16 @@
       
         
           
-            <ol>
-<li>DZNEmptyDataSet （空白提示-提升用户体验） <a href="https://github.com/dzenbot/DZNEmptyDataSet" target="_blank" rel="external">github地址</a></li>
-<li>MagicalRecord （数据库-CoreData的封装） <a href="https://github.com/magicalpanda/MagicalRecord" target="_blank" rel="external">github地址</a></li>
-<li>Chameleon (色彩框架） <a href="https://github.com/ViccAlexander/Chameleon" target="_blank" rel="external">github地址</a></li>
-<li>TextFieldEffects （文本输入框）  <a href="https://github.com/raulriera/TextFieldEffects" target="_blank" rel="external">github地址</a></li>
-<li>Spring  （动画框架）  <a href="https://github.com/MengTo/Spring" target="_blank" rel="external">github地址</a></li>
-<li>GPUImage  (图片处理)  <a href="http://github.com/BradLarson/GPUImage" target="_blank" rel="external">github地址</a></li>
-<li>iRate (用户评论)    <a href="https://github.com/nicklockwood/iRate" target="_blank" rel="external">github地址</a></li>
-<li>MGSwipeTableCell  (可滑动cell)  <a href="https://github.com/MortimerGoro/MGSwipeTableCell" target="_blank" rel="external">github地址</a></li>
-<li>FontBlaster （自定义字体加载到APP）  <a href="https://github.com/ArtSabintsev/FontBlaster" target="_blank" rel="external">github地址</a></li>
-<li>quick   (单元测试)   <a href="https://github.com/Quick/Quick" target="_blank" rel="external">github地址</a></li>
-<li>FlatUIKit   (扁平化UI的iOS组件)   <a href="https://github.com/Grouper/FlatUIKit" target="_blank" rel="external">github地址</a></li>
-<li>AlamofireObjectMapper  (JSON数据转换成对象) <a href="https://github.com/tristanhimmelman/AlamofireObjectMapper" target="_blank" rel="external">github地址</a></li>
-<li>SnipKit (Masonry Swift版本 自动布局)  <a href="https://github.com/SnapKit/SnapKit" target="_blank" rel="external">github地址</a></li>
-<li>Shimmer (有闪烁效果的第三方控件)  <a href="https://github.com/facebook/Shimmer" target="_blank" rel="external">github地址</a></li>
-<li>RESideMenu (侧滑效果)  <a href="https://github.com/romaonthego/RESideMenu" target="_blank" rel="external">github地址</a></li>
-<li>RealtimeGradientText (渐变label)  <a href="https://github.com/kevinzhow/RealtimeGradientText" target="_blank" rel="external">github地址</a></li>
-<li>JVFloatLabeledTextField  (floating textfield) <a href="https://github.com/jverdi/JVFloatLabeledTextField" target="_blank" rel="external">github地址</a></li>
-<li>SWTableViewCell (滑动Cell)   <a href="https://github.com/CEWendel/SWTableViewCell" target="_blank" rel="external">github地址</a></li>
-<li>MonkeyKing （社交分享） <a href="https://github.com/nixzhu/MonkeyKing" target="_blank" rel="external">github地址</a></li>
-<li>R.swift （以一种优雅安全的方式使用资源文件）  <a href="https://github.com/mac-cain13/R.swift" target="_blank" rel="external">github地址</a></li>
-<li>Moya  (Alamofire的封装)   <a href="https://github.com/Moya/Moya" target="_blank" rel="external">github地址</a></li>
-<li>SwiftyUserDefaults (UserDefults 封装)   <a href="https://github.com/radex/SwiftyUserDefaults" target="_blank" rel="external">github地址</a>  <a href="quiver:///notes/66EFF11D-55FB-4918-BE2C-7C83D3C654BB" target="_blank" rel="external">SwiftyUserDefaults 使用</a></li>
-<li>FillableLoaders (自定义的进度加载动画)   <a href="https://github.com/poolqf/FillableLoaders" target="_blank" rel="external">github地址</a></li>
-<li>SwiftString  （字符串扩展）  <a href="https://github.com/amayne/SwiftString" target="_blank" rel="external">github地址</a></li>
-<li>ExSwift  (Swift基础类型扩展库)  <a href="https://github.com/pNre/ExSwift#instance-methods-5" target="_blank" rel="external">github地址</a></li>
-<li>Koloda   （卡片视图）   <a href="https://github.com/Yalantis/Koloda" target="_blank" rel="external">github地址</a></li>
-<li>ImagePicker  （图片选择器）   <a href="https://github.com/hyperoslo/ImagePicker" target="_blank" rel="external">github地址</a></li>
-<li>Material     <a href="https://github.com/CosmicMind/Material" target="_blank" rel="external">github地址</a></li>
-<li>IFTTT/RazzleDazzle  (集成引导页，IFTTT)  <a href="https://github.com/IFTTT/RazzleDazzle" target="_blank" rel="external">github地址</a></li>
-<li>Instructions    (用法指南，介绍页面)     <a href="https://github.com/ephread/Instructions" target="_blank" rel="external">github地址</a></li>
-<li>Animated Tab Bar （动画Tab Bar）   <a href="https://github.com/Ramotion/animated-tab-bar" target="_blank" rel="external">github地址</a></li>
-<li>Adaptive Tab Bar                <a href="https://github.com/Ramotion/adaptive-tab-bar" target="_blank" rel="external">github地址</a></li>
-<li>ESTabBarController     （Tab Bar）   <a href="https://github.com/eggswift/ESTabBarController" target="_blank" rel="external">github地址</a></li>
-<li>Eureka   (动态TableView)    <a href="https://github.com/xmartlabs/Eureka" target="_blank" rel="external">github地址</a> <a href="http://blog.csdn.net/sps900608/article/details/51768854#comments" target="_blank" rel="external">用法</a></li>
-<li>folding-cell   (折叠动画cell)    <a href="https://github.com/Ramotion/folding-cell" target="_blank" rel="external">github地址</a></li>
-<li>SCLAlertView    (alert view)     <a href="https://github.com/vikmeup/SCLAlertView-Swift" target="_blank" rel="external">github地址</a></li>
-<li>SweetAlert-iOS   (alert view)     <a href="https://github.com/codestergit/SweetAlert-iOS" target="_blank" rel="external">github地址</a></li>
-<li>DOFavoriteButton    (twitter 风格点赞按钮)     <a href="https://github.com/okmr-d/DOFavoriteButton" target="_blank" rel="external">github地址</a></li>
-<li>LiquidFloatingActionButton  (floating button 动画nice)  <a href="https://github.com/yoavlt/LiquidFloatingActionButton" target="_blank" rel="external">github地址</a></li>
-<li>ZFRippleButton （Material 风格按钮） <a href="https://github.com/zoonooz/ZFRippleButton" target="_blank" rel="external">github地址</a></li>
-<li>DynamicButton  (动态按钮)   <a href="https://github.com/yannickl/DynamicButton" target="_blank" rel="external">github地址</a></li>
-<li>paper-switch  (改变父视图效果的Switch)  <a href="https://github.com/Ramotion/paper-switch" target="_blank" rel="external">github地址</a></li>
-<li>LTMorphingLabel  （动画Label）    <a href="https://github.com/lexrus/LTMorphingLabel" target="_blank" rel="external">github地址</a></li>
-<li>ActiveLabel.swift  （有很多效果的label hashtag） <a href="https://github.com/optonaut/ActiveLabel.swift" target="_blank" rel="external">github地址</a></li>
-<li>TextFieldEffects   （有很多效果的textfield）  <a href="https://github.com/raulriera/TextFieldEffects" target="_blank" rel="external">github地址</a></li>
-<li>PhoneNumberKit    (针对电话输入的textfield)   <a href="https://github.com/marmelroy/PhoneNumberKit" target="_blank" rel="external">github地址</a></li>
-<li>SkyFloatingLabelTextField （Material 风格textfield） <a href="https://github.com/Skyscanner/SkyFloatingLabelTextField" target="_blank" rel="external">github地址</a></li>
-<li>NextGrowingTextView (自适应高度的TextView)    <a href="https://github.com/muukii/NextGrowingTextView" target="_blank" rel="external">github地址</a></li>
-<li>Hue (颜色  color)    <a href="https://github.com/hyperoslo/Hue" target="_blank" rel="external">github地址</a></li>
-<li>TextAttributes   (封装 NSAttributeString)  <a href="https://github.com/delba/TextAttributes" target="_blank" rel="external">github地址</a></li>
-<li>SwiftOCR   <a href="https://github.com/garnele007/SwiftOCR" target="_blank" rel="external">github地址</a></li>
-<li>Gifu   (GIF)    <a href="https://github.com/kaishin/Gifu" target="_blank" rel="external">github地址</a></li>
-<li>FlowingMenu  (手势侧滑menu)   <a href="https://github.com/yannickl/FlowingMenu" target="_blank" rel="external">github地址</a></li>
-<li>circle-menu   （圆形动画菜单）  <a href="https://github.com/Ramotion/circle-menu" target="_blank" rel="external">github地址</a></li>
-<li>PageMenu   （分页效果）  <a href="https://github.com/uacaps/PageMenu" target="_blank" rel="external">github地址</a></li>
-<li>XLPagerTabStrip  (Material 风格分页效果)  <a href="https://github.com/xmartlabs/XLPagerTabStrip" target="_blank" rel="external">github地址</a></li>
-<li>Timepiece  （NSDate相关）  <a href="https://github.com/naoty/Timepiece" target="_blank" rel="external">github地址</a></li>
-<li>Cosmos     (评分控件)    <a href="https://github.com/marketplacer/Cosmos" target="_blank" rel="external">github地址</a></li>
-<li>ZFPlayer    (视频播放)   <a href="https://github.com/renzifeng/ZFPlayer" target="_blank" rel="external">github地址</a></li>
-</ol>
-
           
+DZNEmptyDataSet （空白
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/14/iOS常用的第三方库/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -726,10 +659,15 @@
       
         
           
-            <h2 id="OC"><a href="#OC" class="headerlink" title="OC"></a>OC</h2><figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">//获取屏幕宽度和高度</span></div><div class="line"><span class="meta">#define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width</span></div><div class="line"><span class="meta">#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height</span></div></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">//支持横屏的宽度和高度</span></div><div class="line"><span class="meta">#if __IPHONE_OS_VERSION_MAX_ALLOWED &gt;= 80000 // 当前Xcode支持iOS8及以上</span></div><div class="line"></div><div class="line"><span class="meta">#define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)</span></div><div class="line"></div><div class="line"><span class="meta">#define SCREENH_HEIGHT ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)</span></div><div class="line"></div><div class="line"><span class="meta">#define SCREEN_SIZE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width</span></div><div class="line"><span class="meta">#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height</span></div><div class="line"><span class="meta">#define SCREEN_SIZE [UIScreen mainScreen].bounds.size</span></div><div class="line"><span class="meta">#endif</span></div><div class="line"></div><div class="line"><span class="comment">//通知中心</span></div><div class="line"><span class="meta">#define LRNotificationCenter [NSNotificationCenter defaultCenter]</span></div><div class="line"><span class="comment">//获取随机颜色</span></div><div class="line"><span class="meta">#define LRRandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]</span></div><div class="line"><span class="comment">//设置RGB颜色</span></div><div class="line"><span class="meta">#define LRRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]</span></div><div class="line"><span class="meta">#define LRRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]</span></div><div class="line"><span class="comment">// clear背景颜色</span></div><div class="line"><span class="meta">#define LRClearColor [UIColor clearColor]</span></div><div class="line"><span class="comment">//Log</span></div><div class="line"><span class="meta">#ifdef DEBUG</span></div><div class="line"><span class="meta">#define XYLog(...) NSLog(@<span class="meta-string">"%s 第%d行 \n %@\n\n"</span>,__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#define XYLog(...)</span></div><div class="line"><span class="meta">#endif</span></div><div class="line"></div><div class="line"><span class="comment">//判断是否为iPhone</span></div><div class="line"><span class="meta">#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)</span></div><div class="line"><span class="meta">#define IS_IPHONE ([[[UIDevice currentDevice] model] isEqualToString:@<span class="meta-string">"iPhone"</span>])</span></div><div class="line"></div><div class="line"><span class="comment">//判断是否为iPad</span></div><div class="line"><span class="meta">#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)</span></div><div class="line"><span class="meta">#define IS_IPAD ([[[UIDevice currentDevice] model] isEqualToString:@<span class="meta-string">"iPad"</span>])</span></div><div class="line"></div><div class="line"><span class="comment">//判断是否为ipod</span></div><div class="line"><span class="meta">#define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@<span class="meta-string">"iPod touch"</span>])</span></div><div class="line"></div><div class="line"><span class="comment">// 判断是否为 iPhone 5SE</span></div><div class="line"><span class="meta">#define iPhone5SE [[UIScreen mainScreen] bounds].size.width == 320.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 568.0f</span></div><div class="line"></div><div class="line"><span class="comment">// 判断是否为iPhone 6/6s</span></div><div class="line"><span class="meta">#define iPhone6_6s [[UIScreen mainScreen] bounds].size.width == 375.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 667.0f</span></div><div class="line"></div><div class="line"><span class="comment">// 判断是否为iPhone 6Plus/6sPlus</span></div><div class="line"><span class="meta">#define iPhone6Plus_6sPlus [[UIScreen mainScreen] bounds].size.width == 414.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 736.0f</span></div><div class="line"></div><div class="line"><span class="comment">//获取系统版本</span></div><div class="line"><span class="meta">#define IOS_SYSTEM_STRING [[UIDevice currentDevice] systemVersion]</span></div><div class="line"></div><div class="line"><span class="comment">//判断 iOS 8 或更高的系统版本</span></div><div class="line"><span class="meta">#define IOS_VERSION_8_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] &gt;=8.0)? (YES):(NO))</span></div><div class="line"></div><div class="line"><span class="comment">// 判断是不是iOS系统，如果是iOS系统在真机和模拟器输出都是YES</span></div><div class="line"><span class="meta">#if TARGET_OS_IPHONE  </span></div><div class="line"><span class="meta">#endif  </span></div><div class="line"></div><div class="line"><span class="meta">#if (TARGET_IPHONE_SIMULATOR)    </span></div><div class="line">          <span class="comment">// 在模拟器的情况下</span></div><div class="line"><span class="meta">#else</span></div><div class="line">         <span class="comment">// 在真机情况下</span></div><div class="line"><span class="meta">#endif</span></div><div class="line"></div><div class="line"><span class="comment">//获取temp</span></div><div class="line"><span class="meta">#define kPathTemp NSTemporaryDirectory()</span></div><div class="line"></div><div class="line"><span class="comment">//获取沙盒 Document</span></div><div class="line"><span class="meta">#define kPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]</span></div><div class="line"></div><div class="line"><span class="comment">//获取沙盒 Cache</span></div><div class="line"><span class="meta">#define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]</span></div></pre></td></tr></table></figure>
-
-          
+          OC//获取屏幕宽度和高度#define
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/14/iOS常用宏定义（OC篇）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -859,14 +797,15 @@
       
         
           
-            <p>通常网络请求返回的是JSON数据，使用ObjectMapper可以让JSON数据直接转化为对象，而使用Alamofire进行网络请求时，使用AlamofireObjectMapper可以直接返回对象，更加简洁。</p>
-<p>###CocoaPods 导入AlamofireObjectMapper<br><figure class="highlight plain"><figcaption><span>'AlamofireObjectMapper', '~> 3.0'```</span></figcaption><table><tr><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">这里采用的Alamofire的测试接口 https://httpbin.org/get</div><div class="line"></div><div class="line">在浏览器中打开可以看到JSON格式的数据：</div><div class="line"></div><div class="line">```JSON</div><div class="line">&#123;</div><div class="line">  &quot;args&quot;: &#123;&#125;, </div><div class="line">  &quot;headers&quot;: &#123;</div><div class="line">    &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;, </div><div class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;, </div><div class="line">    &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&quot;, </div><div class="line">    &quot;Cache-Control&quot;: &quot;max-age=0&quot;, </div><div class="line">    &quot;Host&quot;: &quot;httpbin.org&quot;, </div><div class="line">    &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:46.0) Gecko/20100101 Firefox/46.0&quot;</div><div class="line">  &#125;, </div><div class="line">  &quot;origin&quot;: &quot;202.115.52.218&quot;, </div><div class="line">  &quot;url&quot;: &quot;https://httpbin.org/get&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>根据该JSON的数据格式创建以下两个Mapper类分别对应整个字典和key值为“header”的字典。将JSON中的数据与对象中的数据一一建立转化关系。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> ObjectMapper</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResponseHeader</span>: <span class="title">Mappable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> accept : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> acceptEncoding : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> acceptLanguage : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> cacheControl : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> host : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> userAgent : <span class="type">String</span>?</div><div class="line"></div><div class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(<span class="number">_</span> <span class="built_in">map</span>: <span class="type">Map</span>) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//映射heades字典中的所有键值</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">mapping</span><span class="params">(<span class="built_in">map</span>: Map)</span></span> &#123;</div><div class="line">        accept &lt;- <span class="built_in">map</span>[<span class="string">"Accept"</span>]</div><div class="line">        acceptEncoding &lt;- <span class="built_in">map</span>[<span class="string">"Accept-Encoding"</span>]</div><div class="line">        acceptLanguage &lt;- <span class="built_in">map</span>[<span class="string">"Accept-Language"</span>]</div><div class="line">        cacheControl &lt;- <span class="built_in">map</span>[<span class="string">"Cache-Control"</span>]</div><div class="line">        host &lt;- <span class="built_in">map</span>[<span class="string">"Host"</span>]</div><div class="line">        userAgent &lt;- <span class="built_in">map</span>[<span class="string">"User-Agent"</span>]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> ObjectMapper</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyResponse</span>: <span class="title">Mappable</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> args : <span class="type">NSDictionary</span>?</div><div class="line">    <span class="keyword">var</span> headers : <span class="type">ResponseHeader</span>?</div><div class="line">    <span class="keyword">var</span> origin : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> url : <span class="type">String</span>?</div><div class="line"></div><div class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(<span class="number">_</span> <span class="built_in">map</span>: <span class="type">Map</span>) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//映射字典中的所有键值</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">mapping</span><span class="params">(<span class="built_in">map</span>: Map)</span></span> &#123;</div><div class="line">        args &lt;- <span class="built_in">map</span>[<span class="string">"args"</span>]</div><div class="line">        headers &lt;- <span class="built_in">map</span>[<span class="string">"headers"</span>]</div><div class="line">        origin &lt;- <span class="built_in">map</span>[<span class="string">"origin"</span>]</div><div class="line">        url &lt;- <span class="built_in">map</span>[<span class="string">"url"</span>]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>用Alamofire获取对象</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">webRequst</span><span class="params">()</span></span>  &#123;</div><div class="line">    <span class="keyword">let</span> url = <span class="string">"https://httpbin.org/get"</span></div><div class="line">    <span class="comment">//注意返回的类型为&lt;Mappable对象,NSError&gt;</span></div><div class="line">    <span class="type">Alamofire</span>.request(.<span class="type">GET</span>, url).responseObject &#123; (response: <span class="type">Response</span>&lt;<span class="type">MyResponse</span>, <span class="type">NSError</span>&gt;) <span class="keyword">in</span></div><div class="line">        <span class="keyword">let</span> myResponse = response.result.value</div><div class="line">        <span class="built_in">print</span>(myResponse?.url)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> header = myResponse?.headers&#123;</div><div class="line">            <span class="built_in">print</span>(header.userAgent)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
+          通常网络请求返回的是JSON数据，使用O
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/14/使用AlamofireObjectMapper/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -996,44 +935,15 @@
       
         
           
-            <p>对于类型安全(type-safe)语言，一个常见的问题就是如何编写适用于多种类型输入的程序。想象一下，两个整型数相加和两个浮点数相加的程序看起来应该非常类似，甚至一模一样才对。唯一的区别就是变量的类型不同。</p>
-<p>在强类型语言中，你需要去定义诸如addInts, addFloats, addDoubles 等方法来正确地处理参数及返回值。</p>
-<p>许多编程语言已经解决了这个问题。例如，在C++中，使用Template来解决。而Swift，Java和C#则采用了泛型来解决这个问题。</p>
-<p>下面用有序字典（Ordered Dictionaries）来简单说明一下泛型的用法：</p>
-<p>和数组不同的是，包括Swift在内地很多编程语言和框架都不保证集合(sets)和字典(dictionaries)的数据存储顺序。有序字典和普通的字典类似，不同之处在于它的key是有序的。</p>
-<h4 id="创建有序字典"><a href="#创建有序字典" class="headerlink" title="创建有序字典"></a>创建有序字典</h4><p>点击“文件\新建\文件…”新建一个文件，并选择“IOS\Source\Swift File”。点击“下一步”并把这个文件命名为“OrderedDictionary”。最后，点击“创建”。</p>
-<p>你会得到一个空的Swift文件，加这样一段代码进去：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">OrderedDictionary</span> </span>&#123;  </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>到现在为止应该都没有什么问题。通过语义可以看出这个对象是一个结构体。</p>
-<p>现在你需要将其一般化，以便它能够装载你需要的任何类型的数据。通过下列改变你对Swift中“结构”的定义：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">struct OrderedDictionary&lt;KeyType, ValueType&gt;</div></pre></td></tr></table></figure>
-<p>在尖括弧中的元素是通用类型的参数。KeyType和ValueType不是他们自身的类型，而是你可以使用在结构里定义取代的类型。现在就简洁清新许多了！</p>
-<p>最简单的实现一个有顺序的字典是保持一个数组和一个字典。字典中将会装载衍射，而数组将装载keys的顺序。</p>
-<p>在结构体内部的定义中，加入以下的代码：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typealias</span> <span class="type">ArrayType</span> = [<span class="type">KeyType</span>]</div><div class="line"><span class="keyword">typealias</span> <span class="type">DictionaryType</span> = [<span class="type">KeyType</span>: <span class="type">ValueType</span>]</div><div class="line"><span class="keyword">var</span> array = <span class="type">ArrayType</span>()</div><div class="line"><span class="keyword">var</span> dictionary = <span class="type">DictionaryType</span>()</div></pre></td></tr></table></figure>
-<p>这样声明有两个目的，就像上例描述的，有两种类型的用于给已经存在的类型的取新的名称的别名。在这，你将分别地为后面的数组和字典赋值了别名。声明别名是将复杂类型定义为更短名称的类型的一种非常有效的方式。</p>
-<p>你将注意怎么样从结构体中定义用“KeyType”和“ValueType”的参数类型中替换类型。上例的”KeyTypes”是数组类型的。当然这是没有这样的类型的“KeyType”；当在一般的实例化时，将替代Swift像对OrderedDictionary的类型的一切类型通过。</p>
-<p>就因为这样，你将会注意到编译错误：</p>
-<pre><code>Type &apos;Keytype&apos; does not conform to protocol &apos;Hashable&apos;
-</code></pre><p>这是因为你的字典Key没有遵循Hashable协议； 我们可以手动修改代码让Key遵循Hashable协议：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">OrderedDictionary</span>&lt;<span class="title">KeyType</span>: <span class="title">Hashable</span>, <span class="title">ValueType</span></span></div></pre></td></tr></table></figure>
-<p>接下来我们就需要正式建立有序字典了；</p>
-<ul>
-<li>添加count属性</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">count</span>: <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.array.<span class="built_in">count</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>添加插入和移除方法</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">removeAtIndex</span><span class="params">(index: Int)</span></span> -&gt; (<span class="type">KeyType</span>, <span class="type">ValueType</span>) &#123;</div><div class="line">    <span class="built_in">precondition</span>(index &lt; <span class="keyword">self</span>.array.<span class="built_in">count</span>, <span class="string">"Index 超出范围"</span>)</div><div class="line">    <span class="built_in">assert</span>(index &lt; <span class="keyword">self</span>.array.<span class="built_in">count</span>)</div><div class="line"></div><div class="line">    <span class="keyword">let</span> key = <span class="keyword">self</span>.array.removeAtIndex(index)</div><div class="line"></div><div class="line">    <span class="keyword">let</span> value = <span class="keyword">self</span>.dictionary.removeValueForKey(key)!</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (key, value)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">insert</span><span class="params">(value: ValueType, forKey key: KeyType, atIndex index:Int)</span></span> -&gt; <span class="type">ValueType</span>? &#123;</div><div class="line">    <span class="keyword">var</span> adjustedIndex = index</div><div class="line"></div><div class="line">    <span class="keyword">let</span> existingValue = <span class="keyword">self</span>.dictionary[key]</div><div class="line"></div><div class="line">    <span class="keyword">if</span> existingValue != <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">let</span> existingIndex = <span class="keyword">self</span>.array.indexOf(key)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> existingIndex &lt; index &#123;</div><div class="line">            adjustedIndex--</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">self</span>.array.removeAtIndex(existingIndex!)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">self</span>.array.insert(key, atIndex: adjustedIndex)</div><div class="line">    <span class="keyword">self</span>.dictionary[key] = value</div><div class="line"></div><div class="line">    <span class="keyword">return</span> existingValue</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>注意在结构体内如果方法需要修改结构体内的属性的话，要在方法前加mutating关键字；</p>
-<ul>
-<li>添加下标访问方法：</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">subscript</span>(key: <span class="type">KeyType</span>) -&gt; <span class="type">ValueType</span>? &#123;</div><div class="line">    <span class="keyword">get</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.dictionary[key]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">set</span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">self</span>.array.indexOf(key) &#123;&#125;<span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">self</span>.array.append(key)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">self</span>.dictionary[key] = newValue</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">subscript</span>(index: <span class="type">Int</span>) -&gt;(<span class="type">KeyType</span>, <span class="type">ValueType</span>) &#123;</div><div class="line">    <span class="keyword">get</span> &#123;</div><div class="line">        <span class="built_in">precondition</span>(index &lt; <span class="keyword">self</span>.array.<span class="built_in">count</span>, <span class="string">"Index 超出范围"</span>)</div><div class="line"></div><div class="line">        <span class="keyword">let</span> key = <span class="keyword">self</span>.array[index]</div><div class="line"></div><div class="line">        <span class="keyword">let</span> value = <span class="keyword">self</span>.dictionary[key]!</div><div class="line"></div><div class="line">        <span class="keyword">return</span> (key, value)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样我们就利用泛型创建了一个有序字典。</p>
-
-          
+          对于类型安全(type-safe)语言，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/10/15/Swift-中泛型的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1163,19 +1073,15 @@
       
         
           
-            <p>单例是一个在 Cocoa 中很常用的模式了。对于一些希望能在全局方便访问的实例，或者在 app 的生命周期中只应该存在一个的对象，我们一般使用单例来存储和访问。在 Objective-C 中单例的公认的写法类似下面这样：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line">@implementation <span class="type">MyManager</span></div><div class="line">+ (id)sharedManager &#123;</div><div class="line">    <span class="keyword">static</span> <span class="type">MyManager</span> *staticInstance = <span class="literal">nil</span>;</div><div class="line">    <span class="keyword">static</span> dispatch_once_t onceToken;</div><div class="line"></div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        staticInstance = [[<span class="keyword">self</span> alloc] <span class="keyword">init</span>];</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">return</span> staticInstance;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>使用 GCD 中的 dispatch_once_t 可以保证里面的代码只被调用一次，以此保证单例在线程上的安全。</p>
-<p>因为在 Swift 中可以无缝直接使用 GCD，所以我们可以很方便地把类似方式的单例用 Swift 进行改写：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedManager</span> : <span class="title">MyManager</span> </span>&#123;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</div><div class="line">            <span class="keyword">static</span> <span class="keyword">var</span> onceToken : dispatch_once_t = <span class="number">0</span></div><div class="line">            <span class="keyword">static</span> <span class="keyword">var</span> staticInstance : <span class="type">MyManager</span>? = <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        dispatch_once(&amp;<span class="type">Static</span>.onceToken) &#123;</div><div class="line">            <span class="type">Static</span>.staticInstance = <span class="type">MyManager</span>()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="type">Static</span>.staticInstance!</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>因为 Swift 现在还暂时不支持存储的 class var，所以我们需要使用一个 struct 来存储类型变量。</p>
-<p>这样的写法当然没什么问题，但是在 Swift 里我们其实有一个更简单的保证线程安全的方式，那就是 let。把上面的写法简化一下，可以变成：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedManager</span> : <span class="title">MyManager</span> </span>&#123;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</div><div class="line">            <span class="keyword">static</span> <span class="keyword">let</span> sharedInstance : <span class="type">MyManager</span> = <span class="type">MyManager</span>()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="type">Static</span>.sharedInstance</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>还有另一种更受大家欢迎，并被认为是当前的最佳实践的做法。由于现在 class 不支持存储式的 property，我们想要使用一个只存在一份的属性时，就只能将其定义在全局的 scope 中。值得庆幸的是，在 Swift 拥有访问级别控制后，我们可以在变量定义前面加上 private 关键字，使这个变量只在当前文件中可以被访问。这样我们就可以写出一个没有嵌套的，语法上也更简单好看的单例了：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> sharedInstance = <span class="type">MyManager</span>()</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span>  </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedManager</span> : <span class="title">MyManager</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sharedInstance</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>最后一种是最简单也是最实用的，是swift给的语法糖</p>
-
-          
+          单例是一个在 Cocoa 中很常用的模式
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/10/15/Swift单例/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1305,21 +1211,15 @@
       
         
           
-            <h2 id="什么是Podfile"><a href="#什么是Podfile" class="headerlink" title="什么是Podfile"></a>什么是Podfile</h2><p>Podfile是一个规范，描述了一个或多个一套工程目标的依赖项</p>
-<p>一个简单写法:<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;MyApp&apos; do</div><div class="line">  pod &apos;AFNetworking&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure></p>
-<p>更复杂的一个例子：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 下面两行是指明依赖库的来源地址</div><div class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</div><div class="line">source &apos;https://github.com/Artsy/Specs.git&apos;</div><div class="line"></div><div class="line"># 说明平台是ios，版本是9.0</div><div class="line">platform :ios, &apos;9.0&apos;</div><div class="line"></div><div class="line"># 忽略引入库的所有警告（强迫症者的福音啊）</div><div class="line">inhibit_all_warnings!</div><div class="line"></div><div class="line"># 针对MyApp target引入AFNetworking</div><div class="line"># 针对MyAppTests target引入OCMock，</div><div class="line">target &apos;MyApp&apos; do </div><div class="line">    pod &apos;AFNetworking&apos;, &apos;~&gt; 3.0&apos; </div><div class="line">    target &apos;MyAppTests&apos; do</div><div class="line">       inherit! :search_paths </div><div class="line">       pod &apos;OCMock&apos;, &apos;~&gt; 2.0.1&apos; </div><div class="line">    end</div><div class="line">end</div><div class="line"># 这个是cocoapods的一些配置,官网并没有太详细的说明,一般采取默认就好了,也就是不写.</div><div class="line">post_install do |installer|       </div><div class="line">   installer.pods_project.targets.each do |target| </div><div class="line">     puts target.name </div><div class="line">   end</div><div class="line">end</div></pre></td></tr></table></figure></p>
-<h4 id="From-a-podspec-in-the-root-of-a-library-repository-引用仓库根目录的podspec"><a href="#From-a-podspec-in-the-root-of-a-library-repository-引用仓库根目录的podspec" class="headerlink" title="From a podspec in the root of a library repository (引用仓库根目录的podspec)"></a>From a podspec in the root of a library repository (引用仓库根目录的podspec)</h4><p>有时我们需要引入依赖库指定的分支或节点，写法如下。</p>
-<ul>
-<li><p>引入master分支（默认）</p>
-<figure class="highlight plain"><figcaption><span>'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git'```</span></figcaption><table><tr><td class="code"><pre><div class="line"></div><div class="line">* 引入指定的分支</div><div class="line">  </div><div class="line">  ```pod &apos;AFNetworking&apos;, :git =&gt; &apos;https://github.com/gowalla/AFNetworking.git&apos;, :branch =&gt; &apos;dev&apos;</div></pre></td></tr></table></figure>
-</li>
-<li><p>引入某个节点的代码</p>
-<figure class="highlight plain"><figcaption><span>'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :tag => '0.7.0'```</span></figcaption><table><tr><td class="code"><pre><div class="line"></div><div class="line">* 引入某个特殊的提交节点</div><div class="line">  </div><div class="line">  ```pod &apos;AFNetworking&apos;, :git =&gt; &apos;https://github.com/gowalla/AFNetworking.git&apos;, :commit =&gt; &apos;082f8319af&apos;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>需要特别注意的是，虽然这样将会满足任何在Pod中的依赖项通过其他Pods 但是podspec必须存在于仓库的根目录中。</p>
-
-          
+          什么是PodfilePodfile是一个
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/10/14/CocoaPods Podfile/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1449,29 +1349,15 @@
       
         
           
-            <h2 id="什么是Podfile"><a href="#什么是Podfile" class="headerlink" title="什么是Podfile"></a>什么是Podfile</h2><p>Podfile是一个规范，描述了一个或多个一套工程目标的依赖项</p>
-<p>一个简单写法:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><div class="line">target <span class="string">'MyApp'</span> do</div><div class="line">  pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 3.0'</span></div><div class="line">end</div></pre></td></tr></table></figure>
-<p>更复杂的一个例子：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 下面两行是指明依赖库的来源地址</span></div><div class="line">source <span class="string">'https://github.com/CocoaPods/Specs.git'</span></div><div class="line">source <span class="string">'https://github.com/Artsy/Specs.git'</span></div><div class="line"></div><div class="line"><span class="comment"># 说明平台是ios，版本是9.0</span></div><div class="line">platform :ios, <span class="string">'9.0'</span></div><div class="line"></div><div class="line"><span class="comment"># 忽略引入库的所有警告（强迫症者的福音啊）</span></div><div class="line">inhibit_all_warnings!</div><div class="line"></div><div class="line"><span class="comment"># 针对MyApp target引入AFNetworking</span></div><div class="line"><span class="comment"># 针对MyAppTests target引入OCMock，</span></div><div class="line">target <span class="string">'MyApp'</span> do</div><div class="line">    pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 3.0'</span></div><div class="line">    target <span class="string">'MyAppTests'</span> do</div><div class="line">       inherit! :search_paths</div><div class="line">       pod <span class="string">'OCMock'</span>, <span class="string">'~&gt; 2.0.1'</span></div><div class="line">    end</div><div class="line">end</div><div class="line"><span class="comment"># 这个是cocoapods的一些配置,官网并没有太详细的说明,一般采取默认就好了,也就是不写.</span></div><div class="line">post_install do |installer|       </div><div class="line">   installer.pods_project.targets.each do |target|</div><div class="line">     puts target.name</div><div class="line">   end</div><div class="line">end</div></pre></td></tr></table></figure>
-<h4 id="From-a-podspec-in-the-root-of-a-library-repository-引用仓库根目录的podspec"><a href="#From-a-podspec-in-the-root-of-a-library-repository-引用仓库根目录的podspec" class="headerlink" title="From a podspec in the root of a library repository (引用仓库根目录的podspec)"></a>From a podspec in the root of a library repository (引用仓库根目录的podspec)</h4><p>有时我们需要引入依赖库指定的分支或节点，写法如下。</p>
-<ul>
-<li><p>引入master分支（默认）</p>
-<p><code>pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;</code></p>
-</li>
-<li><p>引入指定的分支</p>
-<p><code>pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :branch =&gt; &#39;dev&#39;</code></p>
-</li>
-<li><p>引入某个节点的代码</p>
-<p><code>pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :tag =&gt; &#39;0.7.0&#39;</code></p>
-</li>
-<li><p>引入某个特殊的提交节点</p>
-<p><code>pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :commit =&gt; &#39;082f8319af&#39;</code></p>
-</li>
-</ul>
-<p>需要特别注意的是，虽然这样将会满足任何在Pod中的依赖项通过其他Pods 但是podspec必须存在于仓库的根目录中。</p>
-
-          
+          什么是PodfilePodfile是一个
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/09/29/CocoaPods Podfile (2)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1601,24 +1487,16 @@
       
         
           
-            <p>设计模式是为了解决特定问题而出现的；</p>
-<p>设计模式的基本原则：</p>
-<ul>
-<li><p>开闭原则<br>模块应该对扩展开放而对修改关闭；</p>
-</li>
-<li><p>里氏代换原则<br>父类和子类之间的方法可以相互调换，从而方便修改；多态</p>
-</li>
-<li><p>依赖倒转原则<br>抽象不依赖于细节，细节依赖于抽象；</p>
-</li>
-<li><p>接口隔离原则<br>尽量保证接口只做必要的事情；</p>
-</li>
-<li><p>合成/聚合复用</p>
-</li>
-</ul>
-<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>比如iOS从网络请求加载数据，更新UI的时候，我们会初始化出一个model，随着后续版本的升级，这个model会持续添加参数，或者减少参数；此时如果我们直接修改这个model的话，那么就要同时修改与这个model相匹配的view，这样就会一只在两者之间修改来修改去，适配器模式就是为了解决这种问题存在的。</p>
-<p>如果你运用了适配器模式，那么我们的model不会直接与view接触，它会先和适配器接触，然后再通过适配器去更新UI</p>
-<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3>
-          
+          设计模式是为了解决特定问题而出现的；
+设
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/09/29/设计模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1748,21 +1626,15 @@
       
         
           
-            <p>用了Mac自带的Vim之后发现yy复制的内容和剪切板不同步，谷歌之，找到2种方法：</p>
-<ul>
-<li>“+y </li>
-<li>在 ~/.vimrc 里增加 set clipboard=unnamed</li>
-</ul>
-<p>但是完全不起任何作用，经过一番折腾之后才知道是Mac自带的Vim7.3版本不支持使用系统剪切板；<br>于是就安装了MacVim，结果试了之后还是不管用，执行</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">vim --version | grep clip</div></pre></td></tr></table></figure>
-<p>结果还是：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">-clientserver -clipboard +cmdline_compl +cmdline_hist +cmdline_info +comments </div><div class="line">-xterm_clipboard -xterm_save</div></pre></td></tr></table></figure>
-<p>原因是就算你安装了MacVim使用了Vim7.4系统自带的Terminal还是会默认使用自带的7.3版本；</p>
-<p>所以只要在profile中添加如下语句就可以解决问题了；</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="built_in">alias</span> vim=<span class="string">"/Applications/MacVim.app/Contents/MacOS/Vim"</span></div></pre></td></tr></table></figure>
-<p>之后你在终端使用vim也会调用MacVim中的7.4版本了。</p>
-
-          
+          用了Mac自带的Vim之后发现yy复制的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/09/26/Mac自带Vim7-3不能使用系统剪切板解决方案/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
