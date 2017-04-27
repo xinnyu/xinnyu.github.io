@@ -294,7 +294,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/29/CocoaPods Podfile/">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2016/09/14/R.swift使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xinnyu">
@@ -316,7 +316,1074 @@
             
               
                 
-                <a class="post-title-link" href="/2015/09/29/CocoaPods Podfile/" itemprop="url">
+                <a class="post-title-link" href="/2016/09/14/R.swift使用/" itemprop="url">
+                  R.swift使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-14T03:29:11+08:00">
+                2016-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/09/14/R.swift使用/" class="leancloud_visitors" data-flag-title="R.swift使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用CocoaPods来对R.Swift进行安装：</p>
+<p><code>pod &#39;R.swift&#39;</code></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li>进入项目的配置界面，在左边的TARGETS项下面选择我们的项目，并在右边点击<code>Build Phases</code>这个tab。</li>
+<li>进入<code>&lt;Build Phases&gt;</code>这个tab后，我们看到左上角有一个”+”按钮，点击并在弹出的选项卡中选择<code>New Run Script Phase</code>。</li>
+<li>我们会看到界面的下方多出了一个<code>Run Script</code>项，展开它，并在脚本输入区域输入<code>&quot;\$PODS_ROOT/R.swift/rswift&quot;</code> “\$SRCROOT” (第二对双引号括起来所代码的是项目的根目录，你也可以放到根目录下的其他目录中，只需将其修改为”$SRCROOT/XXX”，XXX为目标目录名)。<br>4.我们按住新建的这个<code>Run Script</code>项向上移动，移到<code>Compile Source</code>项的上方，不过也要保证此时它也在<code>Check Pods Manifest.lock</code>项的下方。</li>
+<li>Command + B，编译一下，编译成功后，在Finder进入到刚刚我们制定的目录中，此时我们会看到一个名为R.generated.swift的文件已经创建了，直接把此文件拖入Xcode项目中，<strong>记住不要勾选Copy items if needed项</strong>。</li>
+<li>配置到此完成，我们可以构建自己的项目了</li>
+</ol>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="Image-图片"><a href="#Image-图片" class="headerlink" title="Image - 图片"></a>Image - 图片</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pImage = <span class="type">UIImage</span>(named: <span class="string">"image_test"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nImage = <span class="type">R</span>.image.image_test()</div></pre></td></tr></table></figure>
+<h4 id="File-数据文件"><a href="#File-数据文件" class="headerlink" title="File - 数据文件"></a>File - 数据文件</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFile = <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"DataFile"</span>, ofType: <span class="string">"json"</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFile = <span class="type">R</span>.file.dataFileJson.path()</div></pre></td></tr></table></figure>
+<h4 id="Font-字体"><a href="#Font-字体" class="headerlink" title="Font - 字体"></a>Font - 字体</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  不使用R.Swift</span></div><div class="line"><span class="keyword">let</span> pFont = <span class="type">UIFont</span>(name: <span class="string">"chalkduster"</span>, size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  使用R.Swift</span></div><div class="line"><span class="keyword">let</span> nFont = <span class="type">R</span>.font.chalkduster(size: <span class="number">35</span>)</div><div class="line"><span class="comment">//  你看，非常神奇，在上面的方法中你不仅可以选择字体类型，还能设置字体大小</span></div></pre></td></tr></table></figure>
+<h4 id="Color-颜色"><a href="#Color-颜色" class="headerlink" title="Color - 颜色"></a>Color - 颜色</h4><p>把.clr文件拖入项目中即可使用颜色配置<br><code>let appRedColor = R.color.myAppColor.red()</code></p>
+<h4 id="Nibs"><a href="#Nibs" class="headerlink" title="Nibs"></a>Nibs</h4><p>不使用R.swift</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="string">"CustomView"</span></div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">UINib</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> rootViews = customViewNib.instantiate(withOwner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = rootViews[<span class="number">0</span>] <span class="keyword">as</span>? <span class="type">CustomView</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</div></pre></td></tr></table></figure>
+<p>使用 R.swift</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> nameOfNib = <span class="type">R</span>.nib.customView.name</div><div class="line"><span class="keyword">let</span> customViewNib = <span class="type">R</span>.nib.customView()</div><div class="line"><span class="keyword">let</span> rootViews = <span class="type">R</span>.nib.customView.instantiateWithOwner(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> customView = <span class="type">R</span>.nib.customView.firstView(owner: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nib: <span class="type">R</span>.nib.customView)</div></pre></td></tr></table></figure>
+<h4 id="Localized-strings"><a href="#Localized-strings" class="headerlink" title="Localized strings"></a>Localized strings</h4><p>不使用R.swift</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">NSLocalizedString</span>(<span class="string">"welcome.message"</span>, comment: <span class="string">""</span>)</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">NSLocalizedString</span>(<span class="string">"title"</span>, tableName: <span class="string">"Settings"</span>, comment: <span class="string">""</span>)</div><div class="line"></div><div class="line"><span class="comment">// Formatted strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"welcome.withName"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Stringsdict files</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">String</span>(format: <span class="type">NSLocalizedString</span>(<span class="string">"copy.progress"</span>, comment: <span class="string">""</span>), locale: <span class="type">NSLocale</span>.current, <span class="number">4</span>, <span class="number">23</span>)</div></pre></td></tr></table></figure>
+<p>使用 R.swift</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">// Localized strings are grouped per table (.strings file)</span></div><div class="line"><span class="keyword">let</span> welcomeMessage = <span class="type">R</span>.string.localizable.welcomeMessage()</div><div class="line"><span class="keyword">let</span> settingsTitle = <span class="type">R</span>.string.settings.title()</div><div class="line"></div><div class="line"><span class="comment">// Functions with parameters are generated for format strings</span></div><div class="line"><span class="keyword">let</span> welcomeName = <span class="type">R</span>.string.localizable.welcomeWithName(<span class="string">"Alice"</span>)</div><div class="line"></div><div class="line"><span class="comment">// Functions with named argument labels are generated for stringsdict keys</span></div><div class="line"><span class="keyword">let</span> progress = <span class="type">R</span>.string.localizable.copyProgress(completed: <span class="number">4</span>, total: <span class="number">23</span>)</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2016/09/14/iOS常用的第三方库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/14/iOS常用的第三方库/" itemprop="url">
+                  iOS常用的第三方库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-14T01:37:51+08:00">
+                2016-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/09/14/iOS常用的第三方库/" class="leancloud_visitors" data-flag-title="iOS常用的第三方库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>DZNEmptyDataSet （空白提示-提升用户体验） <a href="https://github.com/dzenbot/DZNEmptyDataSet" target="_blank" rel="external">github地址</a></li>
+<li>MagicalRecord （数据库-CoreData的封装） <a href="https://github.com/magicalpanda/MagicalRecord" target="_blank" rel="external">github地址</a></li>
+<li>Chameleon (色彩框架） <a href="https://github.com/ViccAlexander/Chameleon" target="_blank" rel="external">github地址</a></li>
+<li>TextFieldEffects （文本输入框）  <a href="https://github.com/raulriera/TextFieldEffects" target="_blank" rel="external">github地址</a></li>
+<li>Spring  （动画框架）  <a href="https://github.com/MengTo/Spring" target="_blank" rel="external">github地址</a></li>
+<li>GPUImage  (图片处理)  <a href="http://github.com/BradLarson/GPUImage" target="_blank" rel="external">github地址</a></li>
+<li>iRate (用户评论)    <a href="https://github.com/nicklockwood/iRate" target="_blank" rel="external">github地址</a></li>
+<li>MGSwipeTableCell  (可滑动cell)  <a href="https://github.com/MortimerGoro/MGSwipeTableCell" target="_blank" rel="external">github地址</a></li>
+<li>FontBlaster （自定义字体加载到APP）  <a href="https://github.com/ArtSabintsev/FontBlaster" target="_blank" rel="external">github地址</a></li>
+<li>quick   (单元测试)   <a href="https://github.com/Quick/Quick" target="_blank" rel="external">github地址</a></li>
+<li>FlatUIKit   (扁平化UI的iOS组件)   <a href="https://github.com/Grouper/FlatUIKit" target="_blank" rel="external">github地址</a></li>
+<li>AlamofireObjectMapper  (JSON数据转换成对象) <a href="https://github.com/tristanhimmelman/AlamofireObjectMapper" target="_blank" rel="external">github地址</a></li>
+<li>SnipKit (Masonry Swift版本 自动布局)  <a href="https://github.com/SnapKit/SnapKit" target="_blank" rel="external">github地址</a></li>
+<li>Shimmer (有闪烁效果的第三方控件)  <a href="https://github.com/facebook/Shimmer" target="_blank" rel="external">github地址</a></li>
+<li>RESideMenu (侧滑效果)  <a href="https://github.com/romaonthego/RESideMenu" target="_blank" rel="external">github地址</a></li>
+<li>RealtimeGradientText (渐变label)  <a href="https://github.com/kevinzhow/RealtimeGradientText" target="_blank" rel="external">github地址</a></li>
+<li>JVFloatLabeledTextField  (floating textfield) <a href="https://github.com/jverdi/JVFloatLabeledTextField" target="_blank" rel="external">github地址</a></li>
+<li>SWTableViewCell (滑动Cell)   <a href="https://github.com/CEWendel/SWTableViewCell" target="_blank" rel="external">github地址</a></li>
+<li>MonkeyKing （社交分享） <a href="https://github.com/nixzhu/MonkeyKing" target="_blank" rel="external">github地址</a></li>
+<li>R.swift （以一种优雅安全的方式使用资源文件）  <a href="https://github.com/mac-cain13/R.swift" target="_blank" rel="external">github地址</a></li>
+<li>Moya  (Alamofire的封装)   <a href="https://github.com/Moya/Moya" target="_blank" rel="external">github地址</a></li>
+<li>SwiftyUserDefaults (UserDefults 封装)   <a href="https://github.com/radex/SwiftyUserDefaults" target="_blank" rel="external">github地址</a>  <a href="quiver:///notes/66EFF11D-55FB-4918-BE2C-7C83D3C654BB" target="_blank" rel="external">SwiftyUserDefaults 使用</a></li>
+<li>FillableLoaders (自定义的进度加载动画)   <a href="https://github.com/poolqf/FillableLoaders" target="_blank" rel="external">github地址</a></li>
+<li>SwiftString  （字符串扩展）  <a href="https://github.com/amayne/SwiftString" target="_blank" rel="external">github地址</a></li>
+<li>ExSwift  (Swift基础类型扩展库)  <a href="https://github.com/pNre/ExSwift#instance-methods-5" target="_blank" rel="external">github地址</a></li>
+<li>Koloda   （卡片视图）   <a href="https://github.com/Yalantis/Koloda" target="_blank" rel="external">github地址</a></li>
+<li>ImagePicker  （图片选择器）   <a href="https://github.com/hyperoslo/ImagePicker" target="_blank" rel="external">github地址</a></li>
+<li>Material     <a href="https://github.com/CosmicMind/Material" target="_blank" rel="external">github地址</a></li>
+<li>IFTTT/RazzleDazzle  (集成引导页，IFTTT)  <a href="https://github.com/IFTTT/RazzleDazzle" target="_blank" rel="external">github地址</a></li>
+<li>Instructions    (用法指南，介绍页面)     <a href="https://github.com/ephread/Instructions" target="_blank" rel="external">github地址</a></li>
+<li>Animated Tab Bar （动画Tab Bar）   <a href="https://github.com/Ramotion/animated-tab-bar" target="_blank" rel="external">github地址</a></li>
+<li>Adaptive Tab Bar                <a href="https://github.com/Ramotion/adaptive-tab-bar" target="_blank" rel="external">github地址</a></li>
+<li>ESTabBarController     （Tab Bar）   <a href="https://github.com/eggswift/ESTabBarController" target="_blank" rel="external">github地址</a></li>
+<li>Eureka   (动态TableView)    <a href="https://github.com/xmartlabs/Eureka" target="_blank" rel="external">github地址</a> <a href="http://blog.csdn.net/sps900608/article/details/51768854#comments" target="_blank" rel="external">用法</a></li>
+<li>folding-cell   (折叠动画cell)    <a href="https://github.com/Ramotion/folding-cell" target="_blank" rel="external">github地址</a></li>
+<li>SCLAlertView    (alert view)     <a href="https://github.com/vikmeup/SCLAlertView-Swift" target="_blank" rel="external">github地址</a></li>
+<li>SweetAlert-iOS   (alert view)     <a href="https://github.com/codestergit/SweetAlert-iOS" target="_blank" rel="external">github地址</a></li>
+<li>DOFavoriteButton    (twitter 风格点赞按钮)     <a href="https://github.com/okmr-d/DOFavoriteButton" target="_blank" rel="external">github地址</a></li>
+<li>LiquidFloatingActionButton  (floating button 动画nice)  <a href="https://github.com/yoavlt/LiquidFloatingActionButton" target="_blank" rel="external">github地址</a></li>
+<li>ZFRippleButton （Material 风格按钮） <a href="https://github.com/zoonooz/ZFRippleButton" target="_blank" rel="external">github地址</a></li>
+<li>DynamicButton  (动态按钮)   <a href="https://github.com/yannickl/DynamicButton" target="_blank" rel="external">github地址</a></li>
+<li>paper-switch  (改变父视图效果的Switch)  <a href="https://github.com/Ramotion/paper-switch" target="_blank" rel="external">github地址</a></li>
+<li>LTMorphingLabel  （动画Label）    <a href="https://github.com/lexrus/LTMorphingLabel" target="_blank" rel="external">github地址</a></li>
+<li>ActiveLabel.swift  （有很多效果的label hashtag） <a href="https://github.com/optonaut/ActiveLabel.swift" target="_blank" rel="external">github地址</a></li>
+<li>TextFieldEffects   （有很多效果的textfield）  <a href="https://github.com/raulriera/TextFieldEffects" target="_blank" rel="external">github地址</a></li>
+<li>PhoneNumberKit    (针对电话输入的textfield)   <a href="https://github.com/marmelroy/PhoneNumberKit" target="_blank" rel="external">github地址</a></li>
+<li>SkyFloatingLabelTextField （Material 风格textfield） <a href="https://github.com/Skyscanner/SkyFloatingLabelTextField" target="_blank" rel="external">github地址</a></li>
+<li>NextGrowingTextView (自适应高度的TextView)    <a href="https://github.com/muukii/NextGrowingTextView" target="_blank" rel="external">github地址</a></li>
+<li>Hue (颜色  color)    <a href="https://github.com/hyperoslo/Hue" target="_blank" rel="external">github地址</a></li>
+<li>TextAttributes   (封装 NSAttributeString)  <a href="https://github.com/delba/TextAttributes" target="_blank" rel="external">github地址</a></li>
+<li>SwiftOCR   <a href="https://github.com/garnele007/SwiftOCR" target="_blank" rel="external">github地址</a></li>
+<li>Gifu   (GIF)    <a href="https://github.com/kaishin/Gifu" target="_blank" rel="external">github地址</a></li>
+<li>FlowingMenu  (手势侧滑menu)   <a href="https://github.com/yannickl/FlowingMenu" target="_blank" rel="external">github地址</a></li>
+<li>circle-menu   （圆形动画菜单）  <a href="https://github.com/Ramotion/circle-menu" target="_blank" rel="external">github地址</a></li>
+<li>PageMenu   （分页效果）  <a href="https://github.com/uacaps/PageMenu" target="_blank" rel="external">github地址</a></li>
+<li>XLPagerTabStrip  (Material 风格分页效果)  <a href="https://github.com/xmartlabs/XLPagerTabStrip" target="_blank" rel="external">github地址</a></li>
+<li>Timepiece  （NSDate相关）  <a href="https://github.com/naoty/Timepiece" target="_blank" rel="external">github地址</a></li>
+<li>Cosmos     (评分控件)    <a href="https://github.com/marketplacer/Cosmos" target="_blank" rel="external">github地址</a></li>
+<li>ZFPlayer    (视频播放)   <a href="https://github.com/renzifeng/ZFPlayer" target="_blank" rel="external">github地址</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2016/07/14/iOS常用宏定义（OC篇）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/14/iOS常用宏定义（OC篇）/" itemprop="url">
+                  iOS常用宏定义（OC篇）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T12:53:33+08:00">
+                2016-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/07/14/iOS常用宏定义（OC篇）/" class="leancloud_visitors" data-flag-title="iOS常用宏定义（OC篇）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="OC"><a href="#OC" class="headerlink" title="OC"></a>OC</h2><figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">//获取屏幕宽度和高度</span></div><div class="line"><span class="meta">#define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width</span></div><div class="line"><span class="meta">#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height</span></div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">//支持横屏的宽度和高度</span></div><div class="line"><span class="meta">#if __IPHONE_OS_VERSION_MAX_ALLOWED &gt;= 80000 // 当前Xcode支持iOS8及以上</span></div><div class="line"></div><div class="line"><span class="meta">#define SCREEN_WIDTH ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.width)</span></div><div class="line"></div><div class="line"><span class="meta">#define SCREENH_HEIGHT ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale:[UIScreen mainScreen].bounds.size.height)</span></div><div class="line"></div><div class="line"><span class="meta">#define SCREEN_SIZE ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]?CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale):[UIScreen mainScreen].bounds.size)</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width</span></div><div class="line"><span class="meta">#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height</span></div><div class="line"><span class="meta">#define SCREEN_SIZE [UIScreen mainScreen].bounds.size</span></div><div class="line"><span class="meta">#endif</span></div><div class="line"></div><div class="line"><span class="comment">//通知中心</span></div><div class="line"><span class="meta">#define LRNotificationCenter [NSNotificationCenter defaultCenter]</span></div><div class="line"><span class="comment">//获取随机颜色</span></div><div class="line"><span class="meta">#define LRRandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]</span></div><div class="line"><span class="comment">//设置RGB颜色</span></div><div class="line"><span class="meta">#define LRRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]</span></div><div class="line"><span class="meta">#define LRRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]</span></div><div class="line"><span class="comment">// clear背景颜色</span></div><div class="line"><span class="meta">#define LRClearColor [UIColor clearColor]</span></div><div class="line"><span class="comment">//Log</span></div><div class="line"><span class="meta">#ifdef DEBUG</span></div><div class="line"><span class="meta">#define XYLog(...) NSLog(@<span class="meta-string">"%s 第%d行 \n %@\n\n"</span>,__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])</span></div><div class="line"><span class="meta">#else</span></div><div class="line"><span class="meta">#define XYLog(...)</span></div><div class="line"><span class="meta">#endif</span></div><div class="line"></div><div class="line"><span class="comment">//判断是否为iPhone</span></div><div class="line"><span class="meta">#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)</span></div><div class="line"><span class="meta">#define IS_IPHONE ([[[UIDevice currentDevice] model] isEqualToString:@<span class="meta-string">"iPhone"</span>])</span></div><div class="line"></div><div class="line"><span class="comment">//判断是否为iPad</span></div><div class="line"><span class="meta">#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)</span></div><div class="line"><span class="meta">#define IS_IPAD ([[[UIDevice currentDevice] model] isEqualToString:@<span class="meta-string">"iPad"</span>])</span></div><div class="line"></div><div class="line"><span class="comment">//判断是否为ipod</span></div><div class="line"><span class="meta">#define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@<span class="meta-string">"iPod touch"</span>])</span></div><div class="line"></div><div class="line"><span class="comment">// 判断是否为 iPhone 5SE</span></div><div class="line"><span class="meta">#define iPhone5SE [[UIScreen mainScreen] bounds].size.width == 320.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 568.0f</span></div><div class="line"></div><div class="line"><span class="comment">// 判断是否为iPhone 6/6s</span></div><div class="line"><span class="meta">#define iPhone6_6s [[UIScreen mainScreen] bounds].size.width == 375.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 667.0f</span></div><div class="line"></div><div class="line"><span class="comment">// 判断是否为iPhone 6Plus/6sPlus</span></div><div class="line"><span class="meta">#define iPhone6Plus_6sPlus [[UIScreen mainScreen] bounds].size.width == 414.0f &amp;&amp; [[UIScreen mainScreen] bounds].size.height == 736.0f</span></div><div class="line"></div><div class="line"><span class="comment">//获取系统版本</span></div><div class="line"><span class="meta">#define IOS_SYSTEM_STRING [[UIDevice currentDevice] systemVersion]</span></div><div class="line"></div><div class="line"><span class="comment">//判断 iOS 8 或更高的系统版本</span></div><div class="line"><span class="meta">#define IOS_VERSION_8_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] &gt;=8.0)? (YES):(NO))</span></div><div class="line"></div><div class="line"><span class="comment">// 判断是不是iOS系统，如果是iOS系统在真机和模拟器输出都是YES</span></div><div class="line"><span class="meta">#if TARGET_OS_IPHONE  </span></div><div class="line"><span class="meta">#endif  </span></div><div class="line"></div><div class="line"><span class="meta">#if (TARGET_IPHONE_SIMULATOR)    </span></div><div class="line">          <span class="comment">// 在模拟器的情况下</span></div><div class="line"><span class="meta">#else</span></div><div class="line">         <span class="comment">// 在真机情况下</span></div><div class="line"><span class="meta">#endif</span></div><div class="line"></div><div class="line"><span class="comment">//获取temp</span></div><div class="line"><span class="meta">#define kPathTemp NSTemporaryDirectory()</span></div><div class="line"></div><div class="line"><span class="comment">//获取沙盒 Document</span></div><div class="line"><span class="meta">#define kPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]</span></div><div class="line"></div><div class="line"><span class="comment">//获取沙盒 Cache</span></div><div class="line"><span class="meta">#define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2016/02/14/使用AlamofireObjectMapper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/14/使用AlamofireObjectMapper/" itemprop="url">
+                  使用AlamofireObjectMapper
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-14T19:14:25+08:00">
+                2016-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/02/14/使用AlamofireObjectMapper/" class="leancloud_visitors" data-flag-title="使用AlamofireObjectMapper">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>通常网络请求返回的是JSON数据，使用ObjectMapper可以让JSON数据直接转化为对象，而使用Alamofire进行网络请求时，使用AlamofireObjectMapper可以直接返回对象，更加简洁。</p>
+<p>###CocoaPods 导入AlamofireObjectMapper<br><figure class="highlight plain"><figcaption><span>'AlamofireObjectMapper', '~> 3.0'```</span></figcaption><table><tr><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">这里采用的Alamofire的测试接口 https://httpbin.org/get</div><div class="line"></div><div class="line">在浏览器中打开可以看到JSON格式的数据：</div><div class="line"></div><div class="line">```JSON</div><div class="line">&#123;</div><div class="line">  &quot;args&quot;: &#123;&#125;, </div><div class="line">  &quot;headers&quot;: &#123;</div><div class="line">    &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;, </div><div class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;, </div><div class="line">    &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&quot;, </div><div class="line">    &quot;Cache-Control&quot;: &quot;max-age=0&quot;, </div><div class="line">    &quot;Host&quot;: &quot;httpbin.org&quot;, </div><div class="line">    &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:46.0) Gecko/20100101 Firefox/46.0&quot;</div><div class="line">  &#125;, </div><div class="line">  &quot;origin&quot;: &quot;202.115.52.218&quot;, </div><div class="line">  &quot;url&quot;: &quot;https://httpbin.org/get&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>根据该JSON的数据格式创建以下两个Mapper类分别对应整个字典和key值为“header”的字典。将JSON中的数据与对象中的数据一一建立转化关系。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> ObjectMapper</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResponseHeader</span>: <span class="title">Mappable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> accept : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> acceptEncoding : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> acceptLanguage : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> cacheControl : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> host : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> userAgent : <span class="type">String</span>?</div><div class="line"></div><div class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(<span class="number">_</span> <span class="built_in">map</span>: <span class="type">Map</span>) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//映射heades字典中的所有键值</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">mapping</span><span class="params">(<span class="built_in">map</span>: Map)</span></span> &#123;</div><div class="line">        accept &lt;- <span class="built_in">map</span>[<span class="string">"Accept"</span>]</div><div class="line">        acceptEncoding &lt;- <span class="built_in">map</span>[<span class="string">"Accept-Encoding"</span>]</div><div class="line">        acceptLanguage &lt;- <span class="built_in">map</span>[<span class="string">"Accept-Language"</span>]</div><div class="line">        cacheControl &lt;- <span class="built_in">map</span>[<span class="string">"Cache-Control"</span>]</div><div class="line">        host &lt;- <span class="built_in">map</span>[<span class="string">"Host"</span>]</div><div class="line">        userAgent &lt;- <span class="built_in">map</span>[<span class="string">"User-Agent"</span>]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> ObjectMapper</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyResponse</span>: <span class="title">Mappable</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> args : <span class="type">NSDictionary</span>?</div><div class="line">    <span class="keyword">var</span> headers : <span class="type">ResponseHeader</span>?</div><div class="line">    <span class="keyword">var</span> origin : <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> url : <span class="type">String</span>?</div><div class="line"></div><div class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(<span class="number">_</span> <span class="built_in">map</span>: <span class="type">Map</span>) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//映射字典中的所有键值</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">mapping</span><span class="params">(<span class="built_in">map</span>: Map)</span></span> &#123;</div><div class="line">        args &lt;- <span class="built_in">map</span>[<span class="string">"args"</span>]</div><div class="line">        headers &lt;- <span class="built_in">map</span>[<span class="string">"headers"</span>]</div><div class="line">        origin &lt;- <span class="built_in">map</span>[<span class="string">"origin"</span>]</div><div class="line">        url &lt;- <span class="built_in">map</span>[<span class="string">"url"</span>]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用Alamofire获取对象</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">webRequst</span><span class="params">()</span></span>  &#123;</div><div class="line">    <span class="keyword">let</span> url = <span class="string">"https://httpbin.org/get"</span></div><div class="line">    <span class="comment">//注意返回的类型为&lt;Mappable对象,NSError&gt;</span></div><div class="line">    <span class="type">Alamofire</span>.request(.<span class="type">GET</span>, url).responseObject &#123; (response: <span class="type">Response</span>&lt;<span class="type">MyResponse</span>, <span class="type">NSError</span>&gt;) <span class="keyword">in</span></div><div class="line">        <span class="keyword">let</span> myResponse = response.result.value</div><div class="line">        <span class="built_in">print</span>(myResponse?.url)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> header = myResponse?.headers&#123;</div><div class="line">            <span class="built_in">print</span>(header.userAgent)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/10/15/Swift-中泛型的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/15/Swift-中泛型的使用/" itemprop="url">
+                  Swift 中泛型的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-15T15:09:58+08:00">
+                2015-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/10/15/Swift-中泛型的使用/" class="leancloud_visitors" data-flag-title="Swift 中泛型的使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对于类型安全(type-safe)语言，一个常见的问题就是如何编写适用于多种类型输入的程序。想象一下，两个整型数相加和两个浮点数相加的程序看起来应该非常类似，甚至一模一样才对。唯一的区别就是变量的类型不同。</p>
+<p>在强类型语言中，你需要去定义诸如addInts, addFloats, addDoubles 等方法来正确地处理参数及返回值。</p>
+<p>许多编程语言已经解决了这个问题。例如，在C++中，使用Template来解决。而Swift，Java和C#则采用了泛型来解决这个问题。</p>
+<p>下面用有序字典（Ordered Dictionaries）来简单说明一下泛型的用法：</p>
+<p>和数组不同的是，包括Swift在内地很多编程语言和框架都不保证集合(sets)和字典(dictionaries)的数据存储顺序。有序字典和普通的字典类似，不同之处在于它的key是有序的。</p>
+<h4 id="创建有序字典"><a href="#创建有序字典" class="headerlink" title="创建有序字典"></a>创建有序字典</h4><p>点击“文件\新建\文件…”新建一个文件，并选择“IOS\Source\Swift File”。点击“下一步”并把这个文件命名为“OrderedDictionary”。最后，点击“创建”。</p>
+<p>你会得到一个空的Swift文件，加这样一段代码进去：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">OrderedDictionary</span> </span>&#123;  </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>到现在为止应该都没有什么问题。通过语义可以看出这个对象是一个结构体。</p>
+<p>现在你需要将其一般化，以便它能够装载你需要的任何类型的数据。通过下列改变你对Swift中“结构”的定义：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">struct OrderedDictionary&lt;KeyType, ValueType&gt;</div></pre></td></tr></table></figure>
+<p>在尖括弧中的元素是通用类型的参数。KeyType和ValueType不是他们自身的类型，而是你可以使用在结构里定义取代的类型。现在就简洁清新许多了！</p>
+<p>最简单的实现一个有顺序的字典是保持一个数组和一个字典。字典中将会装载衍射，而数组将装载keys的顺序。</p>
+<p>在结构体内部的定义中，加入以下的代码：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typealias</span> <span class="type">ArrayType</span> = [<span class="type">KeyType</span>]</div><div class="line"><span class="keyword">typealias</span> <span class="type">DictionaryType</span> = [<span class="type">KeyType</span>: <span class="type">ValueType</span>]</div><div class="line"><span class="keyword">var</span> array = <span class="type">ArrayType</span>()</div><div class="line"><span class="keyword">var</span> dictionary = <span class="type">DictionaryType</span>()</div></pre></td></tr></table></figure>
+<p>这样声明有两个目的，就像上例描述的，有两种类型的用于给已经存在的类型的取新的名称的别名。在这，你将分别地为后面的数组和字典赋值了别名。声明别名是将复杂类型定义为更短名称的类型的一种非常有效的方式。</p>
+<p>你将注意怎么样从结构体中定义用“KeyType”和“ValueType”的参数类型中替换类型。上例的”KeyTypes”是数组类型的。当然这是没有这样的类型的“KeyType”；当在一般的实例化时，将替代Swift像对OrderedDictionary的类型的一切类型通过。</p>
+<p>就因为这样，你将会注意到编译错误：</p>
+<pre><code>Type &apos;Keytype&apos; does not conform to protocol &apos;Hashable&apos;
+</code></pre><p>这是因为你的字典Key没有遵循Hashable协议； 我们可以手动修改代码让Key遵循Hashable协议：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">OrderedDictionary</span>&lt;<span class="title">KeyType</span>: <span class="title">Hashable</span>, <span class="title">ValueType</span></span></div></pre></td></tr></table></figure>
+<p>接下来我们就需要正式建立有序字典了；</p>
+<ul>
+<li>添加count属性</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">count</span>: <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.array.<span class="built_in">count</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>添加插入和移除方法</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">removeAtIndex</span><span class="params">(index: Int)</span></span> -&gt; (<span class="type">KeyType</span>, <span class="type">ValueType</span>) &#123;</div><div class="line">    <span class="built_in">precondition</span>(index &lt; <span class="keyword">self</span>.array.<span class="built_in">count</span>, <span class="string">"Index 超出范围"</span>)</div><div class="line">    <span class="built_in">assert</span>(index &lt; <span class="keyword">self</span>.array.<span class="built_in">count</span>)</div><div class="line"></div><div class="line">    <span class="keyword">let</span> key = <span class="keyword">self</span>.array.removeAtIndex(index)</div><div class="line"></div><div class="line">    <span class="keyword">let</span> value = <span class="keyword">self</span>.dictionary.removeValueForKey(key)!</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (key, value)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">insert</span><span class="params">(value: ValueType, forKey key: KeyType, atIndex index:Int)</span></span> -&gt; <span class="type">ValueType</span>? &#123;</div><div class="line">    <span class="keyword">var</span> adjustedIndex = index</div><div class="line"></div><div class="line">    <span class="keyword">let</span> existingValue = <span class="keyword">self</span>.dictionary[key]</div><div class="line"></div><div class="line">    <span class="keyword">if</span> existingValue != <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">let</span> existingIndex = <span class="keyword">self</span>.array.indexOf(key)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> existingIndex &lt; index &#123;</div><div class="line">            adjustedIndex--</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">self</span>.array.removeAtIndex(existingIndex!)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">self</span>.array.insert(key, atIndex: adjustedIndex)</div><div class="line">    <span class="keyword">self</span>.dictionary[key] = value</div><div class="line"></div><div class="line">    <span class="keyword">return</span> existingValue</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意在结构体内如果方法需要修改结构体内的属性的话，要在方法前加mutating关键字；</p>
+<ul>
+<li>添加下标访问方法：</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">subscript</span>(key: <span class="type">KeyType</span>) -&gt; <span class="type">ValueType</span>? &#123;</div><div class="line">    <span class="keyword">get</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.dictionary[key]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">set</span> &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">self</span>.array.indexOf(key) &#123;&#125;<span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">self</span>.array.append(key)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">self</span>.dictionary[key] = newValue</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">subscript</span>(index: <span class="type">Int</span>) -&gt;(<span class="type">KeyType</span>, <span class="type">ValueType</span>) &#123;</div><div class="line">    <span class="keyword">get</span> &#123;</div><div class="line">        <span class="built_in">precondition</span>(index &lt; <span class="keyword">self</span>.array.<span class="built_in">count</span>, <span class="string">"Index 超出范围"</span>)</div><div class="line"></div><div class="line">        <span class="keyword">let</span> key = <span class="keyword">self</span>.array[index]</div><div class="line"></div><div class="line">        <span class="keyword">let</span> value = <span class="keyword">self</span>.dictionary[key]!</div><div class="line"></div><div class="line">        <span class="keyword">return</span> (key, value)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样我们就利用泛型创建了一个有序字典。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/10/15/Swift单例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/15/Swift单例/" itemprop="url">
+                  Swift单例
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-15T14:58:10+08:00">
+                2015-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/10/15/Swift单例/" class="leancloud_visitors" data-flag-title="Swift单例">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>单例是一个在 Cocoa 中很常用的模式了。对于一些希望能在全局方便访问的实例，或者在 app 的生命周期中只应该存在一个的对象，我们一般使用单例来存储和访问。在 Objective-C 中单例的公认的写法类似下面这样：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line">@implementation <span class="type">MyManager</span></div><div class="line">+ (id)sharedManager &#123;</div><div class="line">    <span class="keyword">static</span> <span class="type">MyManager</span> *staticInstance = <span class="literal">nil</span>;</div><div class="line">    <span class="keyword">static</span> dispatch_once_t onceToken;</div><div class="line"></div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        staticInstance = [[<span class="keyword">self</span> alloc] <span class="keyword">init</span>];</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">return</span> staticInstance;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>使用 GCD 中的 dispatch_once_t 可以保证里面的代码只被调用一次，以此保证单例在线程上的安全。</p>
+<p>因为在 Swift 中可以无缝直接使用 GCD，所以我们可以很方便地把类似方式的单例用 Swift 进行改写：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedManager</span> : <span class="title">MyManager</span> </span>&#123;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</div><div class="line">            <span class="keyword">static</span> <span class="keyword">var</span> onceToken : dispatch_once_t = <span class="number">0</span></div><div class="line">            <span class="keyword">static</span> <span class="keyword">var</span> staticInstance : <span class="type">MyManager</span>? = <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        dispatch_once(&amp;<span class="type">Static</span>.onceToken) &#123;</div><div class="line">            <span class="type">Static</span>.staticInstance = <span class="type">MyManager</span>()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="type">Static</span>.staticInstance!</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为 Swift 现在还暂时不支持存储的 class var，所以我们需要使用一个 struct 来存储类型变量。</p>
+<p>这样的写法当然没什么问题，但是在 Swift 里我们其实有一个更简单的保证线程安全的方式，那就是 let。把上面的写法简化一下，可以变成：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedManager</span> : <span class="title">MyManager</span> </span>&#123;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</div><div class="line">            <span class="keyword">static</span> <span class="keyword">let</span> sharedInstance : <span class="type">MyManager</span> = <span class="type">MyManager</span>()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="type">Static</span>.sharedInstance</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有另一种更受大家欢迎，并被认为是当前的最佳实践的做法。由于现在 class 不支持存储式的 property，我们想要使用一个只存在一份的属性时，就只能将其定义在全局的 scope 中。值得庆幸的是，在 Swift 拥有访问级别控制后，我们可以在变量定义前面加上 private 关键字，使这个变量只在当前文件中可以被访问。这样我们就可以写出一个没有嵌套的，语法上也更简单好看的单例了：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> sharedInstance = <span class="type">MyManager</span>()</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span>  </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedManager</span> : <span class="title">MyManager</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sharedInstance</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后一种是最简单也是最实用的，是swift给的语法糖</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/10/14/CocoaPods Podfile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/14/CocoaPods Podfile/" itemprop="url">
+                  CocoaPods Podfile
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-14T10:17:25+08:00">
+                2015-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/10/14/CocoaPods Podfile/" class="leancloud_visitors" data-flag-title="CocoaPods Podfile">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是Podfile"><a href="#什么是Podfile" class="headerlink" title="什么是Podfile"></a>什么是Podfile</h2><p>Podfile是一个规范，描述了一个或多个一套工程目标的依赖项</p>
+<p>一个简单写法:<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;MyApp&apos; do</div><div class="line">  pod &apos;AFNetworking&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure></p>
+<p>更复杂的一个例子：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 下面两行是指明依赖库的来源地址</div><div class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</div><div class="line">source &apos;https://github.com/Artsy/Specs.git&apos;</div><div class="line"></div><div class="line"># 说明平台是ios，版本是9.0</div><div class="line">platform :ios, &apos;9.0&apos;</div><div class="line"></div><div class="line"># 忽略引入库的所有警告（强迫症者的福音啊）</div><div class="line">inhibit_all_warnings!</div><div class="line"></div><div class="line"># 针对MyApp target引入AFNetworking</div><div class="line"># 针对MyAppTests target引入OCMock，</div><div class="line">target &apos;MyApp&apos; do </div><div class="line">    pod &apos;AFNetworking&apos;, &apos;~&gt; 3.0&apos; </div><div class="line">    target &apos;MyAppTests&apos; do</div><div class="line">       inherit! :search_paths </div><div class="line">       pod &apos;OCMock&apos;, &apos;~&gt; 2.0.1&apos; </div><div class="line">    end</div><div class="line">end</div><div class="line"># 这个是cocoapods的一些配置,官网并没有太详细的说明,一般采取默认就好了,也就是不写.</div><div class="line">post_install do |installer|       </div><div class="line">   installer.pods_project.targets.each do |target| </div><div class="line">     puts target.name </div><div class="line">   end</div><div class="line">end</div></pre></td></tr></table></figure></p>
+<h4 id="From-a-podspec-in-the-root-of-a-library-repository-引用仓库根目录的podspec"><a href="#From-a-podspec-in-the-root-of-a-library-repository-引用仓库根目录的podspec" class="headerlink" title="From a podspec in the root of a library repository (引用仓库根目录的podspec)"></a>From a podspec in the root of a library repository (引用仓库根目录的podspec)</h4><p>有时我们需要引入依赖库指定的分支或节点，写法如下。</p>
+<ul>
+<li><p>引入master分支（默认）</p>
+<figure class="highlight plain"><figcaption><span>'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git'```</span></figcaption><table><tr><td class="code"><pre><div class="line"></div><div class="line">* 引入指定的分支</div><div class="line">  </div><div class="line">  ```pod &apos;AFNetworking&apos;, :git =&gt; &apos;https://github.com/gowalla/AFNetworking.git&apos;, :branch =&gt; &apos;dev&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>引入某个节点的代码</p>
+<figure class="highlight plain"><figcaption><span>'AFNetworking', :git => 'https://github.com/gowalla/AFNetworking.git', :tag => '0.7.0'```</span></figcaption><table><tr><td class="code"><pre><div class="line"></div><div class="line">* 引入某个特殊的提交节点</div><div class="line">  </div><div class="line">  ```pod &apos;AFNetworking&apos;, :git =&gt; &apos;https://github.com/gowalla/AFNetworking.git&apos;, :commit =&gt; &apos;082f8319af&apos;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>需要特别注意的是，虽然这样将会满足任何在Pod中的依赖项通过其他Pods 但是podspec必须存在于仓库的根目录中。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/29/CocoaPods Podfile (2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xinnyu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XINNYU">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/29/CocoaPods Podfile (2)/" itemprop="url">
                   CocoaPods Podfile
                 </a>
               
@@ -351,7 +1418,7 @@
 
           
           
-             <span id="/2015/09/29/CocoaPods Podfile/" class="leancloud_visitors" data-flag-title="CocoaPods Podfile">
+             <span id="/2015/09/29/CocoaPods Podfile (2)/" class="leancloud_visitors" data-flag-title="CocoaPods Podfile">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -728,1081 +1795,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/26/Dynamics动画/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/26/Dynamics动画/" itemprop="url">
-                  Dynamics动画
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-26T01:29:21+08:00">
-                2015-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/26/Dynamics动画/" class="leancloud_visitors" data-flag-title="Dynamics动画">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>UIKit Dynamics是iOS7中新推出的，可以模拟现实的二维动画效果，开发出逼真的物理动画。</p>
-<h3 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h3><ul>
-<li>UIDynamicAnimator：封装了底层的物理引擎，为动力项（UIDynamicItem）提供物理相关的功能和动画；</li>
-<li>UIDynamicBehavior，动力行为，为动力项提供不同的物理行为；</li>
-<li>UIDynamicItem，动力项，相当于现实世界中的一个基本物体；</li>
-</ul>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
-<li>创建一个UIDynamicAnimator</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIDynamicAnimator</span> *dynamicAnimate;</div><div class="line"></div><div class="line">- (<span class="built_in">UIDynamicAnimator</span> *)dynamicAnimate&#123;</div><div class="line">    <span class="keyword">if</span> (!_dynamicAnimate) &#123;</div><div class="line">        _dynamicAnimate = [[<span class="built_in">UIDynamicAnimator</span> alloc] initWithReferenceView:<span class="keyword">self</span>.gameView];</div><div class="line">        _dynamicAnimate.delegate = <span class="keyword">self</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _dynamicAnimate;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>然后就可以把动力行为加到动画中了</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">[<span class="keyword">self</span>.dynamicAnimate addBehavior:_dropItemBehavior];</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/21/使用融云和LeanCloud-创建一个IM应用/" itemprop="url">
-                  使用融云和LeanCloud 创建一个IM应用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-21T01:39:23+08:00">
-                2015-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/21/使用融云和LeanCloud-创建一个IM应用/" class="leancloud_visitors" data-flag-title="使用融云和LeanCloud 创建一个IM应用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://www.rongcloud.cn/" target="_blank" rel="external">融云</a> 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。<br>详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有种无从下手的感觉，下面简单记录一下使用过程。</p>
-<h3 id="导入SDK"><a href="#导入SDK" class="headerlink" title="导入SDK"></a>导入SDK</h3><p>推荐使用CocoaPods导入：</p>
-<ol>
-<li>在Podfile中添加：</li>
-</ol>
-<p><code>pod &#39;RongCloudIMKit&#39;</code></p>
-<ol>
-<li>然后执行命令：</li>
-</ol>
-<p><code>pod install</code></p>
-<h3 id="获取Token"><a href="#获取Token" class="headerlink" title="获取Token"></a>获取Token</h3><p>Token 也叫用户令牌，是 SDK 端用来连接融云服务器的凭证，每个用户连接服务器都需要一个 Token。每次初始化连接服务器时，都需要向服务器提交 Token。<br>获取Token需要注册一个融云的账号，然后新建一个应用，之后在API调试中填写userid（用户唯一标示符）、name（用户昵称）、portraitUri（头像url）就可以获得一个测试用的Token。</p>
-<h3 id="初始化和测试连接"><a href="#初始化和测试连接" class="headerlink" title="初始化和测试连接"></a>初始化和测试连接</h3><p>获得测试用的Token之后就可以利用AppKey（创建应用时融云给你的应用标示符）和Token对应用进行初始化了：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//用AppKey初始化     </span></div><div class="line"><span class="type">RCIM</span>.sharedRCIM().initWithAppKey(<span class="string">"82hegw5uh4r8x"</span>)      </div><div class="line"><span class="comment">//用Token测试连接</span></div><div class="line"><span class="type">RCIM</span>.sharedRCIM().connectWithToken(token, success: &#123; (str:<span class="type">String</span>!) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line"><span class="built_in">print</span>(<span class="string">"连接成功！"</span>)       </div><div class="line"><span class="comment">//连接成功后设置当前登陆用户信息</span></div><div class="line"><span class="type">RCIMClient</span>.sharedRCIMClient().currentUserInfo = <span class="type">RCUserInfo</span>(userId: id, name: name, portrait: avatorURL)</div><div class="line"></div><div class="line"><span class="comment">//在UserDefaults中保存Token</span></div><div class="line"><span class="type">NSUserDefaults</span>.standardUserDefaults().setObject(token, forKey: <span class="string">"kDeviceToken"</span>)</div><div class="line">	<span class="comment">//在主线程中调用更新UI</span></div><div class="line">dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line"></div><div class="line">&#125;)&#125;,error: &#123; (<span class="number">_</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">	<span class="built_in">print</span>(<span class="string">"连接错误！"</span>)</div><div class="line">&#125;)&#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">	<span class="built_in">print</span>(<span class="string">"Token不正确！"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="连接成功后启动单聊会话"><a href="#连接成功后启动单聊会话" class="headerlink" title="连接成功后启动单聊会话"></a>连接成功后启动单聊会话</h3><p>融云在它的SDK中已经集成聊天用户界面，所以我们只要创建一个RCConversationViewController的实例就能使用它提供的用户界面了，同时用户界面也支持自定义，这部分在官网的开发文档中有详细的介绍，这里就不做赘述。<br>需要注意的是：要使用RCConversationViewController，必须给它的几个属性赋值：</p>
-<ul>
-<li>conversationType：聊天类型，有单聊、群聊等等</li>
-</ul>
-<p><code>self.conversationType = RCConversationType.ConversationType_PRIVATE //这里的PRIVATE是单聊</code></p>
-<ul>
-<li>targetId：聊天目标用户id</li>
-</ul>
-<p><code>self.targerId = &quot;&quot;</code></p>
-<ul>
-<li>userName:聊天目标用户的昵称</li>
-</ul>
-<p><code>self.userName = &quot;&quot;</code></p>
-<ul>
-<li>title:聊天界面显示的标题</li>
-</ul>
-<p><code>self.title = self.userName</code><br>RCConversationViewController中还有其他很多的属性可以自定义，比如用户头像形状之类的，这些可以在它的头文件中找到。</p>
-<h3 id="测试单聊"><a href="#测试单聊" class="headerlink" title="测试单聊"></a>测试单聊</h3><p>设置好以上内容之后，单聊的工作就已经做好了，现在我们可以测试单聊的效果，这里由于还没有其他的用户，我们就先和自己聊天来测试一下单聊的效果；<br>把targerId设置成已经登录的id，然后就可以自己和自己聊天了，内部集成的界面还是挺简洁易用的，虽然是自己和自己聊天，但是他也不是在本地操作的，也要经过融云的服务器，所以你把网络断开的情况下是不能发出信息的。<br>到这里单聊已经实现了，但是你会发现聊天界面他是不会显示用户头像的，虽然你在初始化的时候给了一个头像的url，但是他是不会加载出来的，不得不说这一点确实很脑残，主要原因是融云为了安全起见，他的服务器是不会储存用户信息的，在融云那边只有一个Token和userid的对应关系，和你发送给他的好友关系，也就是说你的用户信息需要自己在用一个服务器存起来，然后向融云提供一个用户信息提供者；</p>
-<h3 id="设置用户信息提供者"><a href="#设置用户信息提供者" class="headerlink" title="设置用户信息提供者"></a>设置用户信息提供者</h3><p>要设置用户信息提供者首先要实现RCIMUserInfoDataSource协议，所以我们要在APP启动的时候让Appdelegate实现协议，然后：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getUserInfoWithUserId</span><span class="params">(userId: String!, completion: <span class="params">(<span class="params">(RCUserInfo!)</span></span></span></span> -&gt; <span class="type">Void</span>)!) &#123;</div><div class="line">    <span class="keyword">let</span> userInfo = <span class="type">RCUserInfo</span>()</div><div class="line">    userInfo.userId = userId</div><div class="line">    <span class="keyword">switch</span> userId&#123;</div><div class="line">    <span class="keyword">case</span> <span class="string">"xxx"</span>:</div><div class="line">        userInfo.name = <span class="string">"xxx"</span></div><div class="line">        userInfo.portraitUri = <span class="string">"http://7xl9qm.com1.z0.glb.clouddn.com/avatar.png"</span></div><div class="line">    <span class="keyword">case</span> <span class="string">"x"</span>:</div><div class="line">        userInfo.name = <span class="string">"A"</span></div><div class="line">        userInfo.portraitUri = <span class="string">"http://www4.qqjay.com/u/files/2011/1216/d3302821f418fc5539398cb3ba72cd8c.jpg"</span></div><div class="line">    <span class="keyword">case</span> <span class="string">"xxxxx"</span>:</div><div class="line">        userInfo.name = <span class="string">"B"</span></div><div class="line">        userInfo.portraitUri = <span class="string">"http://image.photophoto.cn/nm-6/018/030/0180300244.jpg"</span></div><div class="line">    <span class="keyword">case</span> <span class="string">"xxxx"</span>:</div><div class="line">        userInfo.name = <span class="string">"C"</span></div><div class="line">        userInfo.portraitUri = <span class="string">"http://cdn.duitang.com/uploads/item/201407/26/20140726221707_i4ZnL.thumb.224_0.jpeg"</span></div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"no user"</span>)</div><div class="line">    &#125;</div><div class="line">    completion(userInfo)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/21/使用AVPlayer-播放在线音频/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/21/使用AVPlayer-播放在线音频/" itemprop="url">
-                  使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-21T00:17:37+08:00">
-                2015-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/21/使用AVPlayer-播放在线音频/" class="leancloud_visitors" data-flag-title="使用AVPlayer 播放在线音频,并实现后台锁屏播放，自动连播">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在iOS开发中，AVAudioPlayer不是不能播放在线音频的，要播放在线音频只能用以下几个方法：</p>
-<ul>
-<li>AVPlayer</li>
-<li>MPMoviePlayerController 能实现音乐流播（但是此方法苹果在iOS9中已经不推荐使用了）</li>
-<li>Audioqueue，Audiostream （太复杂）</li>
-<li>第三方库AudioStreamer（只能播放在线音频）</li>
-</ul>
-<p>所以用AVPlayer来实现在线音频播放是最好的选择；一下就是利用AVPlayer实现音乐流播并实现后台锁屏播放和设置自动连播的大概步骤：</p>
-<p>项目源代码：<a href="https://github.com/xinnyu/DouBanFM" target="_blank" rel="external">Swift 2.0 版豆瓣电台</a></p>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>先声明AVplayer和AVPlayerItem的实例：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> musicPlayer:<span class="type">AVPlayer</span>!</div><div class="line"><span class="keyword">var</span> playerItem:<span class="type">AVPlayerItem</span>?</div></pre></td></tr></table></figure>
-<p>然后在需要的播放音频的地方给它赋值：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">self</span>.musicPlayer = <span class="type">AVPlayer</span>()</div><div class="line"><span class="keyword">let</span> playerLayer = <span class="type">AVPlayerLayer</span>(player: <span class="keyword">self</span>.musicPlayer)</div><div class="line"><span class="keyword">self</span>.view.layer.addSublayer(playerLayer)</div><div class="line"><span class="keyword">let</span> url = <span class="type">NSURL</span>(string: <span class="string">"   "</span>)</div><div class="line"><span class="comment">//替换当前的playerItem</span></div><div class="line"><span class="keyword">self</span>.musicPlayer.replaceCurrentItemWithPlayerItem(playerItem)</div><div class="line"><span class="comment">//开始播放</span></div><div class="line"><span class="keyword">self</span>.musicPlayer.play()</div></pre></td></tr></table></figure>
-<p>以上就是实现播放在线音频的代码，但是如果要实现后台播放和自动连播的话，还要做以下工作：</p>
-<h3 id="自动连播"><a href="#自动连播" class="headerlink" title="自动连播"></a>自动连播</h3><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//当播放完成了之后发送通知，继续播放</span></div><div class="line"><span class="type">NSNotificationCenter</span>.defaultCenter().addObserver(<span class="keyword">self</span>, selector: <span class="string">"playerItemDidReachEnd:"</span>, name: <span class="type">AVPlayerItemDidPlayToEndTimeNotification</span>, object: playerItem)</div><div class="line"></div><div class="line"><span class="comment">//没有播放完成的通知       </span></div><div class="line"><span class="type">NSNotificationCenter</span>.defaultCenter().addObserver(<span class="keyword">self</span>, selector: <span class="string">"playerItemDidNotReachEnd"</span>, name: <span class="type">AVPlayerItemFailedToPlayToEndTimeNotification</span>, object: playerItem)</div><div class="line"></div><div class="line"><span class="comment">//接受到通知后响应的方法</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">playerItemDidReachEnd</span><span class="params">(aNotification:NSNotification)</span></span>&#123;</div><div class="line">	<span class="comment">//自动播放相关</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">playerItemDidNotReachEnd</span><span class="params">(aNotification:NSNotification)</span></span>&#123;</div><div class="line">	<span class="comment">//歌曲没有正常播放到结束</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><em>后台播放</em></p>
-<p>如果是播放本地音频的话，后台播放只要在APP启动时加上：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> session = <span class="type">AVAudioSession</span>.sharedInstance()</div><div class="line"><span class="keyword">try</span>! session.setCategory(<span class="type">AVAudioSessionCategoryPlayback</span>)</div><div class="line"><span class="keyword">try</span>! session.setActive(<span class="literal">true</span>)</div></pre></td></tr></table></figure>
-<p>然后在info.plist文件中添加：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;key&gt;UIBackgroundModes&lt;/key&gt;</div><div class="line">&lt;array&gt;</div><div class="line">&lt;string&gt;audio&lt;/string&gt;</div><div class="line">&lt;/array&gt;</div></pre></td></tr></table></figure>
-<p>即可。</p>
-<p>但是如果每一首歌都要请求网络的话，只做上述工作时行不通的，还要在实例化AVPlayer的地方加上：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//后台播放</span></div><div class="line"><span class="keyword">var</span> bgTask:<span class="type">UIBackgroundTaskIdentifier</span> = <span class="number">0</span></div><div class="line"><span class="keyword">if</span> <span class="type">UIApplication</span>.sharedApplication().applicationState == <span class="type">UIApplicationState</span>.<span class="type">Background</span> &#123;</div><div class="line">	<span class="keyword">self</span>.musicPlayer.play()</div><div class="line">	netMusicIsPlaying = <span class="literal">true</span></div><div class="line"></div><div class="line">	<span class="keyword">let</span> app:<span class="type">UIApplication</span> = <span class="type">UIApplication</span>.sharedApplication()</div><div class="line">	<span class="keyword">let</span> newTask:<span class="type">UIBackgroundTaskIdentifier</span> = app.beginBackgroundTaskWithExpirationHandler(<span class="literal">nil</span>)</div><div class="line"><span class="keyword">if</span> newTask != <span class="type">UIBackgroundTaskInvalid</span> &#123;</div><div class="line">	app.endBackgroundTask(bgTask)</div><div class="line">	&#125;</div><div class="line">	bgTask = newTask</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="keyword">self</span>.musicPlayer.play()</div><div class="line">	netMusicIsPlaying = <span class="literal">true</span></div><div class="line">	isPlayOffline = <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样才能实现真正的后台播放。</p>
-<h3 id="锁屏界面和控制中心添加详情"><a href="#锁屏界面和控制中心添加详情" class="headerlink" title="锁屏界面和控制中心添加详情"></a>锁屏界面和控制中心添加详情</h3><p>首先要作以下准备工作</p>
-<ul>
-<li>在applicationDidEnterBackground中添加：<pre><code>application.beginReceivingRemoteControlEvents()
-</code></pre></li>
-<li>在ViewDidAppear中添加：</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="type">UIApplication</span>.sharedApplication().beginReceivingRemoteControlEvents()</div><div class="line"><span class="keyword">self</span>.becomeFirstResponder()</div></pre></td></tr></table></figure>
-<ul>
-<li>在viewDidDisappear中添加：</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="type">UIApplication</span>.sharedApplication().endReceivingRemoteControlEvents()</div><div class="line"><span class="keyword">self</span>.resignFirstResponder()</div></pre></td></tr></table></figure>
-<ul>
-<li>重写canBecomeFirstResponder方法</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">canBecomeFirstResponder</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后把歌曲详情设置到锁屏界面：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">configNowPlayingInfoCenter</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="type">NSClassFromString</span>(<span class="string">"MPNowPlayingInfoCenter"</span>) != <span class="literal">nil</span>) &#123;</div><div class="line">	    <span class="comment">//锁屏界面图片的存储方式          </span></div><div class="line">		<span class="keyword">let</span> mArt:<span class="type">MPMediaItemArtwork</span> = <span class="type">MPMediaItemArtwork</span>(image: currentSongPic)</div><div class="line">		<span class="comment">//锁屏界面信息字典</span></div><div class="line">		<span class="keyword">var</span> dic:[<span class="type">String</span> : <span class="type">AnyObject</span>] = [</div><div class="line">			<span class="type">MPMediaItemPropertyTitle</span> : currentSongTitle,</div><div class="line">			<span class="type">MPMediaItemPropertyArtist</span> : currentSongArtist,</div><div class="line">			<span class="type">MPMediaItemPropertyArtwork</span> : mArt</div><div class="line">		]</div><div class="line">		<span class="comment">//获取当前播放的时间和歌曲总时长    </span></div><div class="line">		<span class="keyword">let</span> time = <span class="keyword">self</span>.musicPlayer.currentTime()</div><div class="line">		<span class="keyword">let</span> duration = <span class="keyword">self</span>.musicPlayer.currentItem!.asset.duration</div><div class="line">		<span class="comment">//把信息传递给锁屏界面</span></div><div class="line">		dic.updateValue(<span class="type">NSNumber</span>(double: <span class="type">CMTimeGetSeconds</span>(time)), forKey: <span class="type">MPNowPlayingInfoPropertyElapsedPlaybackTime</span> )</div><div class="line">		dic.updateValue(<span class="type">NSNumber</span>(double: <span class="type">CMTimeGetSeconds</span>(duration)), forKey: <span class="type">MPMediaItemPropertyPlaybackDuration</span>)</div><div class="line">		dic.updateValue(<span class="type">NSNumber</span>(float: <span class="number">1.0</span>), forKey: <span class="type">MPNowPlayingInfoPropertyPlaybackRate</span>)</div><div class="line">		<span class="type">MPNowPlayingInfoCenter</span>.defaultCenter().nowPlayingInfo = dic</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>再处理锁屏和控制中心点击事件：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">remoteControlReceivedWithEvent</span><span class="params">(event: UIEvent?)</span></span> &#123;</div><div class="line">	<span class="keyword">if</span> event!.type == <span class="type">UIEventType</span>.<span class="type">RemoteControl</span> &#123;</div><div class="line">		<span class="keyword">if</span> event!.subtype == <span class="type">UIEventSubtype</span>.<span class="type">RemoteControlNextTrack</span> &#123;</div><div class="line">			<span class="comment">//下一曲</span></div><div class="line"></div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> event!.subtype == <span class="type">UIEventSubtype</span>.<span class="type">RemoteControlPause</span>&#123;</div><div class="line">			<span class="comment">//暂停按钮</span></div><div class="line"></div><div class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> event!.subtype == <span class="type">UIEventSubtype</span>.<span class="type">RemoteControlPlay</span>&#123;</div><div class="line">			<span class="comment">//播放按钮</span></div><div class="line"></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="利用KVO监视播放器的缓存状态和播放状态"><a href="#利用KVO监视播放器的缓存状态和播放状态" class="headerlink" title="利用KVO监视播放器的缓存状态和播放状态"></a>利用KVO监视播放器的缓存状态和播放状态</h3><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//先移除观察者      </span></div><div class="line"><span class="keyword">if</span> <span class="keyword">self</span>.musicPlayer.currentItem != <span class="literal">nil</span> &#123;</div><div class="line">	<span class="keyword">self</span>.musicPlayer.currentItem?.removeObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"status"</span>)</div><div class="line">	<span class="keyword">self</span>.musicPlayer.currentItem?.removeObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"loadedTimeRanges"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//添加观察者</span></div><div class="line">playerItem.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"status"</span>, options: .<span class="type">New</span>, context: <span class="literal">nil</span>)</div><div class="line">playerItem.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"loadedTimeRanges"</span>, options: .<span class="type">New</span>, context: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="comment">//播放状态</span></div><div class="line">playerItem.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"status"</span>, options: .<span class="type">New</span>, context: <span class="literal">nil</span>)</div><div class="line"><span class="comment">//缓存进度</span></div><div class="line">playerItem.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"loadedTimeRanges"</span>, options: .<span class="type">New</span>, context: <span class="literal">nil</span>)</div><div class="line"></div><div class="line"><span class="comment">//属性改变了要实现的方法</span></div><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">observeValueForKeyPath</span><span class="params">(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer&lt;Void&gt;)</span></span> &#123;</div><div class="line">	<span class="comment">//获取缓存进度</span></div><div class="line">	<span class="keyword">if</span> keyPath == <span class="string">"loadedTimeRanges"</span> &#123;</div><div class="line">	<span class="keyword">let</span> array = (object <span class="keyword">as</span>! <span class="type">AVPlayerItem</span>).loadedTimeRanges</div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> range = array.first &#123;</div><div class="line">			<span class="comment">//当前缓存的总时间</span></div><div class="line">       <span class="keyword">let</span> rangeValue = range.<span class="type">CMTimeRangeValue</span></div><div class="line">       <span class="keyword">let</span> duration = rangeValue.duration</div><div class="line">			<span class="comment">//总时间换算成秒数</span></div><div class="line">       <span class="keyword">let</span> loadTime = <span class="type">CMTimeGetSeconds</span>(duration)</div><div class="line"></div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="comment">//获取当前播放状态</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><em>获取到了缓存时间可以判断当前的缓存时间和当前播放时间的值，来判断网络状况，同时也可以在做视频播放器时用来作缓存条</em>。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/21/Reachability 使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/21/Reachability 使用/" itemprop="url">
-                  iOS 常用第三方库7(Reachability)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-21T00:06:47+08:00">
-                2015-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/21/Reachability 使用/" class="leancloud_visitors" data-flag-title="iOS 常用第三方库7(Reachability)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/tonymillion/Reachability" target="_blank" rel="external">Reachability</a> 是一个检测网络状态的框架。<br>开发Web等网络应用程序的时候，需要确认网络环境，连接情况等信息。如果没有处理这些信息的话，是不会通过Apple的审查的。</p>
-<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><p>将Reachability.h 和 Reachability.m 拷贝到你的工程中。</p>
-<p>然后：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> reach:<span class="type">Reachability</span>?</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkNetStatus</span><span class="params">()</span></span>&#123;</div><div class="line">       <span class="keyword">self</span>.reach = <span class="type">Reachability</span>.reachabilityForInternetConnection()</div><div class="line">       <span class="comment">// Tell the reachability that we DON'T want to be reachable on 3G/EDGE/CDMA</span></div><div class="line">       <span class="keyword">self</span>.reach!.reachableOnWWAN = <span class="literal">false</span></div><div class="line">       </div><div class="line">       <span class="keyword">if</span> reach?.currentReachabilityStatus() == <span class="type">NetworkStatus</span>.<span class="type">ReachableViaWWAN</span> &#123;</div><div class="line">           <span class="keyword">self</span>.net = <span class="type">NetState</span>.<span class="type">Mobile</span></div><div class="line">       &#125;</div><div class="line">       </div><div class="line">       <span class="comment">// Here we set up a NSNotification observer. The Reachability that caused the notification</span></div><div class="line">       <span class="comment">// is passed in the object parameter</span></div><div class="line">       <span class="type">NSNotificationCenter</span>.defaultCenter().addObserver(<span class="keyword">self</span>,</div><div class="line">           selector: <span class="string">"reachabilityChanged:"</span>,</div><div class="line">           name: kReachabilityChangedNotification,</div><div class="line">           object: <span class="literal">nil</span>)</div><div class="line">       </div><div class="line">       <span class="keyword">self</span>.reach!.startNotifier()</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="function"><span class="keyword">func</span> <span class="title">reachabilityChanged</span><span class="params">(notification: NSNotification)</span></span>&#123;</div><div class="line">       </div><div class="line">       <span class="keyword">if</span> <span class="keyword">self</span>.reach!.isReachableViaWiFi()  &#123;</div><div class="line">           <span class="built_in">print</span>(<span class="string">"能访问网络"</span>)</div><div class="line">           </div><div class="line">           </div><div class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>  <span class="keyword">self</span>.reach!.isReachableViaWWAN()&#123;</div><div class="line">           appDelegate.isCanUseNetWork = <span class="literal">true</span></div><div class="line">           <span class="built_in">print</span>(<span class="string">"正在使用移动网络"</span>)</div><div class="line">           </div><div class="line">       &#125;<span class="keyword">else</span> &#123;</div><div class="line">           </div><div class="line">           <span class="built_in">print</span>(<span class="string">"没有网络!!!"</span>) </div><div class="line">           <span class="keyword">self</span>.net = <span class="type">NetState</span>.<span class="type">None</span></div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/20/SDWebImage使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/20/SDWebImage使用/" itemprop="url">
-                  SDWebImage使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-20T23:45:43+08:00">
-                2015-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/20/SDWebImage使用/" class="leancloud_visitors" data-flag-title="SDWebImage使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/rs/SDWebImage" target="_blank" rel="external">SDWebImage</a>是一个著名的第三方库，它的作用是：</p>
-<blockquote>
-<p>Asynchronous image downloader with cache support with an UIImageView category.<br>就是一个异步加载图片并且支持缓存的UIImage分类；</p>
-</blockquote>
-<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line">imageView.sd_setImageWithURL(<span class="type">NSURL</span>(string: <span class="string">""</span>), placeholderImage: <span class="type">UIImage</span>(named: <span class="string">"placeholder"</span>))</div></pre></td></tr></table></figure>
-<p>清除缓存：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="type">SDImageCache</span>.sharedImageCache().cleanDisk()</div><div class="line"><span class="type">SDImageCache</span>.sharedImageCache().clearMemory()</div></pre></td></tr></table></figure>
-<p>这个框架使用简单，然而而其中复杂的实现细节全部隐藏在这行代码之后；这边有一篇它的源代码分析：<a href="">http://draveness.me/ios-yuan-dai-ma-jie-xi-sdwebimage/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/20/Facebook 动画库POP使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/20/Facebook 动画库POP使用/" itemprop="url">
-                  Facebook 动画库POP使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-20T22:53:46+08:00">
-                2015-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/20/Facebook 动画库POP使用/" class="leancloud_visitors" data-flag-title="Facebook 动画库POP使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/facebook/pop" target="_blank" rel="external">POP</a>是Facebook公司的一个开源项目，它是一个完全不同于Core Animation的动画引擎；它在基本的静态动画的基础上增加的弹簧动画与衰减动画 使之能创造出更真实更具物理性的交互动画 POP的API可以快速的与现有的ObjC代码集成并可以作用于任意对象的任意属性，POP是个相当成熟且久经考验的框架，Facebook出品的令人惊叹的Paper应用中的所有动画和效果即出自POP。</p>
-<h3 id="使用方式："><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h3><p>POP默认支持三种动画 但同时也支持自定义动画</p>
-<ul>
-<li>POPBasicAnimation</li>
-<li>POPSpringAnimation</li>
-<li>POPDecayAnimation</li>
-<li>POPCustomAnimation //自定义动画</li>
-</ul>
-<p>这里我们只讨论前三种，因为自定义动画还没用过；</p>
-<h4 id="代码示例："><a href="#代码示例：" class="headerlink" title="代码示例："></a>代码示例：</h4><p><strong>BasicAnimation</strong></p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> rotation = <span class="type">POPBasicAnimation</span>(propertyNamed: kPOPLayerRotation[^<span class="type">POP</span>动画的参数])</div><div class="line">rotation.toValue = <span class="type">M_PI</span> * <span class="number">2</span></div><div class="line">rotation.duration = <span class="number">10</span></div><div class="line">rotation.repeatForever = <span class="literal">true</span></div><div class="line">rotation.timingFunction = <span class="type">CAMediaTimingFunction</span>(name: kCAMediaTimingFunctionLinear)</div><div class="line">        </div><div class="line"><span class="keyword">self</span>.layer.pop_addAnimation(rotation, forKey: <span class="string">"旋转"</span>)</div></pre></td></tr></table></figure>
-<p>POPBasicAnimation提供四种时间曲线,这个和Core Animation中的是一样的：</p>
-<ul>
-<li>kCAMediaTimingFunctionLinear</li>
-<li>kCAMediaTimingFunctionEaseIn</li>
-<li>kCAMediaTimingFunctionEaseOut</li>
-<li>kCAMediaTimingFunctionEaseInEaseOut</li>
-</ul>
-<p><strong>POPSpringAnimation</strong><br>弹性动画</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//实例化POP</span></div><div class="line"><span class="keyword">let</span> scale = <span class="type">POPSpringAnimation</span>(propertyNamed:kPOPViewScaleXY)</div><div class="line"><span class="comment">//设置结束值</span></div><div class="line">scale.toValue = <span class="type">NSValue</span>(<span class="type">CGPointMake</span>(<span class="number">2</span>,<span class="number">2</span>))</div><div class="line"><span class="comment">//振幅，范围0-20</span></div><div class="line">scale.springBounciness = <span class="number">20</span></div><div class="line"><span class="comment">//振动速度,范围0-20</span></div><div class="line">scale.springSpeed = <span class="number">1</span></div><div class="line">view.layer.pop_addAnimatiom(scale,foKey:<span class="string">"scale"</span>)</div></pre></td></tr></table></figure>
-<blockquote>
-<p>弹性动画可配置的属性有：</p>
-<ul>
-<li>springBounciness:4.0    //[0-20] 弹力 越大则震动幅度越大</li>
-<li>springSpeed     :12.0   //[0-20] 速度 越大则动画结束越快</li>
-<li>dynamicsTension :0      //拉力  下面这三个都跟物理力学模拟相关 数值调整起来很费时，建议就用默认值</li>
-<li>dynamicsFriction:0      //摩擦 同上</li>
-<li>dynamicsMass    :0      //质量 同上</li>
-</ul>
-</blockquote>
-<p><strong>POPDecayAnimation</strong><br>阻尼动画</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="type">POPDecayAnimation</span> *anDecay = [<span class="type">POPDecayAnimation</span> animationWithPropertyNamed:kPOPLayerPositionX];</div><div class="line">anDecay.velocity = @(<span class="number">600</span>);</div><div class="line">anDecay.beginTime = <span class="type">CACurrentMediaTime</span>() + <span class="number">1</span>.0f;</div><div class="line">[<span class="keyword">self</span>.square pop_addAnimation:anDecay forKey:@<span class="string">"position"</span>];</div></pre></td></tr></table></figure>
-<p><em>注意:这里对POPDecayAnimation设置toValue是没有意义的 会被忽略(因为目的状态是动态计算得到的</em>)</p>
-<blockquote>
-<p>POPDecayAnimation可配置的属性与默认值有:<br>deceleration:0.998  //衰减系数(越小则衰减得越快)</p>
-</blockquote>
-<p><em>注意:POPDecayAnimation也是没有duration字段的 其动画持续时间由velocity与deceleration决定</em></p>
-<p>POP默认支持的动画属性：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> Common CALayer property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerBackgroundColor;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerBounds;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerCornerRadius;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerBorderWidth;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerBorderColor;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerOpacity;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerPosition;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerPositionX;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerPositionY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerRotation;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerRotationX;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerRotationY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerScaleX;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerScaleXY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerScaleY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSize;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubscaleXY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubtranslationX;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubtranslationXY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubtranslationY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubtranslationZ;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerTranslationX;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerTranslationXY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerTranslationY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerTranslationZ;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerZPosition;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerShadowColor;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerShadowOffset;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerShadowOpacity;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerShadowRadius;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common CAShapeLayer property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPShapeLayerStrokeStart;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPShapeLayerStrokeEnd;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPShapeLayerStrokeColor;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPShapeLayerFillColor;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common NSLayoutConstraint property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayoutConstraintConstant;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#if TARGET_OS_IPHONE</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common UIView property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewAlpha;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewBackgroundColor;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewBounds;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewCenter;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewFrame;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewScaleX;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewScaleXY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewScaleY;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewSize;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewTintColor;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common UIScrollView property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPScrollViewContentOffset;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPScrollViewContentSize;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPScrollViewZoomScale;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPScrollViewContentInset;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common UITableView property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPTableViewContentOffset;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPTableViewContentSize;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common UICollectionView property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPCollectionViewContentOffset;</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPCollectionViewContentSize;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common UINavigationBar property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPNavigationBarBarTintColor;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common UIToolbar property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPToolbarBarTintColor;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common UITabBar property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPTabBarBarTintColor;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> Common UILabel property names.</div><div class="line"> */</div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLabelTextColor;</div></pre></td></tr></table></figure>
-<h4 id="自定义属性："><a href="#自定义属性：" class="headerlink" title="自定义属性："></a>自定义属性：</h4><p>POP默认支持的三种动画都继承自POPPropertyAnimation POPPropertyAnimation中定义了一个叫property的属性( 之前没有用到它是因为POP根据不同的默认动画属性帮你生成了默认的property) 而这个property则是用来驱动POP的动画效果中的重要一环。</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:<span class="string">@"prop"</span> initializer:^(POPMutableAnimatableProperty *prop) &#123;</div><div class="line">    <span class="comment">// read value</span></div><div class="line">    prop.readBlock = ^(<span class="keyword">id</span> obj, <span class="built_in">CGFloat</span> values[]) &#123;</div><div class="line">        </div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// write value</span></div><div class="line">    prop.writeBlock = ^(<span class="keyword">id</span> obj, <span class="keyword">const</span> <span class="built_in">CGFloat</span> values[]) &#123;</div><div class="line"></div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// dynamics threshold</span></div><div class="line">    prop.threshold = <span class="number">0.01</span>;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<p>其组成就是一个readBlock一个writeBlock和一个threashold</p>
-<ul>
-<li>readBlock告诉POP当前的属性值</li>
-<li>writeBlock中修改变化后的属性值</li>
-<li>threashold决定了动画变化间隔的阈值 值越大writeBlock的调用次数越少</li>
-<li>POPAnimatableProperty其实是POP中一个比较重要的东西,像上面提到的POP自带的动画属性 查看源代码可以看到也只是POP自动帮你设置好了POPAnimatableProperty而已,其作用就是当动画的某个时间片被触发时,告诉系统如何根据当前时间片做出变化.</li>
-</ul>
-<p>下面是一个秒表动画，是利用自定义属性的POP做出来的：</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:<span class="string">@"countdown"</span> initializer:^(POPMutableAnimatableProperty *prop) &#123;</div><div class="line">        </div><div class="line">        prop.writeBlock = ^(<span class="keyword">id</span> obj, <span class="keyword">const</span> <span class="built_in">CGFloat</span> values[]) &#123;</div><div class="line">            <span class="built_in">UILabel</span> *lable = (<span class="built_in">UILabel</span>*)obj;</div><div class="line">            label.text = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%02d:%02d:%02d"</span>,(<span class="keyword">int</span>)values[<span class="number">0</span>]/<span class="number">60</span>,(<span class="keyword">int</span>)values[<span class="number">0</span>]%<span class="number">60</span>,(<span class="keyword">int</span>)(values[<span class="number">0</span>]*<span class="number">100</span>)%<span class="number">100</span>];</div><div class="line">        &#125;;</div><div class="line">        </div><div class="line"><span class="comment">//        prop.threshold = 0.01f;</span></div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    POPBasicAnimation *anBasic = [POPBasicAnimation linearAnimation];   <span class="comment">//秒表当然必须是线性的时间函数</span></div><div class="line">    anBasic.property = prop;    <span class="comment">//自定义属性</span></div><div class="line">    anBasic.fromValue = @(<span class="number">0</span>);   <span class="comment">//从0开始</span></div><div class="line">    anBasic.toValue = @(<span class="number">3</span>*<span class="number">60</span>);  <span class="comment">//180秒</span></div><div class="line">    anBasic.duration = <span class="number">3</span>*<span class="number">60</span>;    <span class="comment">//持续3分钟</span></div><div class="line">    anBasic.beginTime = <span class="built_in">CACurrentMediaTime</span>() + <span class="number">1.0</span>f;    <span class="comment">//延迟1秒开始</span></div><div class="line">    [label pop_addAnimation:anBasic forKey:<span class="string">@"countdown"</span>];</div></pre></td></tr></table></figure>
-<p>出处：<a href="http://adad184.com/2015/03/11/intro-to-pop/" target="_blank" rel="external">http://adad184.com/2015/03/11/intro-to-pop/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://xinnyu.github.io/2015/09/20/SwiftyJSON使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xinnyu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XINNYU">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/20/SwiftyJSON使用/" itemprop="url">
-                  SwiftyJSON使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-20T22:14:38+08:00">
-                2015-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/20/SwiftyJSON使用/" class="leancloud_visitors" data-flag-title="SwiftyJSON使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/SwiftyJSON/SwiftyJSON" target="_blank" rel="external">SwiftJSON</a>是用Swift写的一个快速处理JSON数据的第三方库。</p>
-<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let json = JSON(data: dataFromNetworking)</div><div class="line">if let userName = json[&quot;name&quot;].string&#123;</div><div class="line">  //就这么简单取到了。</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><a href="http://tangplin.github.io/swiftyjson/" target="_blank" rel="external">中文说明</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1852,7 +1844,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1874,7 +1866,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
