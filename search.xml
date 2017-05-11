@@ -143,16 +143,16 @@
 
     
     <entry>
-      <title><![CDATA[CocoaPods Podfile]]></title>
-      <url>%2F2015%2F09%2F29%2FCocoaPods%20Podfile%2F</url>
-      <content type="text"><![CDATA[什么是PodfilePodfile是一个规范，描述了一个或多个一套工程目标的依赖项 一个简单写法: target 'MyApp' do pod 'AFNetworking', '~&gt; 3.0'end 更复杂的一个例子： # 下面两行是指明依赖库的来源地址source 'https://github.com/CocoaPods/Specs.git'source 'https://github.com/Artsy/Specs.git'# 说明平台是ios，版本是9.0platform :ios, '9.0'# 忽略引入库的所有警告（强迫症者的福音啊）inhibit_all_warnings!# 针对MyApp target引入AFNetworking# 针对MyAppTests target引入OCMock，target 'MyApp' do pod 'AFNetworking', '~&gt; 3.0' target 'MyAppTests' do inherit! :search_paths pod 'OCMock', '~&gt; 2.0.1' endend# 这个是cocoapods的一些配置,官网并没有太详细的说明,一般采取默认就好了,也就是不写.post_install do |installer| installer.pods_project.targets.each do |target| puts target.name endend From a podspec in the root of a library repository (引用仓库根目录的podspec)有时我们需要引入依赖库指定的分支或节点，写法如下。 引入master分支（默认） pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39; 引入指定的分支 pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :branch =&gt; &#39;dev&#39; 引入某个节点的代码 pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :tag =&gt; &#39;0.7.0&#39; 引入某个特殊的提交节点 pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :commit =&gt; &#39;082f8319af&#39; 需要特别注意的是，虽然这样将会满足任何在Pod中的依赖项通过其他Pods 但是podspec必须存在于仓库的根目录中。]]></content>
+      <title><![CDATA[设计模式]]></title>
+      <url>%2F2015%2F09%2F29%2F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2F</url>
+      <content type="text"><![CDATA[设计模式是为了解决特定问题而出现的； 设计模式的基本原则： 开闭原则模块应该对扩展开放而对修改关闭； 里氏代换原则父类和子类之间的方法可以相互调换，从而方便修改；多态 依赖倒转原则抽象不依赖于细节，细节依赖于抽象； 接口隔离原则尽量保证接口只做必要的事情； 合成/聚合复用 适配器模式比如iOS从网络请求加载数据，更新UI的时候，我们会初始化出一个model，随着后续版本的升级，这个model会持续添加参数，或者减少参数；此时如果我们直接修改这个model的话，那么就要同时修改与这个model相匹配的view，这样就会一只在两者之间修改来修改去，适配器模式就是为了解决这种问题存在的。 如果你运用了适配器模式，那么我们的model不会直接与view接触，它会先和适配器接触，然后再通过适配器去更新UI TODO]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[设计模式]]></title>
-      <url>%2F2015%2F09%2F29%2F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2F</url>
-      <content type="text"><![CDATA[设计模式是为了解决特定问题而出现的； 设计模式的基本原则： 开闭原则模块应该对扩展开放而对修改关闭； 里氏代换原则父类和子类之间的方法可以相互调换，从而方便修改；多态 依赖倒转原则抽象不依赖于细节，细节依赖于抽象； 接口隔离原则尽量保证接口只做必要的事情； 合成/聚合复用 适配器模式比如iOS从网络请求加载数据，更新UI的时候，我们会初始化出一个model，随着后续版本的升级，这个model会持续添加参数，或者减少参数；此时如果我们直接修改这个model的话，那么就要同时修改与这个model相匹配的view，这样就会一只在两者之间修改来修改去，适配器模式就是为了解决这种问题存在的。 如果你运用了适配器模式，那么我们的model不会直接与view接触，它会先和适配器接触，然后再通过适配器去更新UI TODO]]></content>
+      <title><![CDATA[CocoaPods Podfile]]></title>
+      <url>%2F2015%2F09%2F29%2FCocoaPods%20Podfile%2F</url>
+      <content type="text"><![CDATA[什么是PodfilePodfile是一个规范，描述了一个或多个一套工程目标的依赖项 一个简单写法: target 'MyApp' do pod 'AFNetworking', '~&gt; 3.0'end 更复杂的一个例子： # 下面两行是指明依赖库的来源地址source 'https://github.com/CocoaPods/Specs.git'source 'https://github.com/Artsy/Specs.git'# 说明平台是ios，版本是9.0platform :ios, '9.0'# 忽略引入库的所有警告（强迫症者的福音啊）inhibit_all_warnings!# 针对MyApp target引入AFNetworking# 针对MyAppTests target引入OCMock，target 'MyApp' do pod 'AFNetworking', '~&gt; 3.0' target 'MyAppTests' do inherit! :search_paths pod 'OCMock', '~&gt; 2.0.1' endend# 这个是cocoapods的一些配置,官网并没有太详细的说明,一般采取默认就好了,也就是不写.post_install do |installer| installer.pods_project.targets.each do |target| puts target.name endend From a podspec in the root of a library repository (引用仓库根目录的podspec)有时我们需要引入依赖库指定的分支或节点，写法如下。 引入master分支（默认） pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39; 引入指定的分支 pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :branch =&gt; &#39;dev&#39; 引入某个节点的代码 pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :tag =&gt; &#39;0.7.0&#39; 引入某个特殊的提交节点 pod &#39;AFNetworking&#39;, :git =&gt; &#39;https://github.com/gowalla/AFNetworking.git&#39;, :commit =&gt; &#39;082f8319af&#39; 需要特别注意的是，虽然这样将会满足任何在Pod中的依赖项通过其他Pods 但是podspec必须存在于仓库的根目录中。]]></content>
     </entry>
 
     
