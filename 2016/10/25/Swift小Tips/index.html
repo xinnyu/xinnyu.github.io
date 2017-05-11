@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://xinnyu.github.io/2016/10/25/Swift小Tips/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="@noescape和@autoclosure@noescape：这个关键字告诉编译器，参数闭包只能在函数内部使用。它不能被赋值给临时变量，不能异步调用，也不能作为未标记为@noescape的参数传递给其他函数。总之您可以放心，它无法在这个函数作用域之外使用。 除了安全性上的保证，swift还会为标记为@noescape的参数做一些优化，闭包内访问类的成员时您还可以省去self.的语法。 @auto">
-<meta property="og:updated_time" content="2017-04-27T10:27:56.000Z">
+<meta property="og:updated_time" content="2017-05-11T20:21:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift小Tips">
 <meta name="twitter:description" content="@noescape和@autoclosure@noescape：这个关键字告诉编译器，参数闭包只能在函数内部使用。它不能被赋值给临时变量，不能异步调用，也不能作为未标记为@noescape的参数传递给其他函数。总之您可以放心，它无法在这个函数作用域之外使用。 除了安全性上的保证，swift还会为标记为@noescape的参数做一些优化，闭包内访问类的成员时您还可以省去self.的语法。 @auto">
@@ -56,9 +56,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </span>
@@ -96,7 +96,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#noescape和-autoclosure"><span class="toc-number">1.</span> <span class="toc-text">@noescape和@autoclosure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变参数"><span class="toc-number">2.</span> <span class="toc-text">可变参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dynamic关键字"><span class="toc-number">3.</span> <span class="toc-text">dynamic关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊的字面量"><span class="toc-number">4.</span> <span class="toc-text">特殊的字面量</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#noescape和-autoclosure"><span class="toc-number">1.</span> <span class="toc-text">@noescape和@autoclosure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变参数"><span class="toc-number">2.</span> <span class="toc-text">可变参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dynamic关键字"><span class="toc-number">3.</span> <span class="toc-text">dynamic关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊的字面量"><span class="toc-number">4.</span> <span class="toc-text">特殊的字面量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-in-遍历"><span class="toc-number">5.</span> <span class="toc-text">for in 遍历</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -148,6 +148,7 @@
 <h4 id="特殊的字面量"><a href="#特殊的字面量" class="headerlink" title="特殊的字面量"></a>特殊的字面量</h4><p>在开发或调试过程中如果能用好下面这四个字面量，将会起到事半功倍的效果：</p>
 <p><code>__FILE__</code>：当前代码在那个文件中<br><code>__FUNCTION__</code>：当前代码在该文件的那个函数中<br><code>__LINE__</code>：当前代码在该文件的第多少行<br><code>__COLUMN__</code>：当前代码在改行的多少列</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">specialLitertalExpression</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="keyword">__FILE__</span>)</div><div class="line">    <span class="built_in">print</span>(<span class="keyword">__FUNCTION__</span>)</div><div class="line">    <span class="built_in">print</span>(<span class="keyword">__LINE__</span>)</div><div class="line">    <span class="built_in">print</span>(<span class="keyword">__COLUMN__</span>)   <span class="comment">// 输出结果为11，因为有4个空格，print是五个字符，还有一个左括号。</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="for-in-遍历"><a href="#for-in-遍历" class="headerlink" title="for in 遍历"></a>for in 遍历</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">stride</span>(from: <span class="number">0.5</span>, to: <span class="number">19.25</span>, by: <span class="number">0.3</span>)&#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(i)</span>"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
   </div>
 </article>
 
@@ -163,15 +164,15 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#noescape和-autoclosure"><span class="toc-number">1.</span> <span class="toc-text">@noescape和@autoclosure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变参数"><span class="toc-number">2.</span> <span class="toc-text">可变参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dynamic关键字"><span class="toc-number">3.</span> <span class="toc-text">dynamic关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊的字面量"><span class="toc-number">4.</span> <span class="toc-text">特殊的字面量</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#noescape和-autoclosure"><span class="toc-number">1.</span> <span class="toc-text">@noescape和@autoclosure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变参数"><span class="toc-number">2.</span> <span class="toc-text">可变参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dynamic关键字"><span class="toc-number">3.</span> <span class="toc-text">dynamic关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊的字面量"><span class="toc-number">4.</span> <span class="toc-text">特殊的字面量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-in-遍历"><span class="toc-number">5.</span> <span class="toc-text">for in 遍历</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -213,9 +214,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </nav>

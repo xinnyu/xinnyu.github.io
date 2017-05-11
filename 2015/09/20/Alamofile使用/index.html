@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="AlamofireAlamofire 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架； 使用方法：Alamofire.request(method: Method, URLString: URLStringConvertible,             parameters: [String : AnyObject]?,              encoding">
+    <meta name="description" content="Alamofire 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架； 使用方法：Alamofire.request(method: Method, URLString: URLStringConvertible, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [Str">
 <meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Alamofile使用">
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/20/Alamofile使用/index.html">
 <meta property="og:site_name" content="XINNYU">
-<meta property="og:description" content="AlamofireAlamofire 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架； 使用方法：Alamofire.request(method: Method, URLString: URLStringConvertible,             parameters: [String : AnyObject]?,              encoding">
-<meta property="og:updated_time" content="2017-05-10T20:10:32.000Z">
+<meta property="og:description" content="Alamofire 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架； 使用方法：Alamofire.request(method: Method, URLString: URLStringConvertible, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [Str">
+<meta property="og:updated_time" content="2017-05-11T20:21:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Alamofile使用">
-<meta name="twitter:description" content="AlamofireAlamofire 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架； 使用方法：Alamofire.request(method: Method, URLString: URLStringConvertible,             parameters: [String : AnyObject]?,              encoding">
+<meta name="twitter:description" content="Alamofire 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架； 使用方法：Alamofire.request(method: Method, URLString: URLStringConvertible, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [Str">
     
     
         
@@ -56,9 +56,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </span>
@@ -135,15 +135,15 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><center>Alamofire</center><br><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">Alamofire</a> 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架；</p>
-<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="type">Alamofire</span>.request(method: <span class="type">Method</span>, <span class="type">URLString</span>: <span class="type">URLStringConvertible</span>,</div><div class="line">             parameters: [<span class="type">String</span> : <span class="type">AnyObject</span>]?,</div><div class="line">              encoding: <span class="type">ParameterEncoding</span>,</div><div class="line">               headers: [<span class="type">String</span> : <span class="type">String</span>]?).response (options: <span class="type">NSJSONReadingOptions</span>,</div><div class="line">     completionHandler: &#123; (<span class="type">NSURLRequest</span>, <span class="type">NSHTTPURLResponse</span>?, <span class="type">NSData</span>?, <span class="type">NSError</span>?) -&gt; () <span class="keyword">in</span></div><div class="line"><span class="comment">//操作数据</span></div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+    <p><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">Alamofire</a> 是Swift版的 AFNetworking，是非常方便实用的第三方网络操作框架；</p>
+<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="type">Alamofire</span>.request(method: <span class="type">Method</span>, <span class="type">URLString</span>: <span class="type">URLStringConvertible</span>, parameters: [<span class="type">String</span> : <span class="type">AnyObject</span>]?, encoding: <span class="type">ParameterEncoding</span>, headers: [<span class="type">String</span> : <span class="type">String</span>]?).response (options: <span class="type">NSJSONReadingOptions</span>, completionHandler: &#123; (<span class="type">NSURLRequest</span>, <span class="type">NSHTTPURLResponse</span>?, <span class="type">NSData</span>?, <span class="type">NSError</span>?) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">    <span class="comment">//操作数据</span></div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>但是上面方法中有些参数可以省略，基本用法如下：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="type">Alamofire</span>.request(.<span class="type">GET</span>, <span class="string">"URL"</span>).responseJSON(options: <span class="type">NSJSONReadingOptions</span>.<span class="type">AllowFragments</span>) &#123; (<span class="number">_</span>, <span class="number">_</span>, json, <span class="number">_</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line"><span class="comment">//操作数据</span></div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="type">Alamofire</span>.request(.<span class="type">GET</span>, <span class="string">"URL"</span>).responseJSON(options: <span class="type">NSJSONReadingOptions</span>.<span class="type">AllowFragments</span>) &#123; (<span class="number">_</span>, <span class="number">_</span>, json, <span class="number">_</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">    <span class="comment">//操作数据</span></div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="获取数据的方法"><a href="#获取数据的方法" class="headerlink" title="获取数据的方法"></a>获取数据的方法</h4><ul>
-<li><code>response()</code></li>
-<li><code>responseString(encoding: NSStringEncoding)</code></li>
-<li><code>responseJSON(options: NSJSONReadingOptions)</code></li>
-<li><code>responsePropertyList(options: NSPropertyListReadOptions)</code></li>
+<li>response()</li>
+<li>responseString(encoding: NSStringEncoding)</li>
+<li>responseJSON(options: NSJSONReadingOptions)</li>
+<li>responsePropertyList(options: NSPropertyListReadOptions)</li>
 </ul>
 <h4 id="HTTP-Methods"><a href="#HTTP-Methods" class="headerlink" title="HTTP Methods"></a>HTTP Methods</h4><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Method</span>: <span class="title">String</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">OPTIONS</span> = <span class="string">"OPTIONS"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">GET</span> = <span class="string">"GET"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">HEAD</span> = <span class="string">"HEAD"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">POST</span> = <span class="string">"POST"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">PUT</span> = <span class="string">"PUT"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">PATCH</span> = <span class="string">"PATCH"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">DELETE</span> = <span class="string">"DELETE"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">TRACE</span> = <span class="string">"TRACE"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">CONNECT</span> = <span class="string">"CONNECT"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="请求需要的参数parameters"><a href="#请求需要的参数parameters" class="headerlink" title="请求需要的参数parameters"></a>请求需要的参数parameters</h4><p>类型是一个字典 [String : AnyObject]</p>
@@ -166,9 +166,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </div>
@@ -216,9 +216,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </nav>

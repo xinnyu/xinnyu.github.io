@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="layoutSubviews这个方法，默认没有做任何事情，需要子类进行重写。系统在很多时候会去调用这个方法：  初始化不会触发layoutSubviews，但是如果设置了不为CGRectZero的frame的时候就会触发。 addSubview会触发layoutSubviews 设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化 滚动一个UISc">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIView的几个layout方法">
+<meta property="og:url" content="https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/index.html">
+<meta property="og:site_name" content="XINNYU">
+<meta property="og:description" content="layoutSubviews这个方法，默认没有做任何事情，需要子类进行重写。系统在很多时候会去调用这个方法：  初始化不会触发layoutSubviews，但是如果设置了不为CGRectZero的frame的时候就会触发。 addSubview会触发layoutSubviews 设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化 滚动一个UISc">
+<meta property="og:updated_time" content="2017-05-11T20:21:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIView的几个layout方法">
+<meta name="twitter:description" content="layoutSubviews这个方法，默认没有做任何事情，需要子类进行重写。系统在很多时候会去调用这个方法：  初始化不会触发layoutSubviews，但是如果设置了不为CGRectZero的frame的时候就会触发。 addSubview会触发layoutSubviews 设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化 滚动一个UISc">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>UIView的几个layout方法</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/12/24/iOS,Mac著名开发者博客/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/01/15/iOS小Tips/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&text=UIView的几个layout方法"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&is_video=false&description=UIView的几个layout方法"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UIView的几个layout方法&body=Check out this article: https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&name=UIView的几个layout方法&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#layoutSubviews"><span class="toc-number">1.</span> <span class="toc-text">layoutSubviews</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#setNeedsLayout"><span class="toc-number">2.</span> <span class="toc-text">setNeedsLayout</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#layoutIfNeeded"><span class="toc-number">3.</span> <span class="toc-text">layoutIfNeeded</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#drawRect"><span class="toc-number">4.</span> <span class="toc-text">drawRect</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sizeToFit"><span class="toc-number">5.</span> <span class="toc-text">sizeToFit</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        UIView的几个layout方法
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">XINNYU</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-12-25T02:17:25.000Z" itemprop="datePublished">2016-12-25</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/iOS/">iOS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="layoutSubviews"><a href="#layoutSubviews" class="headerlink" title="layoutSubviews"></a>layoutSubviews</h1><p>这个方法，默认没有做任何事情，需要子类进行重写。系统在很多时候会去调用这个方法：</p>
+<ol>
+<li>初始化不会触发layoutSubviews，但是如果设置了不为CGRectZero的frame的时候就会触发。</li>
+<li>addSubview会触发layoutSubviews</li>
+<li>设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</li>
+<li>滚动一个UIScrollView会触发layoutSubviews</li>
+<li>旋转Screen会触发父UIView上的layoutSubviews事件</li>
+<li>改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件</li>
+</ol>
+<p>当我们在某个类的内部调整子视图位置时，需要调用。反过来的意思就是说：如果你想要在外部设置subviews的位置，就不要重写。</p>
+<h1 id="setNeedsLayout"><a href="#setNeedsLayout" class="headerlink" title="setNeedsLayout"></a>setNeedsLayout</h1><p>标记为需要重新布局，不立即刷新，但layoutSubviews一定会被调用<br>配合layoutIfNeeded立即更新</p>
+<h1 id="layoutIfNeeded"><a href="#layoutIfNeeded" class="headerlink" title="layoutIfNeeded"></a>layoutIfNeeded</h1><p>如果有需要刷新的标记，立即调用layoutSubviews进行布局</p>
+<p>当你需要通过改变UIView的约束制作动画时，把改变约束的代码放进动画闭包，是不会产生动画的，<br>因为他只是调用了setNeedsLayout方法，并不会立即刷新。</p>
+<p>所以我们需要先把约束在动画之前修改好，在动画闭包中执行layoutIfNeeded，这样就能有动画效果了。</p>
+<p>如果一些变化不想动画，就在动画前执行layoutIfNeeded</p>
+<h1 id="drawRect"><a href="#drawRect" class="headerlink" title="drawRect"></a>drawRect</h1><p>drawRect在以下情况下会被调用：<br>1、如果在UIView初始化时没有设置rect大小，将直接导致drawRect不被自动调用。drawRect调用是在Controller-&gt;loadView, Controller-&gt;viewDidLoad 两方法之后调用的.所以不用担心在控制器中,这些View的drawRect就开始画了.这样可以在控制器中设置一些值给View(如果这些View draw的时候需要用到某些变量值).<br>2、该方法在调用sizeToFit后被调用，所以可以先调用sizeToFit计算出size。然后系统自动调用drawRect:方法。<br>3、通过设置contentMode属性值为UIViewContentModeRedraw。那么将在每次设置或更改frame的时候自动调用drawRect:。<br>4、直接调用setNeedsDisplay，或者setNeedsDisplayInRect:触发drawRect:，但是有个前提条件是rect不能为0。<br>以上1,2推荐；而3,4不提倡</p>
+<p>drawRect方法使用注意点：<br>1、若使用UIView绘图，只能在drawRect：方法中获取相应的contextRef并绘图。如果在其他方法中获取将获取到一个invalidate的ref并且不能用于画图。drawRect：方法不能手动显示调用，必须通过调用setNeedsDisplay 或者 setNeedsDisplayInRect，让系统自动调该方法。<br>2、若使用calayer绘图，只能在drawInContext:中（类似于drawRect）绘制，或者在delegate中的相应方法绘制。同样也是调用setNeedDisplay等间接调用以上方法<br>3、若要实时画图，不能使用gestureRecognizer，只能使用touchbegan等方法来掉用setNeedsDisplay实时刷新屏幕</p>
+<h1 id="sizeToFit"><a href="#sizeToFit" class="headerlink" title="sizeToFit"></a>sizeToFit</h1><p>sizeToFit会自动调用sizeThatFits方法；<br>sizeToFit不应该在子类中被重写，应该重写sizeThatFits<br>sizeThatFits传入的参数是receiver当前的size，返回一个适合的size<br>sizeToFit可以被手动直接调用sizeToFit和sizeThatFits方法都没有递归，对subviews也不负责，只负责自己</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#layoutSubviews"><span class="toc-number">1.</span> <span class="toc-text">layoutSubviews</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#setNeedsLayout"><span class="toc-number">2.</span> <span class="toc-text">setNeedsLayout</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#layoutIfNeeded"><span class="toc-number">3.</span> <span class="toc-text">layoutIfNeeded</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#drawRect"><span class="toc-number">4.</span> <span class="toc-text">drawRect</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sizeToFit"><span class="toc-number">5.</span> <span class="toc-text">sizeToFit</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&text=UIView的几个layout方法"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&is_video=false&description=UIView的几个layout方法"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UIView的几个layout方法&body=Check out this article: https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&title=UIView的几个layout方法"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/&name=UIView的几个layout方法&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 xinnyu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

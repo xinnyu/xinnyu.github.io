@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/20/Facebook 动画库POP使用/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="POP是Facebook公司的一个开源项目，它是一个完全不同于Core Animation的动画引擎；它在基本的静态动画的基础上增加的弹簧动画与衰减动画 使之能创造出更真实更具物理性的交互动画 POP的API可以快速的与现有的ObjC代码集成并可以作用于任意对象的任意属性，POP是个相当成熟且久经考验的框架，Facebook出品的令人惊叹的Paper应用中的所有动画和效果即出自POP。 使用方式：">
-<meta property="og:updated_time" content="2017-05-09T19:00:02.000Z">
+<meta property="og:updated_time" content="2017-05-11T20:21:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Facebook 动画库POP使用">
 <meta name="twitter:description" content="POP是Facebook公司的一个开源项目，它是一个完全不同于Core Animation的动画引擎；它在基本的静态动画的基础上增加的弹簧动画与衰减动画 使之能创造出更真实更具物理性的交互动画 POP的API可以快速的与现有的ObjC代码集成并可以作用于任意对象的任意属性，POP是个相当成熟且久经考验的框架，Facebook出品的令人惊叹的Paper应用中的所有动画和效果即出自POP。 使用方式：">
@@ -56,9 +56,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </span>
@@ -96,7 +96,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用方式："><span class="toc-number">1.</span> <span class="toc-text">使用方式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例："><span class="toc-number">2.</span> <span class="toc-text">代码示例：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义属性："><span class="toc-number">3.</span> <span class="toc-text">自定义属性：</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方式："><span class="toc-number">1.</span> <span class="toc-text">使用方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例："><span class="toc-number">1.1.</span> <span class="toc-text">代码示例：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义属性："><span class="toc-number">1.2.</span> <span class="toc-text">自定义属性：</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -136,7 +136,7 @@
 
   <div class="content" itemprop="articleBody">
     <p><a href="https://github.com/facebook/pop" target="_blank" rel="external">POP</a>是Facebook公司的一个开源项目，它是一个完全不同于Core Animation的动画引擎；它在基本的静态动画的基础上增加的弹簧动画与衰减动画 使之能创造出更真实更具物理性的交互动画 POP的API可以快速的与现有的ObjC代码集成并可以作用于任意对象的任意属性，POP是个相当成熟且久经考验的框架，Facebook出品的令人惊叹的Paper应用中的所有动画和效果即出自POP。</p>
-<h4 id="使用方式："><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h4><p>POP默认支持三种动画 但同时也支持自定义动画</p>
+<h3 id="使用方式："><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h3><p>POP默认支持三种动画 但同时也支持自定义动画</p>
 <ul>
 <li>POPBasicAnimation</li>
 <li>POPSpringAnimation</li>
@@ -185,9 +185,7 @@
 </ul>
 <p>下面是一个秒表动画，是利用自定义属性的POP做出来的：</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><div class="line">POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:<span class="string">@"countdown"</span> initializer:^(POPMutableAnimatableProperty *prop) &#123;</div><div class="line">        </div><div class="line">        prop.writeBlock = ^(<span class="keyword">id</span> obj, <span class="keyword">const</span> <span class="built_in">CGFloat</span> values[]) &#123;</div><div class="line">            <span class="built_in">UILabel</span> *lable = (<span class="built_in">UILabel</span>*)obj;</div><div class="line">            label.text = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%02d:%02d:%02d"</span>,(<span class="keyword">int</span>)values[<span class="number">0</span>]/<span class="number">60</span>,(<span class="keyword">int</span>)values[<span class="number">0</span>]%<span class="number">60</span>,(<span class="keyword">int</span>)(values[<span class="number">0</span>]*<span class="number">100</span>)%<span class="number">100</span>];</div><div class="line">        &#125;;</div><div class="line">        </div><div class="line"><span class="comment">//        prop.threshold = 0.01f;</span></div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    POPBasicAnimation *anBasic = [POPBasicAnimation linearAnimation];   <span class="comment">//秒表当然必须是线性的时间函数</span></div><div class="line">    anBasic.property = prop;    <span class="comment">//自定义属性</span></div><div class="line">    anBasic.fromValue = @(<span class="number">0</span>);   <span class="comment">//从0开始</span></div><div class="line">    anBasic.toValue = @(<span class="number">3</span>*<span class="number">60</span>);  <span class="comment">//180秒</span></div><div class="line">    anBasic.duration = <span class="number">3</span>*<span class="number">60</span>;    <span class="comment">//持续3分钟</span></div><div class="line">    anBasic.beginTime = <span class="built_in">CACurrentMediaTime</span>() + <span class="number">1.0</span>f;    <span class="comment">//延迟1秒开始</span></div><div class="line">    [label pop_addAnimation:anBasic forKey:<span class="string">@"countdown"</span>];</div></pre></td></tr></table></figure>
-<blockquote>
 <p>出处：<a href="http://adad184.com/2015/03/11/intro-to-pop/" target="_blank" rel="external">http://adad184.com/2015/03/11/intro-to-pop/</a></p>
-</blockquote>
 
   </div>
 </article>
@@ -204,15 +202,15 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用方式："><span class="toc-number">1.</span> <span class="toc-text">使用方式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例："><span class="toc-number">2.</span> <span class="toc-text">代码示例：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义属性："><span class="toc-number">3.</span> <span class="toc-text">自定义属性：</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方式："><span class="toc-number">1.</span> <span class="toc-text">使用方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码示例："><span class="toc-number">1.1.</span> <span class="toc-text">代码示例：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义属性："><span class="toc-number">1.2.</span> <span class="toc-text">自定义属性：</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -254,9 +252,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </nav>

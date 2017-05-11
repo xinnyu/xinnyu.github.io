@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://xinnyu.github.io/2015/09/21/使用融云和LeanCloud-创建一个IM应用/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="融云 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有种无从下手的感觉，下面简单记录一下使用过程。 导入SDK推荐使用CocoaPods导入：  在Podfile中添加：  pod &amp;#39;RongCloudIMKit&amp;#39;  然后执行命令：">
-<meta property="og:updated_time" content="2017-05-11T08:33:04.000Z">
+<meta property="og:updated_time" content="2017-05-11T20:21:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用融云和LeanCloud 创建一个IM应用">
 <meta name="twitter:description" content="融云 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有种无从下手的感觉，下面简单记录一下使用过程。 导入SDK推荐使用CocoaPods导入：  在Podfile中添加：  pod &amp;#39;RongCloudIMKit&amp;#39;  然后执行命令：">
@@ -56,9 +56,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </span>
@@ -135,7 +135,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><a href="http://www.rongcloud.cn/" target="_blank" rel="external">融云</a> 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。<br>详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有<br>种无从下手的感觉，下面简单记录一下使用过程。</p>
+    <p><a href="http://www.rongcloud.cn/" target="_blank" rel="external">融云</a> 是国内一家专门为APP开发者提供IM服务的公司，利用它提供的SDK可以快速使你的APP集成IM通讯能力。<br>详细的使用方法在它官网的开发文档中有提供，但是不得不吐槽的就是它的开发文档写的实在太乱了让人有种无从下手的感觉，下面简单记录一下使用过程。</p>
 <h3 id="导入SDK"><a href="#导入SDK" class="headerlink" title="导入SDK"></a>导入SDK</h3><p>推荐使用CocoaPods导入：</p>
 <ol>
 <li>在Podfile中添加：</li>
@@ -145,10 +145,10 @@
 <li>然后执行命令：</li>
 </ol>
 <p><code>pod install</code></p>
-<h3 id="获取Token"><a href="#获取Token" class="headerlink" title="获取Token"></a>获取Token</h3><p>Token 也叫用户令牌，是 SDK 端用来连接融云服务器的凭证，每个用户连接服务器都需要一个 Token。每次初始化连接服务器时，都需要向服务器提交 Token。<br>获取Token需要注册一个融云的账号，然后新建一个应用，之后在API调试中填写userid（用户唯一标示<br>符）、name（用户昵称）、portraitUri（头像url）就可以获得一个测试用的Token。</p>
-<h3 id="初始化和测试连接"><a href="#初始化和测试连接" class="headerlink" title="初始化和测试连接"></a>初始化和测试连接</h3><p>获得测试用的Token之后就可以利用AppKey（创建应用时融云给你的应用标示符）和Token对应用进行初<br>始化了：</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//用AppKey初始化     </span></div><div class="line"><span class="type">RCIM</span>.sharedRCIM().initWithAppKey(<span class="string">"82hegw5uh4r8x"</span>)      </div><div class="line"><span class="comment">//用Token测试连接</span></div><div class="line"><span class="type">RCIM</span>.sharedRCIM().connectWithToken(token, success: &#123; (str:<span class="type">String</span>!) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line"><span class="built_in">print</span>(<span class="string">"连接成功！"</span>)       </div><div class="line"><span class="comment">//连接成功后设置当前登陆用户信息</span></div><div class="line"><span class="type">RCIMClient</span>.sharedRCIMClient().currentUserInfo = <span class="type">RCUserInfo</span>(userId: id,</div><div class="line"> name: name, portrait: avatorURL)</div><div class="line"></div><div class="line"><span class="comment">//在UserDefaults中保存Token</span></div><div class="line"><span class="type">NSUserDefaults</span>.standardUserDefaults().setObject(token, forKey: <span class="string">"kDeviceToken"</span>)</div><div class="line">	<span class="comment">//在主线程中调用更新UI</span></div><div class="line">dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line"></div><div class="line">&#125;)&#125;,error: &#123; (<span class="number">_</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">	<span class="built_in">print</span>(<span class="string">"连接错误！"</span>)</div><div class="line">&#125;)&#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">	<span class="built_in">print</span>(<span class="string">"Token不正确！"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="连接成功后启动单聊会话"><a href="#连接成功后启动单聊会话" class="headerlink" title="连接成功后启动单聊会话"></a>连接成功后启动单聊会话</h3><p>融云在它的SDK中已经集成聊天用户界面，所以我们只要创建一个RCConversationViewController的<br>实例就能使用它提供的用户界面了，同时用户界面也支持自定义，这部分在官网的开发文档中有详细的介<br>绍，这里就不做赘述。<br>需要注意的是：要使用RCConversationViewController，必须给它的几个属性赋值：</p>
+<h3 id="获取Token"><a href="#获取Token" class="headerlink" title="获取Token"></a>获取Token</h3><p>Token 也叫用户令牌，是 SDK 端用来连接融云服务器的凭证，每个用户连接服务器都需要一个 Token。每次初始化连接服务器时，都需要向服务器提交 Token。<br>获取Token需要注册一个融云的账号，然后新建一个应用，之后在API调试中填写userid（用户唯一标示符）、name（用户昵称）、portraitUri（头像url）就可以获得一个测试用的Token。</p>
+<h3 id="初始化和测试连接"><a href="#初始化和测试连接" class="headerlink" title="初始化和测试连接"></a>初始化和测试连接</h3><p>获得测试用的Token之后就可以利用AppKey（创建应用时融云给你的应用标示符）和Token对应用进行初始化了：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="comment">//用AppKey初始化     </span></div><div class="line"><span class="type">RCIM</span>.sharedRCIM().initWithAppKey(<span class="string">"82hegw5uh4r8x"</span>)      </div><div class="line"><span class="comment">//用Token测试连接</span></div><div class="line"><span class="type">RCIM</span>.sharedRCIM().connectWithToken(token, success: &#123; (str:<span class="type">String</span>!) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line"><span class="built_in">print</span>(<span class="string">"连接成功！"</span>)       </div><div class="line"><span class="comment">//连接成功后设置当前登陆用户信息</span></div><div class="line"><span class="type">RCIMClient</span>.sharedRCIMClient().currentUserInfo = <span class="type">RCUserInfo</span>(userId: id, name: name, portrait: avatorURL)</div><div class="line"></div><div class="line"><span class="comment">//在UserDefaults中保存Token</span></div><div class="line"><span class="type">NSUserDefaults</span>.standardUserDefaults().setObject(token, forKey: <span class="string">"kDeviceToken"</span>)</div><div class="line">	<span class="comment">//在主线程中调用更新UI</span></div><div class="line">dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line"></div><div class="line">&#125;)&#125;,error: &#123; (<span class="number">_</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">	<span class="built_in">print</span>(<span class="string">"连接错误！"</span>)</div><div class="line">&#125;)&#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></div><div class="line">	<span class="built_in">print</span>(<span class="string">"Token不正确！"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="连接成功后启动单聊会话"><a href="#连接成功后启动单聊会话" class="headerlink" title="连接成功后启动单聊会话"></a>连接成功后启动单聊会话</h3><p>融云在它的SDK中已经集成聊天用户界面，所以我们只要创建一个RCConversationViewController的实例就能使用它提供的用户界面了，同时用户界面也支持自定义，这部分在官网的开发文档中有详细的介绍，这里就不做赘述。<br>需要注意的是：要使用RCConversationViewController，必须给它的几个属性赋值：</p>
 <ul>
 <li>conversationType：聊天类型，有单聊、群聊等等</li>
 </ul>
@@ -168,7 +168,6 @@
 <h3 id="测试单聊"><a href="#测试单聊" class="headerlink" title="测试单聊"></a>测试单聊</h3><p>设置好以上内容之后，单聊的工作就已经做好了，现在我们可以测试单聊的效果，这里由于还没有其他的用户，我们就先和自己聊天来测试一下单聊的效果；<br>把targerId设置成已经登录的id，然后就可以自己和自己聊天了，内部集成的界面还是挺简洁易用的，虽然是自己和自己聊天，但是他也不是在本地操作的，也要经过融云的服务器，所以你把网络断开的情况下是不能发出信息的。<br>到这里单聊已经实现了，但是你会发现聊天界面他是不会显示用户头像的，虽然你在初始化的时候给了一个头像的url，但是他是不会加载出来的，不得不说这一点确实很脑残，主要原因是融云为了安全起见，他的服务器是不会储存用户信息的，在融云那边只有一个Token和userid的对应关系，和你发送给他的好友关系，也就是说你的用户信息需要自己在用一个服务器存起来，然后向融云提供一个用户信息提供者；</p>
 <h3 id="设置用户信息提供者"><a href="#设置用户信息提供者" class="headerlink" title="设置用户信息提供者"></a>设置用户信息提供者</h3><p>要设置用户信息提供者首先要实现RCIMUserInfoDataSource协议，所以我们要在APP启动的时候让Appdelegate实现协议，然后：</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">getUserInfoWithUserId</span><span class="params">(userId: String!, completion: <span class="params">(<span class="params">(RCUserInfo!)</span></span></span></span> -&gt; <span class="type">Void</span>)!) &#123;</div><div class="line">    <span class="keyword">let</span> userInfo = <span class="type">RCUserInfo</span>()</div><div class="line">    userInfo.userId = userId</div><div class="line">    <span class="keyword">switch</span> userId&#123;</div><div class="line">    <span class="keyword">case</span> <span class="string">"xxx"</span>:</div><div class="line">        userInfo.name = <span class="string">"xxx"</span></div><div class="line">        userInfo.portraitUri = <span class="string">"http://7xl9qm.com1.z0.glb.clouddn.com/avatar.png"</span></div><div class="line">    <span class="keyword">case</span> <span class="string">"x"</span>:</div><div class="line">        userInfo.name = <span class="string">"A"</span></div><div class="line">        userInfo.portraitUri = <span class="string">"http://www4.qqjay.com/u/files/2011/1216/d3302821f418fc5539398cb3ba72cd8c.jpg"</span></div><div class="line">    <span class="keyword">case</span> <span class="string">"xxxxx"</span>:</div><div class="line">        userInfo.name = <span class="string">"B"</span></div><div class="line">        userInfo.portraitUri = <span class="string">"http://image.photophoto.cn/nm-6/018/030/0180300244.jpg"</span></div><div class="line">    <span class="keyword">case</span> <span class="string">"xxxx"</span>:</div><div class="line">        userInfo.name = <span class="string">"C"</span></div><div class="line">        userInfo.portraitUri = <span class="string">"http://cdn.duitang.com/uploads/item/201407/26/20140726221707_i4ZnL.thumb.224_0.jpeg"</span></div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"no user"</span>)</div><div class="line">    &#125;</div><div class="line">    completion(userInfo)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
   </div>
 </article>
 
@@ -184,9 +183,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </div>
@@ -234,9 +233,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </nav>

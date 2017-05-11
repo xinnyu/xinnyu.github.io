@@ -10,12 +10,12 @@
 <meta name="keywords" content="iOS,OC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS小Tips">
-<meta property="og:url" content="https://xinnyu.github.io/2016/11/15/iOS小Tips/index.html">
+<meta property="og:url" content="https://xinnyu.github.io/2017/01/15/iOS小Tips/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="1，打印View所有子视图po [[self view]recursiveDescription] 2，layoutSubviews调用的调用时机* 当视图第一次显示的时候会被调用。* 添加子视图也会调用这个方法。* 当本视图的大小发生改变的时候是会调用的。* 当子视图的frame发生改变的时候是会调用的。* 当删除子视图的时候是会调用的. 3，NSString过滤特殊字符// 定义一个特殊字符的">
 <meta property="og:image" content="http://oo90m08ev.bkt.clouddn.com/17-4-27/72206646-file_1493286154744_f939.png">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/790890-2233c59924c77b95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-05-11T08:48:04.000Z">
+<meta property="og:updated_time" content="2017-05-11T20:21:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS小Tips">
 <meta name="twitter:description" content="1，打印View所有子视图po [[self view]recursiveDescription] 2，layoutSubviews调用的调用时机* 当视图第一次显示的时候会被调用。* 添加子视图也会调用这个方法。* 当本视图的大小发生改变的时候是会调用的。* 当子视图的frame发生改变的时候是会调用的。* 当删除子视图的时候是会调用的. 3，NSString过滤特殊字符// 定义一个特殊字符的">
@@ -59,9 +59,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </span>
@@ -69,10 +69,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2016/11/15/iOS AVPlayer 简单封装/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        <li><a class="icon" href="/2016/12/25/UIView的几个layout方法-layoutSubviews、layoutIfNeeded、setNeedsLayout/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
         
         
-        <li><a class="icon" href="/2016/12/24/iOS,Mac著名开发者博客/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        <li><a class="icon" href="/2017/01/23/Swift3中的GCD/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
         <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
@@ -85,16 +85,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2016/11/15/iOS小Tips/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&text=iOS小Tips"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&is_video=false&description=iOS小Tips"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=iOS小Tips&body=Check out this article: https://xinnyu.github.io/2016/11/15/iOS小Tips/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&name=iOS小Tips&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2017/01/15/iOS小Tips/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&text=iOS小Tips"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&is_video=false&description=iOS小Tips"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS小Tips&body=Check out this article: https://xinnyu.github.io/2017/01/15/iOS小Tips/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&name=iOS小Tips&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -122,7 +122,7 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2016-11-15T12:19:25.000Z" itemprop="datePublished">2016-11-15</time>
+        <time datetime="2017-01-15T10:16:29.000Z" itemprop="datePublished">2017-01-15</time>
     </div>
 
 
@@ -221,9 +221,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </div>
@@ -234,16 +234,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2016/11/15/iOS小Tips/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&text=iOS小Tips"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&is_video=false&description=iOS小Tips"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=iOS小Tips&body=Check out this article: https://xinnyu.github.io/2016/11/15/iOS小Tips/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2016/11/15/iOS小Tips/&name=iOS小Tips&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2017/01/15/iOS小Tips/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&text=iOS小Tips"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&is_video=false&description=iOS小Tips"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS小Tips&body=Check out this article: https://xinnyu.github.io/2017/01/15/iOS小Tips/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&title=iOS小Tips"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2017/01/15/iOS小Tips/&name=iOS小Tips&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -271,9 +271,9 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
     </nav>
