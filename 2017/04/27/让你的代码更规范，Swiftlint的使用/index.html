@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://xinnyu.github.io/2017/04/27/让你的代码更规范，Swiftlint的使用/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="SwiftLint 是一个用于强制检查 Swift 代码风格和规定的一个工具，基本上以 GitHub’s Swift 代码风格指南为基础。SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。  安装swiftlint官方给出了几种安装方式，这边我使用Homebrew的方式进行安装，步骤如下：  安装Homebrew (如果没">
-<meta property="og:updated_time" content="2017-05-11T20:21:35.000Z">
+<meta property="og:updated_time" content="2017-05-12T10:22:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="让你的代码更规范，Swiftlint的使用">
 <meta name="twitter:description" content="SwiftLint 是一个用于强制检查 Swift 代码风格和规定的一个工具，基本上以 GitHub’s Swift 代码风格指南为基础。SwiftLint Hook 了 Clang 和 SourceKit 从而能够使用 AST 来表示源代码文件的更多精确结果。  安装swiftlint官方给出了几种安装方式，这边我使用Homebrew的方式进行安装，步骤如下：  安装Homebrew (如果没">
@@ -157,6 +157,8 @@
 <p>更多类容可以查看：<a href="https://github.com/realm/SwiftLint/blob/master/README_CN.md" target="_blank" rel="external">Swfitlint 规则</a></p>
 <h1 id="小Tips"><a href="#小Tips" class="headerlink" title="小Tips"></a>小Tips</h1><p>在确定源码被正常备份后使用<code>swiftlint autocorrect</code>指令可以对源代码进行自动修正</p>
 <p>可以通过在一个源文件中定义一个如下格式的注释来关闭某个规则：<br><code>// swiftlint:disable &lt;rule&gt;</code><br>在该文件结束之前或者在定义如下格式的匹配注释之前，这条规则都会被禁用：<br><code>// swiftlint:enable &lt;rule&gt;</code></p>
+<p>下面是我个人的配置文件分享：</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><div class="line">included: # 检查的目录</div><div class="line">excluded: # 忽略检查的目录，优先级比included高</div><div class="line">  - <span class="type">Carthage</span></div><div class="line">  - <span class="type">Pods</span></div><div class="line"></div><div class="line">identifier_name:</div><div class="line">  min_length: # not possible to disable this partial rule, so <span class="keyword">set</span> it to zero</div><div class="line">    warning: <span class="number">0</span></div><div class="line">    error: <span class="number">0</span></div><div class="line">  excluded:</div><div class="line">    - _addNotificationBlock(<span class="number">_</span>:)</div><div class="line">    - _nsError</div><div class="line">    - _nsErrorDomain</div><div class="line">    - id</div><div class="line">    - pk</div><div class="line">    - to</div><div class="line"></div><div class="line">file_length: <span class="number">1000</span> #文件的行数</div><div class="line"></div><div class="line">line_length: <span class="number">150</span> # 每一行的字符数</div></pre></td></tr></table></figure>
 
   </div>
 </article>
