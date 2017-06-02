@@ -94,7 +94,7 @@
 <meta property="og:url" content="https://xinnyu.github.io/2016/09/01/CocoaPods Podfile/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="Podfile 语法改变CocoaPods 1.0版本有一些改变， 会直接让现在已有的 Podfile 不能工作：  必须指明 target :exclusive =&amp;gt; true 和 link_with 被去掉了 pod install 默认不再进行 pod repo update  inhibit_all_warnings!inhibit_all_warnings! 屏蔽所有来自于coco">
-<meta property="og:updated_time" content="2017-05-13T11:09:29.000Z">
+<meta property="og:updated_time" content="2017-06-02T19:38:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods Podfile">
 <meta name="twitter:description" content="Podfile 语法改变CocoaPods 1.0版本有一些改变， 会直接让现在已有的 Podfile 不能工作：  必须指明 target :exclusive =&amp;gt; true 和 link_with 被去掉了 pod install 默认不再进行 pod repo update  inhibit_all_warnings!inhibit_all_warnings! 屏蔽所有来自于coco">
@@ -392,18 +392,18 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">pod &apos;AFNetworking&apos;, :git =&gt; &apos;https://github.com/gowalla/AFNetworking.git&apos;, :commit =&gt; &apos;082f8319af</div></pre></td></tr></table></figure>
 <h1 id="target"><a href="#target" class="headerlink" title="target"></a>target</h1><p>在给定的块内定义pod的target（Xcode工程中的target）和指定依赖的范围。一个target应该与Xcode工程的target有关联。默认情况下，target会包含定义在块外的依赖，除非指定不使用<code>inherit!</code>来继承（说的是嵌套的块里的继承问题）</p>
 <p>定义一个简单target ZipApp引入SSZipArchive库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;ZipApp&apos; do </div><div class="line">pod &apos;SSZipArchive&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;ZipApp&apos; do</div><div class="line">pod &apos;SSZipArchive&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
 <p>定义一个ZipApptarget仅引入SSZipArchive库，定义ZipAppTeststarget 引入Nimble的同时也会继承ZipApptarget里面的SSZipArchive库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;ZipApp&apos; do </div><div class="line">    pod &apos;SSZipArchive&apos; </div><div class="line">    target &apos;ZipAppTests&apos; do</div><div class="line">        inherit! :search_paths </div><div class="line">        pod &apos;Nimble&apos; </div><div class="line">    end</div><div class="line">end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;ZipApp&apos; do</div><div class="line">    pod &apos;SSZipArchive&apos;</div><div class="line">    target &apos;ZipAppTests&apos; do</div><div class="line">        inherit! :search_paths</div><div class="line">        pod &apos;Nimble&apos;</div><div class="line">    end</div><div class="line">end</div></pre></td></tr></table></figure>
 <p>target块中嵌套多个子块</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;ShowsApp&apos; do</div><div class="line">    # ShowsApp 仅仅引入ShowsKit</div><div class="line">    pod &apos;ShowsKit&apos; </div><div class="line">    # 引入 ShowsKit 和 ShowTVAuth </div><div class="line">    target &apos;ShowsTV&apos; do </div><div class="line">        pod &apos;ShowTVAuth&apos; </div><div class="line">    end </div><div class="line">    # 引入了Specta和Expecta以及ShowsKit</div><div class="line">    target &apos;ShowsTests&apos; do </div><div class="line">        inherit! :search_paths </div><div class="line">        pod &apos;Specta&apos; </div><div class="line">        pod &apos;Expecta&apos; </div><div class="line">    end</div><div class="line">end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;ShowsApp&apos; do</div><div class="line">    # ShowsApp 仅仅引入ShowsKit</div><div class="line">    pod &apos;ShowsKit&apos;</div><div class="line">    # 引入 ShowsKit 和 ShowTVAuth</div><div class="line">    target &apos;ShowsTV&apos; do</div><div class="line">        pod &apos;ShowTVAuth&apos;</div><div class="line">    end</div><div class="line">    # 引入了Specta和Expecta以及ShowsKit</div><div class="line">    target &apos;ShowsTests&apos; do</div><div class="line">        inherit! :search_paths</div><div class="line">        pod &apos;Specta&apos;</div><div class="line">        pod &apos;Expecta&apos;</div><div class="line">    end</div><div class="line">end</div></pre></td></tr></table></figure>
 <h1 id="抽象target"><a href="#抽象target" class="headerlink" title="抽象target"></a>抽象target</h1><p>定义一个新的抽象目标，它可以方便的用于目标依赖继承。</p>
 <p>简单写法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">abstract_target &apos;Networking&apos; do</div><div class="line">    pod &apos;AlamoFire&apos; </div><div class="line">    target &apos;Networking App 1&apos; </div><div class="line">    target &apos;Networking App 2&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">abstract_target &apos;Networking&apos; do</div><div class="line">    pod &apos;AlamoFire&apos;</div><div class="line">    target &apos;Networking App 1&apos;</div><div class="line">    target &apos;Networking App 2&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
 <p>定义一种abstract_target包含多个target</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 注意：这是个抽象的target也就是说在工程中并没有这个target引入ShowsKit</div><div class="line">abstract_target &apos;Shows&apos; do</div><div class="line">    pod &apos;ShowsKit&apos;</div><div class="line">    # ShowsiOS target会引入ShowWebAuth库以及继承自Shows的ShowsKit库</div><div class="line">    target &apos;ShowsiOS&apos; do</div><div class="line">         pod &apos;ShowWebAuth&apos;</div><div class="line">    end</div><div class="line">  # ShowsTV target会引入ShowTVAuth库以及继承自Shows的ShowsKit库</div><div class="line">    target &apos;ShowsTV&apos; do</div><div class="line">        pod &apos;ShowTVAuth&apos;</div><div class="line">    end</div><div class="line">    # ShowsTests target引入了Specta和Expecta库，并且指明继承Shows，所以也会引入ShowsKit</div><div class="line">    target &apos;ShowsTests&apos; do</div><div class="line">        inherit! :search_paths </div><div class="line">        pod &apos;Specta&apos; </div><div class="line">        pod &apos;Expecta&apos; </div><div class="line">    end</div><div class="line">end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 注意：这是个抽象的target也就是说在工程中并没有这个target引入ShowsKit</div><div class="line">abstract_target &apos;Shows&apos; do</div><div class="line">    pod &apos;ShowsKit&apos;</div><div class="line">    # ShowsiOS target会引入ShowWebAuth库以及继承自Shows的ShowsKit库</div><div class="line">    target &apos;ShowsiOS&apos; do</div><div class="line">         pod &apos;ShowWebAuth&apos;</div><div class="line">    end</div><div class="line">  # ShowsTV target会引入ShowTVAuth库以及继承自Shows的ShowsKit库</div><div class="line">    target &apos;ShowsTV&apos; do</div><div class="line">        pod &apos;ShowTVAuth&apos;</div><div class="line">    end</div><div class="line">    # ShowsTests target引入了Specta和Expecta库，并且指明继承Shows，所以也会引入ShowsKit</div><div class="line">    target &apos;ShowsTests&apos; do</div><div class="line">        inherit! :search_paths</div><div class="line">        pod &apos;Specta&apos;</div><div class="line">        pod &apos;Expecta&apos;</div><div class="line">    end</div><div class="line">end</div></pre></td></tr></table></figure>
 <h2 id="abstract-和-inherit"><a href="#abstract-和-inherit" class="headerlink" title="abstract! 和 inherit!"></a>abstract! 和 inherit!</h2><p><code>abstract!</code> 指示当前的target是抽象的，因此不会直接链接Xcode target。<br><code>inherit!</code> 设置当前target的继承模式。例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;App&apos; do</div><div class="line">    target &apos;AppTests&apos; do</div><div class="line">        inherit! :search_paths </div><div class="line">    end</div><div class="line">end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">target &apos;App&apos; do</div><div class="line">    target &apos;AppTests&apos; do</div><div class="line">        inherit! :search_paths</div><div class="line">    end</div><div class="line">end</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -446,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/14/iOS常用的第三方库/" rel="next" title="iOS常用的第三方库">
-                <i class="fa fa-chevron-left"></i> iOS常用的第三方库
+              <a href="/2016/07/14/iOS常用宏定义（OC篇）/" rel="next" title="iOS常用宏定义（OC篇）">
+                <i class="fa fa-chevron-left"></i> iOS常用宏定义（OC篇）
               </a>
             
           </div>
@@ -456,8 +456,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/14/iOS常用宏定义（OC篇）/" rel="prev" title="iOS常用宏定义（OC篇）">
-                iOS常用宏定义（OC篇） <i class="fa fa-chevron-right"></i>
+              <a href="/2016/09/14/iOS常用的第三方库/" rel="prev" title="iOS常用的第三方库">
+                iOS常用的第三方库 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -537,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
