@@ -66,10 +66,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2015/09/20/iOS9-网络https-错误/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        <li><a class="icon" href="/2015/09/19/iOS-MVC-详解/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
         
         
-        <li><a class="icon" href="/2015/09/19/iOS-MVC-详解/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        <li><a class="icon" href="/2015/09/20/iOS9-网络https-错误/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
         <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
@@ -141,9 +141,9 @@
 <p>我们可以用淘宝的Ruby镜像来访问cocoapods。按照下面的顺序在终端中敲入依次敲入命令：</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">gem sources --remove https://rubygems.org/</div></pre></td></tr></table></figure>
 <p>等有反应之后再敲入以下命令:</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">gem sources -a http://ruby.taobao.org/</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">gem sources <span class="_">-a</span> http://ruby.taobao.org/</div></pre></td></tr></table></figure>
 <p>为了验证你的Ruby镜像是并且仅是taobao，可以用以下命令查看：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">gem sources -l</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">gem sources <span class="_">-l</span></div></pre></td></tr></table></figure>
 <p>只有在终端中出现下面文字才表明你上面的命令是成功的：</p>
 <blockquote>
 <p>CURRENT SOURCES ***<br><a href="http://ruby.taobao.org/" target="_blank" rel="external">http://ruby.taobao.org/</a></p>

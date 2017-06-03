@@ -66,10 +66,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2015/08/11/Reachability 使用/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        <li><a class="icon" href="/2015/07/21/PNChart 使用/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
         
         
-        <li><a class="icon" href="/2015/07/21/PNChart 使用/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        <li><a class="icon" href="/2015/08/11/Reachability 使用/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
         <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
@@ -136,7 +136,7 @@
 
   <div class="content" itemprop="articleBody">
     <p>在bash_profile中添加：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/.rvm/bin"</span> <span class="comment"># Add RVM to PATH for scripting</span></div><div class="line"></div><div class="line">[[ -s <span class="string">"<span class="variable">$HOME</span>/.rvm/scripts/rvm"</span> ]] &amp;&amp; <span class="built_in">source</span> <span class="string">"<span class="variable">$HOME</span>/.rvm/scripts/rvm"</span> <span class="comment"># Load RVM into a shell session *as a function*</span></div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/.rvm/bin"</span> <span class="comment"># Add RVM to PATH for scripting</span></div><div class="line"></div><div class="line">[[ <span class="_">-s</span> <span class="string">"<span class="variable">$HOME</span>/.rvm/scripts/rvm"</span> ]] &amp;&amp; <span class="built_in">source</span> <span class="string">"<span class="variable">$HOME</span>/.rvm/scripts/rvm"</span> <span class="comment"># Load RVM into a shell session *as a function*</span></div></pre></td></tr></table></figure>
 
   </div>
 </article>
