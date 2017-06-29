@@ -10,10 +10,10 @@
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础算法(快速排序)">
-<meta property="og:url" content="https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/index.html">
+<meta property="og:url" content="https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/index.html">
 <meta property="og:site_name" content="XINNYU">
 <meta property="og:description" content="Quicksort又称划分交换排序，最早由东尼·霍尔提出。在平均状况下，排序n个项目要Ο(n log n)次比较。在最坏状况下则需要Ο(n2)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他Ο(n log n)算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地被实现出来。 快速排序使用分治法（Divide and conquer）策略来把一个串行（list）">
-<meta property="og:updated_time" content="2017-05-11T20:33:20.000Z">
+<meta property="og:updated_time" content="2017-06-29T06:20:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础算法(快速排序)">
 <meta name="twitter:description" content="Quicksort又称划分交换排序，最早由东尼·霍尔提出。在平均状况下，排序n个项目要Ο(n log n)次比较。在最坏状况下则需要Ο(n2)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他Ο(n log n)算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地被实现出来。 快速排序使用分治法（Divide and conquer）策略来把一个串行（list）">
@@ -66,10 +66,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2017/01/23/Swift3中的GCD/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        <li><a class="icon" href="/2016/08/14/基础算法(堆排序)/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
         
         
-        <li><a class="icon" href="/2017/01/30/基础算法(堆排序)/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        <li><a class="icon" href="/2016/09/01/CocoaPods Podfile/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
         <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
@@ -82,16 +82,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&text=基础算法(快速排序)"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&is_video=false&description=基础算法(快速排序)"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=基础算法(快速排序)&body=Check out this article: https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&name=基础算法(快速排序)&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&text=基础算法(快速排序)"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&is_video=false&description=基础算法(快速排序)"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=基础算法(快速排序)&body=Check out this article: https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&name=基础算法(快速排序)&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -119,7 +119,7 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2017-01-29T06:52:05.000Z" itemprop="datePublished">2017-01-29</time>
+        <time datetime="2016-08-17T08:52:05.000Z" itemprop="datePublished">2016-08-17</time>
     </div>
 
 
@@ -176,16 +176,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&text=基础算法(快速排序)"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&is_video=false&description=基础算法(快速排序)"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=基础算法(快速排序)&body=Check out this article: https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2017/01/29/基础算法(快速排序)/&name=基础算法(快速排序)&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&text=基础算法(快速排序)"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&is_video=false&description=基础算法(快速排序)"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=基础算法(快速排序)&body=Check out this article: https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&title=基础算法(快速排序)"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://xinnyu.github.io/2016/08/17/基础算法(快速排序)/&name=基础算法(快速排序)&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
